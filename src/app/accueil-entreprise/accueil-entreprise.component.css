@@ -1,0 +1,341 @@
+/* Début Section Bannière */
+.banner{
+  background-color: #0F2A3D;
+  height: 70vh;
+  margin-top: 90px;
+}
+.ml2 {
+  font-weight: 900;
+  font-size: 3.5em;
+}
+.ml2 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+.imgBanner{
+  height: 70vh;
+  margin-right: 30px;
+}
+/* Fin Section Bannière */
+/* Début Première Section */
+.secondletter{
+  color: #FFA439;
+}
+.carte{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px;
+}
+.carteItem
+{
+  border: 2px solid #FFA439;
+  border-radius: 20px;
+  height: 150px;
+}
+.carteItems
+{
+  border: 2px solid #FFA439;
+  border-radius: 20px;
+  height: 180px;
+}
+@media screen and (width<= 900px){
+  .carte{
+    grid-template-columns: 1fr;
+  }
+  .banner{
+    display: flex;
+    flex-direction: column;
+
+  }
+  .imgBanner{
+    height: 45vh;
+    margin-right: 0;
+  }
+  .carteItem, .carteItems{
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 500px) and (min-width: 200px){
+  .carte{
+    grid-template-columns: 1fr;
+  }
+  .banner{
+    display: flex;
+    flex-direction: column;
+
+  }
+  .imgBanner{
+    height: 30vh;
+    margin-right: 0;
+  }
+  .carteItem, .carteItems{
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+/* Fin Première Section */
+
+/* Début Section Projet*/
+.trait{
+  background-color: #FFA439;
+  width: 50px;
+  height: 5px;
+}
+.tittle{
+  margin-left: 5px;
+  color: #FFA439;
+  font-weight: bold;
+}
+.iconDev{
+  float: right;
+}
+.cartes{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 100px;
+  justify-content: center;
+  position: relative;
+  z-index: -1;
+  margin: 0 auto !important;
+  border: 2px solid;
+}
+.dieyna{
+  margin: 0 auto !important;
+}
+.card span{
+  font-weight: bold;
+}
+.btnProjet{
+  float: right;
+}
+.bouton{
+  background-color: #0F2A3D;
+  color: white;
+  font-weight: bold;
+  margin-right: 90px;
+}
+  /* service carte */
+  .bigdiv{
+    background-color: #FFA439;
+    height: 360px;
+    width: 220px;
+    margin: 40px auto;
+
+}
+.petitdiv{
+    border: 2px solid gray;
+    height: 370px;
+    width: 240px;
+    background-color: white;
+    position: relative;
+    bottom: 30px;
+    right: 40px;
+}
+
+.tofservice{
+    height: 90px;
+    width: 100px;
+    /* border-radius: 50%; */
+    margin: 0 auto;
+
+}
+.tofservice img{
+height: 100px;
+width: 200px;
+}
+
+.carteconatiner{
+    position: relative;
+    bottom: 40px;
+    left: 40px;
+}
+@media screen and (max-width: 900px) and (min-width: 200px){
+  .cartes{
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 0 auto;
+
+  }
+  .btnProjet{
+    float: none;
+    margin-left: 100px;
+  }
+}
+/* Fin Section Projet*/
+
+/* Début Section Comment ça marche et Pourquoi choisir devFinders*/
+.sectionThree{
+  margin-top: 100px;
+  display: grid;
+  grid-template-columns:  1fr 1fr;
+  gap: 20px;
+}
+/* Début Premier section */
+/* The actual timeline (the vertical ruler) */
+.firstItem{
+  position: relative;
+  z-index: -2;
+}
+.main-timeline {
+  position: relative;
+}
+
+/* The actual timeline (the vertical ruler) */
+.main-timeline::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  background-color: #0F2A3D;
+  top: 2%;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.timeline {
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+/* The circles on the timeline */
+.timeline::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -13px;
+  background-color: white;
+  border: 5px solid ;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Place the container to the left */
+.left {
+  padding: 0px 40px 20px 0px;
+  left: 0;
+  font-size: 14px;
+}
+
+/* Place the container to the right */
+.right {
+  padding: 0px 0px 20px 40px;
+  left: 50%;
+  font-size: 14px;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left::before {
+  content: " ";
+  position: absolute;
+  top: 18px;
+  z-index: 1;
+  right: 30px;
+  border: medium solid white;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent #FFA439;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+  content: " ";
+  position: absolute;
+  top: 18px;
+  z-index: 1;
+  left: 30px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent #FFA439 transparent transparent;
+}
+
+/* Fix the circle for containers on the right side */
+.right::after {
+  left: -12px;
+}
+.timeline .card{
+  box-shadow: 2px 5px 10px #0F2A3D
+}
+.timeline h2{
+  color: #FFA439;
+  font-weight: bold;
+}
+.timeline p{
+  font-size: 16px;
+}
+/* Fin Premier section */
+
+/* Début deuxième section */
+.secondItem{
+  background-color: #0F2A3D;
+  color: white;
+  line-height: 50px;
+  border-radius: 20px;
+}
+/* Fin deuxième section */
+@media screen and (max-width: 900px) and (min-width: 200px){
+  .sectionThree{
+    grid-template-columns:  1fr;
+    width: 80%;
+  }
+}
+/* Fin Section Comment ça marche et Pourquoi choisir devFinders*/
+
+/* Début Section Témoignages*/
+.temoignagesItem{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 50px;
+}
+.temoignagesItems img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  left: 50px;
+  top: 10px;
+  border: 1px solid #0F2A3D;
+  z-index: -2;
+}
+.contenu{
+  box-shadow: 5px 4px 4px #FFA439;
+}
+#text{
+  margin: 0 auto;
+}
+.contenu h4{
+  color: #FFA439;
+  margin: 0 auto;
+}
+.hr{
+  width: 250px;
+  height: 2px;
+  background-color: #FFA439;
+  margin: 0 auto;
+}
+@media screen and (max-width: 900px) and (min-width: 700px){
+  .temoignagesItem{
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+  }
+  .contenu{
+    margin-right: 10px;
+  }
+}
+@media screen and (max-width: 800px) and (min-width: 400px){
+  .temoignagesItem{
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+  }
+  .contenu{
+    margin-right: 10px;
+  }
+  .temoignagesItems{
+    margin: 0 auto;
+  }
+}
