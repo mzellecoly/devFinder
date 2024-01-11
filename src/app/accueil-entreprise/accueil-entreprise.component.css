@@ -56,7 +56,7 @@
     margin: 0 auto;
   }
 }
-@media screen and (max-width: 500px) and (min-width: 200px){
+@media screen and (max-width: 574px) and (min-width: 200px){
   .carte{
     grid-template-columns: 1fr;
   }
@@ -76,14 +76,14 @@
 }
 /* Fin Première Section */
 
-/* Début Section Projet*/
+/* Début Section Developpeur*/
 .trait{
   background-color: #FFA439;
   width: 50px;
   height: 5px;
 }
 .tittle{
-  margin-left: 5px;
+  /* margin-left: 1px; */
   color: #FFA439;
   font-weight: bold;
 }
@@ -98,13 +98,19 @@
   position: relative;
   z-index: -1;
   margin: 0 auto !important;
-  border: 2px solid;
 }
 .dieyna{
   margin: 0 auto !important;
 }
 .card span{
   font-weight: bold;
+}
+.textItem{
+  margin-top: 70px;
+}
+.textItem svg{
+  float: right;
+  margin-right: 10px;
 }
 .btnProjet{
   float: right;
@@ -120,8 +126,7 @@
     background-color: #FFA439;
     height: 360px;
     width: 220px;
-    margin: 40px auto;
-
+    margin: 0 auto;
 }
 .petitdiv{
     border: 2px solid gray;
@@ -141,8 +146,9 @@
 
 }
 .tofservice img{
-height: 100px;
-width: 200px;
+  height: 150px;
+  width: 200px;
+  margin-left: -50px;
 }
 
 .carteconatiner{
@@ -164,7 +170,7 @@ width: 200px;
     margin-left: 100px;
   }
 }
-/* Fin Section Projet*/
+/* Fin Section Developpeur*/
 
 /* Début Section Comment ça marche et Pourquoi choisir devFinders*/
 .sectionThree{
@@ -274,7 +280,7 @@ width: 200px;
 .secondItem{
   background-color: #0F2A3D;
   color: white;
-  line-height: 50px;
+  line-height: 30px;
   border-radius: 20px;
 }
 /* Fin deuxième section */
@@ -327,7 +333,7 @@ width: 200px;
     margin-right: 10px;
   }
 }
-@media screen and (max-width: 800px) and (min-width: 400px){
+@media screen and (max-width: 800px) and (min-width: 200px){
   .temoignagesItem{
     grid-template-columns: 1fr;
     margin: 0 auto;

@@ -26,15 +26,18 @@ body{
     width: 768px;
     max-width: 100%;
     min-height: 480px;
-    margin: 15px auto;
-
-}
+    margin: 150px auto;
+  }
+  /* #container{
+  z-index: -1;
+} */
 
 .container p{
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
+
 }
 
 .container span{

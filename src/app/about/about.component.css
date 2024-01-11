@@ -1,0 +1,73 @@
+/* Banniere */
+.banner img{
+  width: 100%;
+  height: 70vh;
+  margin-top: 90px;
+}
+/* Fin Banniere */
+
+/* Début section a propos */
+.aboutus h2 p,span{
+  color: #FFA439;
+}
+.aboutusText{
+  /* width: 70%; */
+  margin: 0 auto;
+  position: relative;
+  z-index: -1;
+}
+.aboutusText p{
+  border-radius: 40px;
+  background: #0F2A3D;
+  width: 70%;
+  height: 250px;
+  color: #FFF;
+  text-align: justify;
+  font-weight: 400;
+  line-height: 35px;
+  margin: 0 auto;
+}
+.aboutusText img{
+  width: 50%;
+  height: 240px;
+  position: relative;
+  left: 280px;
+  top: -80px;
+}
+/* Fin section a propos */
+.mission{
+  margin: 0 auto;
+  /* background-color: #FFA439; */
+}
+.table{
+  width: 70%;
+  border-radius: 20px;
+  background: #FFF;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+}
+.tableTH{
+  border-bottom: 1px solid black;
+}
+.table th{
+  border-right: 1px solid black;
+}
+/* @media screen and (width<= 600px){
+  .aboutusText img{
+    display: none;
+  }
+} */
+@media screen and (max-width: 989px) and (min-width: 200px){
+  .aboutusText img{
+    display: none;
+  }
+  .aboutusText p{
+    height: 380px;
+  }
+}
+@media screen and (max-width: 450px) and (min-width: 200px){
+  .aboutusText p{
+    height: 460px;
+  }
+}

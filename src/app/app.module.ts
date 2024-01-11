@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccueilEntrepriseComponent } from './accueil-entreprise/accueil-entreprise.component';
 import { HeaderEntrepriseComponent } from './header-entreprise/header-entreprise.component';
 import { FooterEntrepriseComponent } from './footer-entreprise/footer-entreprise.component';
+import { ProjetComponent } from './projet/projet.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FooterEntrepriseComponent } from './footer-entreprise/footer-entreprise
     AccueilEntrepriseComponent,
     HeaderEntrepriseComponent,
     FooterEntrepriseComponent,
+    ProjetComponent,
   ],
   imports: [
     BrowserModule,
