@@ -16,6 +16,8 @@ import { AccueilEntrepriseComponent } from './accueil-entreprise/accueil-entrepr
 import { HeaderEntrepriseComponent } from './header-entreprise/header-entreprise.component';
 import { FooterEntrepriseComponent } from './footer-entreprise/footer-entreprise.component';
 import { ProjetComponent } from './projet/projet.component';
+import { PolitiqueComponent } from './politique/politique.component';
+import { ConditionComponent } from './condition/condition.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ProjetComponent } from './projet/projet.component';
     HeaderEntrepriseComponent,
     FooterEntrepriseComponent,
     ProjetComponent,
+    PolitiqueComponent,
+    ConditionComponent,
   ],
   imports: [
     BrowserModule,

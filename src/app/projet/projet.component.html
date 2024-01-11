@@ -1,1 +1,216 @@
-<p>projet works!</p>
+<!-- header -->
+<div class="headertext">
+  <app-header></app-header>
+</div>
+<!-- header -->
+
+<!-- Contenu -->
+<div class="listesprojet">
+  <div class="listecontainer">
+    <div class="recherche d-flex justify-content-end mt-5">
+      <form
+      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 mw-100 navbar-search col-6">
+      <div class="input-group search">
+          <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher ici"
+              aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+              <button class="btn text-white fw-bold btnSearch" type="button">
+               rechercher
+              </button>
+          </div>
+      </div>
+      </form>
+    </div>
+    <div class="listesprojets">
+      <div class="row mx-0" >
+          <div class="col-3 col-sm-3  vh-100 " id="theme">
+              <h4 class="text-center fw-bold my-3">Categories</h4>
+              <div>
+                  <div class="list-group rounded-0 liste" id="list-tab" role="tablist">
+                      <a class="list-group-item list-group-item-action fw-medium border active"  id="list-description-list" data-bs-toggle="list" href="#list-description" role="tab" aria-controls="list-description">Toutes les catégories</a>
+                      <a class="list-group-item list-group-item-action fw-medium border" id="list-html-list" data-bs-toggle="list" href="#list-html" role="tab" aria-controls="list-html">HTML</a>
+                      <a class="list-group-item list-group-item-action fw-medium border" id="list-css-list" data-bs-toggle="list" href="#list-css" role="tab" aria-controls="list-css">CSS</a>
+                      <a class="list-group-item list-group-item-action fw-medium border" id="list-javascript-list" data-bs-toggle="list" href="#list-javascript" role="tab" aria-controls="list-javascript">JavaScript</a>
+                      <a class="list-group-item list-group-item-action fw-medium border" id="list-api-list" data-bs-toggle="list" href="#list-api" role="tab" aria-controls="list-api">API</a>
+                      <a class="list-group-item list-group-item-action fw-medium border" id="list-angular-list" data-bs-toggle="list" href="#list-angular" role="tab" aria-controls="list-angular">Angular</a>
+                      <a class="list-group-item list-group-item-action fw-medium border" id="list-react-list" data-bs-toggle="list" href="#list-react" role="tab" aria-controls="list-react">React</a>
+                      <a class="list-group-item list-group-item-action fw-medium border" id="list-php-list" data-bs-toggle="list" href="#list-php" role="tab" aria-controls="list-php">PHP</a>
+                    </div>
+              </div>
+          </div>
+          <div class="col-9 col-sm-9 " id="formation">
+              <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade active show p-4" id="list-description" role="tabpanel" aria-labelledby="list-description-list">
+                    <div class="sectiontitle text-center  mt-5">
+                      <h3 class="text-black fw-bold">Nos projets</h3>
+                      <hr class="border-3 opacity-100">
+                    </div>
+                    <div class="projets mt-5">
+                      <div class="container mt-2 cartes">
+                        <div class="dieyna" id="cartes">
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Calculatrice d'âge</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
+                                <p class="card-text">Ce projet est conçu pour aiguiser vos compétences en matière de JavaScript et de validation de formulaire. Travailler avec des dates en JavaScript peut être délicat, ce sera donc un bon test !</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Dictionnaire</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span><span class="secondletter ms-3">API</span>
+                                <p class="card-text">Dans ce projet, vous intégrerez l'API Dictionnaire pour créer une application web de dictionnaire du monde réel. Les tests supplémentaires portent sur les thèmes de couleurs et la sélection des polices de caractères.</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Portfolio développeur</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
+                                <p class="card-text">Testez vos compétences en HTML et CSS avec ce site portfolio. Des connaissances de base en JS sont nécessaires pour la validation du formulaire. Vous pouvez même le personnaliser et l'utiliser comme votre propre site !</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Calculatrice d'âge</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
+                                <p class="card-text">Ce projet est conçu pour aiguiser vos compétences en matière de JavaScript et de validation de formulaire. Travailler avec des dates en JavaScript peut être délicat, ce sera donc un bon test !</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Dictionnaire</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span><span class="secondletter ms-3">API</span>
+                                <p class="card-text">Dans ce projet, vous intégrerez l'API Dictionnaire pour créer une application web de dictionnaire du monde réel. Les tests supplémentaires portent sur les thèmes de couleurs et la sélection des polices de caractères.</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Portfolio développeur</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
+                                <p class="card-text">Testez vos compétences en HTML et CSS avec ce site portfolio. Des connaissances de base en JS sont nécessaires pour la validation du formulaire. Vous pouvez même le personnaliser et l'utiliser comme votre propre site !</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade show p-4" id="list-html" role="tabpanel" aria-labelledby="list-html-list">
+                    <div class="sectiontitle text-center  mt-5">
+                      <h3 class="text-black fw-bold">Nos projets</h3>
+                      <hr class="border-3 opacity-100">
+                    </div>
+                    <div class="projets mt-5">
+                      <div class="container mt-2 cartes">
+                        <div class="dieyna" id="cartes">
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Calculatrice d'âge</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
+                                <p class="card-text">Ce projet est conçu pour aiguiser vos compétences en matière de JavaScript et de validation de formulaire. Travailler avec des dates en JavaScript peut être délicat, ce sera donc un bon test !</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Dictionnaire</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span><span class="secondletter ms-3">API</span>
+                                <p class="card-text">Dans ce projet, vous intégrerez l'API Dictionnaire pour créer une application web de dictionnaire du monde réel. Les tests supplémentaires portent sur les thèmes de couleurs et la sélection des polices de caractères.</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Portfolio développeur</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
+                                <p class="card-text">Testez vos compétences en HTML et CSS avec ce site portfolio. Des connaissances de base en JS sont nécessaires pour la validation du formulaire. Vous pouvez même le personnaliser et l'utiliser comme votre propre site !</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Calculatrice d'âge</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
+                                <p class="card-text">Ce projet est conçu pour aiguiser vos compétences en matière de JavaScript et de validation de formulaire. Travailler avec des dates en JavaScript peut être délicat, ce sera donc un bon test !</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Dictionnaire</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span><span class="secondletter ms-3">API</span>
+                                <p class="card-text">Dans ce projet, vous intégrerez l'API Dictionnaire pour créer une application web de dictionnaire du monde réel. Les tests supplémentaires portent sur les thèmes de couleurs et la sélection des polices de caractères.</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Portfolio développeur</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
+                                <p class="card-text">Testez vos compétences en HTML et CSS avec ce site portfolio. Des connaissances de base en JS sont nécessaires pour la validation du formulaire. Vous pouvez même le personnaliser et l'utiliser comme votre propre site !</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade show p-4" id="list-api" role="tabpanel" aria-labelledby="list-api-list">
+                    <div class="sectiontitle text-center  mt-5">
+                      <h3 class="text-black fw-bold">Nos projets</h3>
+                      <hr class="border-3 opacity-100">
+                    </div>
+                    <div class="projets mt-5">
+                      <div class="container mt-2 cartes">
+                        <div class="dieyna" id="cartes">
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Dictionnaire</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span><span class="secondletter ms-3">API</span>
+                                <p class="card-text">Dans ce projet, vous intégrerez l'API Dictionnaire pour créer une application web de dictionnaire du monde réel. Les tests supplémentaires portent sur les thèmes de couleurs et la sélection des polices de caractères.</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 20rem;">
+                              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Dictionnaire</h5>
+                                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span><span class="secondletter ms-3">API</span>
+                                <p class="card-text">Dans ce projet, vous intégrerez l'API Dictionnaire pour créer une application web de dictionnaire du monde réel. Les tests supplémentaires portent sur les thèmes de couleurs et la sélection des polices de caractères.</p>
+                                <a href="#" class="btn bouton">Détails</a>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Contenu -->
+
+<!-- footer -->
+<app-footer></app-footer>
+<!-- footer -->

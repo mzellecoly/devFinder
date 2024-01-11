@@ -1,0 +1,88 @@
+/* titre listes */
+.listesprojet{
+  position: relative;
+  /* z-index: -1; */
+  margin-top: 150px;
+}
+hr{
+  border-color: #FFA439 !important;
+  width: 60px;
+  height: 2px !important;
+  margin: 0 auto;
+}
+.listesprojet .list-group  .active{
+  background-color: #0F2A3D !important;
+}
+.listesprojet #theme{
+  margin-top: 100px;
+  border: 2px solid #0F2A3D  ;
+}
+.itemName{
+  height: 30px;
+  width: 50%;
+  background-color: #FFA439;
+  border-radius: 20px;
+}
+#cardmentor {
+  box-shadow: 2px 2px 5px  #0F2A3D ;
+}
+#cardmentor img {
+  height: 14rem;
+}
+.btnSearch{
+  background-color: #0F2A3D;
+}
+.listesprojet input{
+  background-color: red;
+}
+.liste a{
+  border-bottom: 1px solid  !important;
+}
+.liste a{
+  border: 1px solid  !important;
+}
+/* Début Section Projet*/
+.bouton{
+  background-color: #0F2A3D;
+  color: white;
+  font-weight: bold;
+  margin-right: 90px;
+}
+.projets{
+  /* background-color: #FFA439; */
+}
+.headertext{
+  position: relative;
+  z-index: 2000;
+}
+#cartes{
+  /* position: relative;
+  z-index: -1;
+  pointer-events: none; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 auto !important;
+  /* background-color: #FFA439; */
+}
+.dieyna{
+  margin: 0 auto !important;
+}
+.card{
+  box-shadow: 5px 4px 4px rgba(128, 128, 128, 0.611);
+}
+.card span{
+  font-weight: bold;
+}
+@media screen and (max-width: 900px) and (min-width: 200px){
+  #cartes{
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 0 auto;
+
+  }
+}
+/* Fin Section Projet*/

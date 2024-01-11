@@ -1,3 +1,7 @@
+.headertext{
+  position: relative;
+  z-index: 2000;
+}
 /* Début Section Bannière */
 .banner{
   background-color: #0F2A3D;
@@ -98,8 +102,6 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 100px;
   justify-content: center;
-  position: relative;
-  z-index: -1;
   margin: 0 auto !important;
 }
 .dieyna{
@@ -140,10 +142,6 @@
 }
 /* Début Premier section */
 /* The actual timeline (the vertical ruler) */
-.firstItem{
-  position: relative;
-  z-index: -2;
-}
 .main-timeline {
   position: relative;
 }
@@ -261,11 +259,9 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  position: relative;
   left: 50px;
   top: 10px;
   border: 1px solid #0F2A3D;
-  z-index: -2;
 }
 .contenu{
   box-shadow: 5px 4px 4px #FFA439;

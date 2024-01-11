@@ -8,6 +8,9 @@ import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
 import { AccueilEntrepriseComponent } from './accueil-entreprise/accueil-entreprise.component';
+import { ProjetComponent } from './projet/projet.component';
+import { PolitiqueComponent } from './politique/politique.component';
+import { ConditionComponent } from './condition/condition.component';
 const routes: Routes = [
   {path: '', redirectTo:'auth', pathMatch:'full'},
   {path: 'auth', component:AuthComponent},
@@ -18,6 +21,9 @@ const routes: Routes = [
   {path: 'dashboard', component:DashboardComponent},
   {path: 'about', component:AboutComponent},
   {path: 'accueilEntreprise', component:AccueilEntrepriseComponent},
+  {path: 'projet', component:ProjetComponent},
+  {path: 'politique', component:PolitiqueComponent},
+  {path: 'condition', component:ConditionComponent},
 ];
 
 @NgModule({

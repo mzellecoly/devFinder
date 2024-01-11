@@ -16,7 +16,10 @@ body{
     flex-direction: column;
     height: 100vh;
 }
-
+.headertext{
+  position: relative;
+  z-index: 2000;
+}
 .container{
     background-color: #fff;
     border-radius: 30px;
@@ -28,29 +31,21 @@ body{
     min-height: 480px;
     margin: 150px auto;
   }
-  /* #container{
-  z-index: -1;
-} */
-
 .container p{
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
-
 }
-
 .container span{
     font-size: 12px;
 }
-
 .container a{
     color: #333;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
 }
-
 .container button{
     background-color: #0F2A3D;
     color: #fff;
@@ -69,7 +64,6 @@ body{
     background-color: transparent;
     border-color: #fff;
 }
-
 .container form{
     background-color: #fff;
     display: flex;
@@ -79,7 +73,6 @@ body{
     padding: 0 40px;
     height: 100%;
 }
-
 .container input{
     background-color: #eee;
     border: none;
