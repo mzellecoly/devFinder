@@ -73,3 +73,31 @@
     height: 460px;
   }
 }
+/* <!-- Début Section Entrprise--> */
+.tittle{
+  margin-left: 70px;
+}
+.partner{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.partner img{
+  width: 160px;
+  height: 150px;
+  margin: 0 auto;
+}
+.image{
+  width: 140px !important;
+  height: 100px !important;
+}
+@media screen and (max-width: 950px) and (min-width: 450px){
+  .partner{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media screen and (width<= 450px){
+  .partner{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+/* <!-- Début Section Entrprise--> */
