@@ -1,0 +1,42 @@
+<!-- SIDEBAR -->
+
+  <a class="brand mt-4 ms-1">
+    <img src="https://img.freepik.com/photos-gratuite/femme-affaires-africaine-confiante-souriante-portrait-gros-plan-pour-emploi-campagne-carriere_53876-143280.jpg?w=740&t=st=1704756227~exp=1704756827~hmac=0ed9f6d5c8f33823b8f1aafdbdf8a94fb26f3a10bf57ee66f52effbe76a48301" alt="">
+    <p class="mt-4 ms-3">Marie Laure COLY</p>
+  </a>
+  <ul class="side-menu top">
+    <li class="active">
+      <a [routerLink]="['accueiladmin']">
+        <i class='bx bxs-dashboard' ></i>
+        <span class="text">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['gestionprojet']">
+        <i class='bx bxs-shopping-bag-alt' ></i>
+        <span class="text">Gestion projet</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['profil']">
+        <i class='bx bxs-doughnut-chart' ></i>
+        <span class="text">Gestion profil</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['table']">
+        <i class='bx bxs-doughnut-chart' ></i>
+        <span class="text">Gestion table</span>
+      </a>
+    </li>
+  </ul>
+  <ul class="side-menu">
+    <li>
+      <a href="#" class="logout" [routerLink]="['/auth']">
+        <i class='bx bxs-log-out-circle' ></i>
+        <span class="text">Deconnexion</span>
+      </a>
+    </li>
+  </ul>
+
+<!-- SIDEBAR -->

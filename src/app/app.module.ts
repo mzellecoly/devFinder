@@ -8,16 +8,13 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { FormsModule } from '@angular/forms';
-import { DataTablesModule } from 'angular-datatables';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AccueilEntrepriseComponent } from './accueil-entreprise/accueil-entreprise.component';
-import { HeaderEntrepriseComponent } from './header-entreprise/header-entreprise.component';
-import { FooterEntrepriseComponent } from './footer-entreprise/footer-entreprise.component';
 import { ProjetComponent } from './projet/projet.component';
 import { PolitiqueComponent } from './politique/politique.component';
 import { ConditionComponent } from './condition/condition.component';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -29,9 +26,6 @@ import { ConditionComponent } from './condition/condition.component';
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    AccueilEntrepriseComponent,
-    HeaderEntrepriseComponent,
-    FooterEntrepriseComponent,
     ProjetComponent,
     PolitiqueComponent,
     ConditionComponent,

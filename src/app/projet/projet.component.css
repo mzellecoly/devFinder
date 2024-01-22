@@ -1,7 +1,6 @@
 /* titre listes */
 .listesprojet{
   position: relative;
-  /* z-index: -1; */
   margin-top: 150px;
 }
 hr{
@@ -56,15 +55,11 @@ hr{
   z-index: 2000;
 }
 #cartes{
-  /* position: relative;
-  z-index: -1;
-  pointer-events: none; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   justify-content: center;
   margin: 0 auto !important;
-  /* background-color: #FFA439; */
 }
 .dieyna{
   margin: 0 auto !important;

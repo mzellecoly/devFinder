@@ -1,0 +1,61 @@
+.projet ul li
+{
+  background-color: #FFA439;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 15px;
+}
+.projet ul li
+{
+  cursor: pointer;
+}
+.btnAjout{
+  background-color: #FFA439;
+  color: white;
+}
+
+#cartes{
+  /* position: relative;
+  z-index: -1;
+  pointer-events: none; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 auto !important;
+  /* background-color: #FFA439; */
+}
+.dieyna{
+  margin: 0 auto !important;
+}
+.card{
+  box-shadow: 5px 4px 4px rgba(128, 128, 128, 0.611);
+}
+.card span{
+  font-weight: bold;
+}
+.bouton{
+  background-color: #0F2A3D;
+  color: white;
+  font-weight: bold;
+  margin-right: 90px;
+}
+@media screen and (max-width: 900px) and (min-width: 200px){
+  #cartes{
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 0 auto;
+
+  }
+}
+.imgPopup img{
+  width: 350px;
+  height: 250px;
+  justify-content: center;
+  /* margin: 0 auto; */
+}
+.contentPopup{
+  text-align: justify;
+}

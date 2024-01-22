@@ -1,0 +1,61 @@
+/* --------------------section portfolio------------------- */
+
+.portfolio .portfolioTop{
+  /* border: 1px solid black; */
+  height: 20%;
+}
+
+.portfolio .portfolioTop p{
+  margin-top: 2%;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.portfolio .portfolioBottom{
+  /* border: 1px solid black; */
+  height: 80%;
+}
+
+.portfolio .portfolioBottom .portfolioBottomMenu{
+  /* border: 1px solid black; */
+  height: 7%;
+  width: 30%;
+  border-radius: 20px;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.portfolio .portfolioBottom .portfolioBottomMenu li{
+  /* border: 1px solid black; */
+  width: 20%;
+}
+
+.portfolio .portfolioBottom .portfolioBottomMenu li button{
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.766);
+  cursor: pointer;
+}
+
+.portfolio .portfolioBottom .portfolioBottomMenu li button:hover{
+  color: 0F2A3D;
+}
+
+.portfolio .portfolioBottom .portfolioBottomMenu li button.active{
+  color: #0F2A3D;
+}
+.hide{
+  display: none;
+}
+.portfolioBottomItemContainer{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto;
+}
