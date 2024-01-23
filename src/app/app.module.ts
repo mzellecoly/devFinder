@@ -15,6 +15,8 @@ import { ProjetComponent } from './projet/projet.component';
 import { PolitiqueComponent } from './politique/politique.component';
 import { ConditionComponent } from './condition/condition.component';
 import { DataTablesModule } from 'angular-datatables';
+import { ProfilsComponent } from './profils/profils.component';
+import { AccueilEntrepriseComponent } from './accueil-entreprise/accueil-entreprise.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { DataTablesModule } from 'angular-datatables';
     ProjetComponent,
     PolitiqueComponent,
     ConditionComponent,
+    ProfilsComponent,
+    AccueilEntrepriseComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,8 @@ import { AboutComponent } from './about/about.component';
 import { ProjetComponent } from './projet/projet.component';
 import { PolitiqueComponent } from './politique/politique.component';
 import { ConditionComponent } from './condition/condition.component';
+import { ProfilsComponent } from './profils/profils.component';
+import { AccueilEntrepriseComponent } from './accueil-entreprise/accueil-entreprise.component';
 const routes: Routes = [
   {path: '', redirectTo:'auth', pathMatch:'full'},
   {path: 'auth', component:AuthComponent},
@@ -22,6 +24,8 @@ const routes: Routes = [
   {path: 'projet', component:ProjetComponent},
   {path: 'politique', component:PolitiqueComponent},
   {path: 'condition', component:ConditionComponent},
+  {path: 'profils', component:ProfilsComponent},
+  {path: 'accueilentreprise', component:AccueilEntrepriseComponent},
   {path: 'admin', loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule)},
 ];
 

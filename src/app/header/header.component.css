@@ -19,6 +19,7 @@ body {
   left: 0;
   width: 100%;
   background-color: #0F2A3D;
+  z-index: 1000;
 }
 
 .navbar {
@@ -28,7 +29,6 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px 15px;
-  z-index: 1000;
 }
 
 .navbar .logo a {

@@ -1,0 +1,93 @@
+/* Début Section Developpeur*/
+.trait{
+  background-color: #FFA439;
+  width: 50px;
+  height: 5px;
+}
+.tittle{
+  /* margin-left: 1px; */
+  color: #FFA439;
+  font-weight: bold;
+}
+.iconDev{
+  float: right;
+}
+.cartes{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 100px;
+  justify-content: center;
+  margin: 0 auto !important;
+}
+.dieyna{
+  margin: 0 auto !important;
+}
+.card span{
+  font-weight: bold;
+}
+.textItem{
+  margin-top: 70px;
+}
+.textItem svg{
+  float: right;
+  margin-right: 10px;
+}
+.btnProjet{
+  float: right;
+}
+.bouton{
+  background-color: #0F2A3D;
+  color: white;
+  font-weight: bold;
+  margin-right: 90px;
+}
+  /* service carte */
+  .bigdiv{
+    background-color: #FFA439;
+    height: 350px;
+    width: 210px;
+    margin: 0 auto;
+}
+.petitdiv{
+    border: 2px solid gray;
+    height: 370px;
+    width: 240px;
+    background-color: white;
+    position: relative;
+    bottom: 30px;
+    right: 40px;
+}
+
+.tofservice{
+    height: 90px;
+    width: 100px;
+    /* border-radius: 50%; */
+    margin: 0 auto;
+
+}
+.tofservice img{
+  height: 150px;
+  width: 200px;
+  margin-left: -50px;
+}
+
+.carteconatiner{
+    position: relative;
+    bottom: 40px;
+    left: 40px;
+}
+@media screen and (max-width: 900px) and (min-width: 200px){
+  .cartes{
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 0 auto;
+
+  }
+  .btnProjet{
+    float: none;
+    margin-left: 100px;
+  }
+}
+/* Fin Section Developpeur*/
