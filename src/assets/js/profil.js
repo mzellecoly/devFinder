@@ -70,10 +70,4 @@
                 btnAll.classList.add('active');
             }
 
-            // Écouteurs d'événements pour les boutons de filtrage
-            btnAll.addEventListener('click', showAll);
-            btnApp.addEventListener('click', showApp);
-            btnWeb.addEventListener('click', showWeb);
-            btnCard.addEventListener('click', showCard);
-
 

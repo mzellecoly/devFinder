@@ -1,0 +1,81 @@
+.projet ul li
+{
+  background-color: #FFA439;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 15px;
+}
+.projet ul li
+{
+  cursor: pointer;
+}
+.btnAjout{
+  background-color: #FFA439;
+  color: white;
+}
+.menuFiltre{
+  border: 2px solid #0F2A3D;
+  width: 50%;
+  border-radius: 15px;
+  color: #0F2A3D;
+}.active{
+ color: #FFA439 !important;
+ border: none;
+}
+/* CSS Tableau */
+.thHead{
+  background-color: #0F2A3D !important;
+  color: white;
+}
+/* Fin CSS Tableau */
+.imgPopup img{
+  width: 350px;
+  height: 250px;
+  justify-content: center;
+  /* margin: 0 auto; */
+}
+.contentPopup{
+  text-align: justify;
+}
+table tbody tr td{
+  border-bottom: 2px dashed #FFA439;
+}
+.check{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.inputAjout input{
+  border: none;
+  border-bottom: 2px solid #FFA439;
+}
+.paginate_button .page-item.active{
+  background-color: #FFA439 !important;
+
+}
+.pagination{
+  background-color: red;
+}
+span {
+  background: #F7DFF5;
+  margin-top: 32px;
+  padding: 8px 15px;
+  font-size: 0.75rem;
+  border-radius: 50px;
+  font-weight: 600;
+}
+.designer {
+  background-color: #ff9d0056;
+  color: #FFA439;
+}
+.termin{
+  background-color: #27ae5f2a;
+  color: #27AE60;
+}
+.cancel{
+  background-color: rgba(255, 0, 0, 0.354);
+  color: red;
+}
+.modalFooter{
+  color: #FFA439;
+}
+

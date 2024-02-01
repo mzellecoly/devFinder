@@ -1,0 +1,69 @@
+.profilAdmin{
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap
+}
+.right-profil input{
+	width: 70%;
+	border: 1px solid #0F2A3D;
+}
+.first{
+	background-color: #0F2A3D;
+	width: 150px;
+	height: 4px;
+	position: relative;
+	top: -40px;
+	left: 430px;
+}
+.second{
+	background-color: #FFA439;
+	border-radius: 100%;
+	width: 20px;
+	height: 10px;
+	position: relative;
+	top: -47px;
+	left: 490px;
+}
+.left-profil img{
+	width: 80%;
+	height: 80%;
+}
+.pwd{
+	width: 60%;
+}
+.pwd input{
+	width: 60%;
+	border: 1px solid #0F2A3D;
+}
+.btnSave{
+	border: none;
+	background-color: #0F2A3D;
+	color: white;
+	font-weight: bold;
+	border-radius: 10px;
+	margin-left: 90%;
+}
+@media screen and (max-width: 768px) {
+	.pwd{
+		width: 100%;
+		margin: 0 auto;
+	}
+	.first, .second{
+		display: none;
+	}
+	.btnSave{
+		margin-left: 0;
+	}
+}
+@media screen and (max-width: 576px) {
+	.pwd{
+		width: 100%;
+		margin: 0 auto;
+	}
+	.first, .second{
+		display: none;
+	}
+	.btnSave{
+		margin-left: 0;
+	}
+}

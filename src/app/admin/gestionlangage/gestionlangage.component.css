@@ -1,0 +1,25 @@
+.table1 thead tr th {
+  background-color: #0F2A3D;
+  color: white;
+}
+
+tbody tr td i {
+  color: #0F2A3D;
+
+}
+.grid-contain-form{
+  display: grid;
+  grid-template-columns: 1.2fr 1.5fr;
+  /* border: 2px solid red; */
+}
+.btn-ajout{
+  background-color: #0F2A3D;
+  color: white;
+  font-weight: bold;
+}
+.input-categorie{
+  border-bottom:  2px solid #0F2A3D;
+  border-top:0 ;
+  border-left: 0;
+  border-right: 0;
+}

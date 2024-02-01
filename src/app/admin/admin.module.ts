@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MainComponent } from './main/main.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { AccueilAdminComponent } from './accueil-admin/accueil-admin.component';
-import { DeveloppeurComponent } from './developpeur/developpeur.component';
 import { ProfilComponent } from './profil/profil.component';
 import { GestionProjetComponent } from './gestion-projet/gestion-projet.component';
-import { TablesComponent } from './tables/tables.component';
 import { DataTablesModule } from 'angular-datatables';
 import { FormsModule } from '@angular/forms';
-
+import { EditprofilComponent } from './editprofil/editprofil.component';
+import { GestionlangageComponent } from './gestionlangage/gestionlangage.component';
+import { SharedModule } from '../shared/shared.module';
+import { LangageProgramPipe } from '../shared/langage-program.pipe';
 
 @NgModule({
   declarations: [
@@ -20,16 +21,18 @@ import { FormsModule } from '@angular/forms';
     SidebarComponent,
     HeaderComponent,
     AccueilAdminComponent,
-    DeveloppeurComponent,
     ProfilComponent,
     GestionProjetComponent,
-    TablesComponent
+    EditprofilComponent,
+    GestionlangageComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     DataTablesModule,
-    FormsModule
-  ]
+    FormsModule,
+    HttpClientModule,
+    SharedModule,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

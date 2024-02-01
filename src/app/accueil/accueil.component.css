@@ -135,7 +135,6 @@
 }
 .dieyna{
   margin: 0 auto !important;
-
 }
 .card{
   box-shadow: 5px 4px 4px rgba(128, 128, 128, 0.611);
@@ -303,12 +302,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 50px;
-  /* margin: 0 auto; */
-}
-.temoignagesItems{
-  /* border: 2px solid green; */
-  /* margin: 0 auto; */
-  /* width: 80%; */
 }
 .temoignagesItems img{
   position: relative;

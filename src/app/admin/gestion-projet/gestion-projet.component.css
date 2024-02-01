@@ -13,43 +13,21 @@
   background-color: #FFA439;
   color: white;
 }
-
-#cartes{
-  /* position: relative;
-  z-index: -1;
-  pointer-events: none; */
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  justify-content: center;
-  margin: 0 auto !important;
-  /* background-color: #FFA439; */
+.menuFiltre{
+  border: 2px solid #0F2A3D;
+  width: 50%;
+  border-radius: 15px;
+  color: #0F2A3D;
+}.active{
+ color: #FFA439 !important;
+ border: none;
 }
-.dieyna{
-  margin: 0 auto !important;
-}
-.card{
-  box-shadow: 5px 4px 4px rgba(128, 128, 128, 0.611);
-}
-.card span{
-  font-weight: bold;
-}
-.bouton{
-  background-color: #0F2A3D;
+/* CSS Tableau */
+.thHead{
+  background-color: #0F2A3D !important;
   color: white;
-  font-weight: bold;
-  margin-right: 90px;
 }
-@media screen and (max-width: 900px) and (min-width: 200px){
-  #cartes{
-    grid-template-columns: 1fr;
-    margin: 0 auto;
-  }
-  .card{
-    margin: 0 auto;
-
-  }
-}
+/* Fin CSS Tableau */
 .imgPopup img{
   width: 350px;
   height: 250px;
@@ -59,3 +37,42 @@
 .contentPopup{
   text-align: justify;
 }
+table tbody tr td{
+  border-bottom: 2px dashed #FFA439;
+}
+.check{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.inputAjout input, .inputAjout select{
+  border: none;
+  border-bottom: 2px solid #FFA439;
+}
+.paginate_button .page-item.active{
+  background-color: #FFA439 !important;
+
+}
+.pagination{
+  background-color: red;
+}
+span {
+  background: #F7DFF5;
+  margin-top: 32px;
+  padding: 8px 15px;
+  font-size: 0.75rem;
+  border-radius: 50px;
+  font-weight: 600;
+}
+.designer {
+  background-color: #ff9d0056;
+  color: #FFA439;
+}
+.termin{
+  background-color: #27ae5f2a;
+  color: #27AE60;
+}
+.cancel{
+  background-color: rgba(255, 0, 0, 0.354);
+  color: red;
+}
+

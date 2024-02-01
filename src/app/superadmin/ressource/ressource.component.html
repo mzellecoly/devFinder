@@ -1,0 +1,259 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btnAjout" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Ajouter Immersion
+</button>
+<button type="button" class="btn btnAjout ms-2" data-bs-toggle="modal" data-bs-target="#briefModal">
+  Ajouter Brief
+</button>
+
+<!-- contenu -->
+<!-- Menu filtre pour le tableau des projets  -->
+<div class="menuFiltre mt-5 d-flex">
+  <div class="filtreSection">
+      <button class="btn filtreActive fw-bold px-3 active" *ngIf="isProgress">Imerssion</button>
+      <button class="btn fw-bold px-3 active" *ngIf="!isProgress" (click)="showProgress()">Imerssion</button>
+  </div>
+
+  <div class="filtreSection">
+      <button class="btn filtreActive fw-bold px-3" *ngIf="isTerminate">Brief</button>
+      <button class="btn fw-bold px-3" *ngIf="!isTerminate" (click)="showTerminate()">Brief</button>
+  </div>
+</div>
+
+<!-- Liste des immerssions -->
+<div class="lignesUrbaine sectionEspace" *ngIf="isProgress">
+  <!-- Tableau des projets en cours -->
+  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" *ngIf="listeImerssion.length>0">
+    <thead>
+      <tr>
+        <th class="thHead">Titre</th>
+        <th class="thHead">Description</th>
+        <th class="thHead">Niveau de compétence</th>
+        <th class="thHead">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ressource of listeImerssion">
+        <td>{{ressource.titre}}</td>
+        <td>{{ getPartieDuTexte(ressource.description, 20) }}</td>
+        <td>{{ressource.niveau_de_competence}}</td>
+        <td>
+          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosImmersion(ressource)"></i>
+          <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="afficherDetailsImerssion(ressource)" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
+          <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="supprimerImmersion(ressource)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="" *ngIf="listeImerssion.length<0">
+    <thead>
+      <tr>
+        <th class="thHead">Titre</th>
+        <th class="thHead">Description</th>
+        <th class="thHead">Niveau de compétence</th>
+        <th class="thHead">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Aucune donnée disponnible sur le tableau</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Liste des briefs -->
+<div class="lignesUrbaine sectionEspace" *ngIf="isTerminate">
+  <!-- Tableau des projets terminés -->
+  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" >
+    <thead class="thHead">
+      <tr class="thHead">
+        <th class="thHead">Titre</th>
+        <th class="thHead">Description</th>
+        <th class="thHead">Compétence</th>
+        <th class="thHead">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ressource of listeBrief">
+        <td>{{ressource.titre}}</td>
+        <td>{{ getPartieDuTexte(ressource.description, 20) }}</td>
+        <td>{{ressource.niveau_de_competence}}</td>
+        <td>
+          <!-- <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="afficherDetailsBrief(ressource)" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i> -->
+            <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModalBrief" (click)="chargerInfosBrief(ressource)"></i>
+            <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="afficherDetailsImerssion(ressource)" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
+            <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="supprimerBrief(ressource)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- contenu -->
+
+<!-- PopUp ajout immerssion-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter une immersion</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Titre</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="Titre" [(ngModel)]="titre">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Description</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Lien support</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Niveau</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau de compétence" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Lien git</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien git" name="lien_du_livrable" [(ngModel)]="lien_du_livrable">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btnAjout" (click)="AjoutImmersion()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PopUp ajout brief-->
+<div class="modal fade" id="briefModal" tabindex="-1" aria-labelledby="briefModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="briefModalLabel">Ajouter un brief</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Titre</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="Titre" [(ngModel)]="titre">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Description</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Lien support</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Niveau</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau de compétence" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Lien git</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien git" name="lien_du_livrable" [(ngModel)]="lien_du_livrable">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btnAjout" (click)="AjoutBrief()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PopUp modifier immersion-->
+<div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifiermodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modifiermodalLabel">Modifier un projet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Titre</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="titre" [(ngModel)]="titre">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Description</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Lien support</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Niveau</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau de compétence" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Lien git</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien git" name="lien_du_livrable" [(ngModel)]="lien_du_livrable">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btnAjout" (click)=" modifierImmersion(idImmersion)">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PopUp modifier brief-->
+<div class="modal fade" id="modifierModalBrief" tabindex="-1" aria-labelledby="modifiermodalBriefLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modifiermodalBriefLabel">Modifier un projet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Titre</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="titre" [(ngModel)]="titre">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Description</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Lien support</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Niveau</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau de compétence" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Lien git</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien git" name="lien_du_livrable" [(ngModel)]="lien_du_livrable">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btnAjout" (click)=" modifierBrief(idBrief)">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PopUp pour détail -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailmodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detailmodalLabel">{{briefSelectionne.titre}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{briefSelectionne.description}}</p>
+        <p>{{briefSelectionne.niveau_de_competence}}</p>
+        <p>{{briefSelectionne.lien_support}}</p>
+        <p>{{briefSelectionne.lien_du_livrable}}</p>
+      </div>
+    </div>
+  </div>
+</div>

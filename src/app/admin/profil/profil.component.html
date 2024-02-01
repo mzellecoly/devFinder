@@ -1,51 +1,183 @@
-<section class="portfolio" id="portfolio">
-  <div class="portfolioBottom">
-      <ul class="portfolioBottomMenu">
-              <li><button class="btnAll active">ALL</button></li>
-              <li><button class="btnApp" onclick="showApp()">APP</button></li>
-              <li><button class="btnCard">CARD</button></li>
-              <li><button class="btnWeb">WEB</button></li>
-      </ul>
-      <div class="portfolioBottomItemContainer mt-5">
-        <div class="projetItem portfolioBottomItem web">
-          <div class="card" style="width: 20rem;">
-              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Portfolio développeur</h5>
-                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
-                <p class="card-text">Testez vos compétences en HTML et CSS avec ce site portfolio. Des connaissances de base en JS sont nécessaires pour la validation du formulaire. Vous pouvez même le personnaliser et l'utiliser comme votre propre site !</p>
-                <i class="fa-solid fa-eye" style="color: #FFA439; font-size: 20px;" data-bs-toggle="modal" data-bs-target="#detailprojet"></i>
-                <i class="fa-solid fa-pen-to-square ms-3" style="color: #FFA439; font-size: 20px;" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-                <i class="fa-solid fa-trash-can ms-3" style="color: #FFA439; font-size: 20px;"></i>
-              </div>
-          </div>
+<div class="profil">
+  <div class="left">
+    <div class="profilUp">
+      <img src="https://img.freepik.com/photos-gratuite/belle-femme-africaine-se-sentant-reconnaissante_181624-46352.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" alt="">
+      <p>Véronique M G DIATTA</p>
+    </div>
+    <div class="profilDown mt-3">
+      <h3>Informations</h3>
+      <div>
+        <strong>Email</strong>
+        <p>name@gmail.com</p>
+      </div>
+      <div>
+        <strong>Téléphone</strong>
+        <p>77 777 77 77</p>
+      </div>
+      <div>
+        <strong>Réseaux sociaux</strong>
+        <p>
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-twitter"></i>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="rightUp">
+      <h3>Expérience</h3>
+      <div>
+        <strong>Langages et Technologies <i class="fa-solid fa-pencil ms-2" data-bs-toggle="modal" data-bs-target="#firstModal"></i></strong>
+        <p>HTML CSS JS PHP SQL</p>
+      </div>
+      <div>
+        <strong>Entreprises <i class="fa-solid fa-circle-plus ms-2" style="font-size: 17px;" data-bs-toggle="modal" data-bs-target="#secondModal"></i></strong>
+        <div>
+          <p>Agence Nationale de la Statistique et de la Démographie (ANSD)</p>
+          <p class="rightItem">Stage en développement web</p>
+          <p class="rightItem">6 mois</p>
         </div>
-        <div class="projetItem portfolioBottomItem web">
-          <div class="card" style="width: 20rem;">
-              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Portfolio développeur</h5>
-                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
-                <p class="card-text">Testez vos compétences en HTML et CSS avec ce site portfolio. Des connaissances de base en JS sont nécessaires pour la validation du formulaire. Vous pouvez même le personnaliser et l'utiliser comme votre propre site !</p>
-                <i class="fa-solid fa-eye" style="color: #FFA439; font-size: 20px;" data-bs-toggle="modal" data-bs-target="#detailprojet"></i>
-                <i class="fa-solid fa-pen-to-square ms-3" style="color: #FFA439; font-size: 20px;" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-                <i class="fa-solid fa-trash-can ms-3" style="color: #FFA439; font-size: 20px;"></i>
-              </div>
-          </div>
-        </div>
-        <div class="projetItem portfolioBottomItem web">
-          <div class="card" style="width: 20rem;">
-              <img src="https://img.freepik.com/free-photo/african-american-man-woman-doing-teamwork-collaboration-presentation-report-looking-data-computer-papers-working-together-with-paperwork-office-during-sunset_482257-46942.jpg?size=626&ext=jpg&ga=GA1.2.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Portfolio développeur</h5>
-                <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
-                <p class="card-text">Testez vos compétences en HTML et CSS avec ce site portfolio. Des connaissances de base en JS sont nécessaires pour la validation du formulaire. Vous pouvez même le personnaliser et l'utiliser comme votre propre site !</p>
-                <i class="fa-solid fa-eye" style="color: #FFA439; font-size: 20px;" data-bs-toggle="modal" data-bs-target="#detailprojet"></i>
-                <i class="fa-solid fa-pen-to-square ms-3" style="color: #FFA439; font-size: 20px;" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-                <i class="fa-solid fa-trash-can ms-3" style="color: #FFA439; font-size: 20px;"></i>
-              </div>
-          </div>
+        <div>
+          <p>Wanekoo</p>
+          <p class="rightItem">Stage en développement web</p>
+          <p class="rightItem">6 mois</p>
         </div>
       </div>
+      <div>
+        <strong>Projets <i class="fa-solid fa-circle-plus ms-2" style="font-size: 17px;" data-bs-toggle="modal" data-bs-target="#threeModal"></i></strong>
+        <p>https://daaraytechnologie.netlify.app/</p>
+        <p class="rightItem">https://briefangmarielaure.netlify.app/auth</p>
+      </div>
+    </div>
+    <div class="rightDown mt-3">
+      <h3>A propos <i class="fa-solid fa-pencil ms-2" data-bs-toggle="modal" data-bs-target="#fourModal"></i></h3>
+      <strong>À propos de Noel Robinson NDECKY  </strong>
+      <p>Noel Robinson NDECKY, est un étudiant de la promotion 7 en Informatique,<br>Développement, d'Applications (IDA) à l'Espace Numérique ouvert (ENO) de<br>Sébikotane qui conjugue avec brio ses études et sa passion pour<br>l’entrepreneuriat.
+        En plus d être un membre actif de la communauté<br>estudiantine , il a développé un projet de fabrication de maquettes avec<br>comme ambition de marquer son empreinte dans la création d'objets<br>ludiques au Sénégal. </p>
+    </div>
   </div>
-</section>
+</div>
+<!-- Modal pour langage et technologie-->
+<div class="modal fade" id="firstModal" tabindex="-1" aria-labelledby="firstModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="firstModalLabel">Langages et Technologies</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            HTML
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            CSS
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+          <label class="form-check-label" for="flexCheckChecked">
+            CSS
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+          <label class="form-check-label" for="flexCheckChecked">
+            JS
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+          <label class="form-check-label" for="flexCheckChecked">
+            PHP
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+          <label class="form-check-label" for="flexCheckChecked">
+            SQL
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btnEditProfil" style="background-color: #FFA439; color: white;">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal pour entreprises-->
+<div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="secondModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="secondModalLabel">Entreprise</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Entreprise</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Entreprise">
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Poste occupé</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Poste occupé">
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Durée</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Durée">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btnEditProfil" style="background-color: #FFA439; color: white;">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal pour projet-->
+<div class="modal fade" id="threeModal" tabindex="-1" aria-labelledby="threeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="threeModalLabel">Projet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Url du projet</label>
+          <input type="url" class="form-control" id="exampleFormControlInput1" placeholder="Veuillez mettre le lien de votre projet">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btnEditProfil" style="background-color: #FFA439; color: white;">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal pour a propos-->
+<div class="modal fade" id="fourModal" tabindex="-1" aria-labelledby="fourModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="fourModalLabel">Projet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">A propos</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btnEditProfil" style="background-color: #FFA439; color: white;">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>

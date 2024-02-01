@@ -1,0 +1,38 @@
+<div class="grid-contain-form">
+  <div class="table-data">
+      <div class="order">
+          <form>
+              <h5 class="fw-bold text-center mb-5">Ajout Langage</h5>
+              <div class="mb-3">
+                  <label for="categorie" class="form-label">Nom langage</label>
+                  <input type="email" class="form-control input-categorie rounded-0 " id="categorie" aria-describedby="categorie" name="nom" [(ngModel)]="nom">
+              </div>
+              <button type="submit" class="btn btn-ajout d-block m-auto" (click)="ajoutLangage()">Ajouter</button>
+          </form>
+      </div>
+  </div>
+  <div class="table-data">
+      <div class="order">
+          <h4 class="fw-bold ">Liste des langages</h4>
+          <table class="table table-responsive-md table1 table-sm px-5 py-5 table table-with-padding " id="table-list">
+              <thead >
+                  <tr class="h-25 px-2 py-3" style="background-color: red;">
+                      <th scope="col" >Nom langage</th>
+                      <th scope="col" >Action </th>
+                  </tr>
+              </thead>
+              <tbody class="table-group-divider">
+              <tr *ngFor="let langage of listeLangage">
+                  <td>{{langage.nom}}</td>
+                  <td id="iconAction">
+                      <i class="bi bi-trash3-fill"(click)=" supprimerLangage(langage)"></i>
+                  </td>
+              </tr>
+
+              </tbody>
+          </table>
+
+      </div>
+  </div>
+
+</div>

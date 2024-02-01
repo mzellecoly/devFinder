@@ -1,3 +1,17 @@
+.projets{
+  margin-top: 200px;
+}.btnSearch{
+  background-color: #0F2A3D;
+}
+.search input{
+  width: 500px ;
+  border: none;
+  background-color: #F6F6F6;
+  border-radius: 10px;
+}
+.rechercher{
+  /* float: right ; */
+}
 /* Début Section Developpeur*/
 .trait{
   background-color: #FFA439;
@@ -70,15 +84,17 @@
   width: 200px;
   margin-left: -50px;
 }
-
 .carteconatiner{
     position: relative;
     bottom: 40px;
     left: 40px;
 }
-@media screen and (max-width: 900px) and (min-width: 200px){
+.textsevice{
+  line-height: 18px;
+}
+/* @media screen and (width<= 950px){
   .cartes{
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     margin: 0 auto;
   }
   .card{
@@ -88,6 +104,40 @@
   .btnProjet{
     float: none;
     margin-left: 100px;
+  }
+} */
+@media screen and (max-width: 950px) and (min-width: 850px){
+  .cartes{
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 0 auto;
+
+  }
+  .btnProjet{
+    float: none;
+    margin-left: 100px;
+  }
+}
+@media screen and (max-width: 877px) and (min-width: 580px){
+  .cartes{
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 0 auto;
+
+  }
+}
+@media screen and (max-width: 580px) and (min-width: 200px){
+  .cartes{
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 0 auto;
+
   }
 }
 /* Fin Section Developpeur*/
