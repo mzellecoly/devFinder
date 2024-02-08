@@ -4,13 +4,15 @@
   background-color: #0F2A3D;
 }
 .search input{
-  width: 500px ;
+  width: 300px ;
   border: none;
   background-color: #F6F6F6;
   border-radius: 10px;
 }
-.rechercher{
-  /* float: right ; */
+.search{
+  /* border: 2px solid red; */
+  width: 40%;
+  float: right ;
 }
 /* Début Section Developpeur*/
 .trait{
@@ -92,20 +94,10 @@
 .textsevice{
   line-height: 18px;
 }
-/* @media screen and (width<= 950px){
-  .cartes{
-    grid-template-columns: 1fr 1fr 1fr;
-    margin: 0 auto;
-  }
-  .card{
-    margin: 0 auto;
-
-  }
-  .btnProjet{
-    float: none;
-    margin-left: 100px;
-  }
-} */
+.btnAjout{
+  background-color: #FFA439;
+  color: white;
+}
 @media screen and (max-width: 950px) and (min-width: 850px){
   .cartes{
     grid-template-columns: 1fr 1fr 1fr;

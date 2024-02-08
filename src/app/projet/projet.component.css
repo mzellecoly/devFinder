@@ -74,6 +74,31 @@ hr{
 .card span{
   font-weight: bold;
 }
+.modal-dialog {
+  margin-top: 150px;
+}
+.btnAjout{
+  background-color: #FFA439;
+  color: white;
+}
+.btnColore{
+  background-color: #FFA439;
+  color: white;
+}
+.btnColor{
+  background-color: #0F2A3D;
+  color: white;
+  font-weight: bold;
+}
+@media screen and (max-width: 1178px) and (min-width: 850px){
+  #cartes{
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 0 auto;
+  }
+}
 @media screen and (max-width: 900px) and (min-width: 200px){
   #cartes{
     grid-template-columns: 1fr;

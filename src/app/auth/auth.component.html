@@ -18,13 +18,7 @@
                 <input type="text" placeholder="Nom Complet" name="nom" [(ngModel)]="nom_complet">
                 <input type="email" placeholder="Email" name="email" [(ngModel)]="email">
                 <input type="password" placeholder="Mot de passe" name="mot_de_passe" [(ngModel)]="mot_de_passe">
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" placeholder="Vous-êtes ?" name="role" [(ngModel)]="role">
-                    <option selected>Vous etes ?</option>
-                    <option value="ROLE_ASSOCIATION">Porteur de projet</option>
-                    <option value="ROLE_APPRENANT">Developpeur</option>
-                    <option value="ROLE_ENTREPRISE">Entreprise</option>
-                </select>
-                <button (click)="inscription()">S'inscrire</button>
+                <button (click)="inscriptionUser()">S'inscrire</button>
             </form>
         </div>
         <div class="form-container sign-in">

@@ -12,8 +12,12 @@ export class AuthService {
   isAdmin$ = new BehaviorSubject<boolean>(false);
   urlAuth="http://localhost:8000";
 
-  private isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+
+  private userProfileSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  public userProfile$: Observable<User | null> = this.userProfileSubject.asObservable();
+
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, mot_de_passe: string): Observable<any> {
@@ -27,6 +31,7 @@ export class AuthService {
           // console.log("userConnecté :");
           console.log("user",response);
           localStorage.setItem("token",response.token);
+          localStorage.setItem("userId", response.id);
           this.isAuthenticatedSubject.next(true);
           this.isAdmin$.next(response.email === 'admin@admin.com' && response.mot_de_passe ==='password'); // Mettez à jour en fonction de votre logique de rôle
           // Gérer la redirection ici si nécessaire
@@ -38,10 +43,51 @@ export class AuthService {
 
   logout() {
     // Logique de déconnexion
+    localStorage.removeItem('token');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('userOnline');
+    localStorage.removeItem('userId');
     this.isAuthenticatedSubject.next(false);
+    this.isAdmin$.next(false);
   }
-
   get isAuthenticated(): boolean {
     return this.isAuthenticatedSubject.value;
+  }
+  getUserProfile(): Observable<User> {
+    return this.http.get<User>(`${url}/utilisateur/connecter`).pipe(
+      tap((userProfile) => {
+        this.userProfileSubject.next(userProfile);
+      })
+    );
+  }
+
+  // / Service qui verifie quel utilisateur est connecter
+  IsOnline(): { user: User | null; role: string | null } {
+    const userOnlineString = localStorage.getItem('userOnline');
+    if (userOnlineString) {
+      const userOnline = JSON.parse(userOnlineString);
+      const role = userOnline && userOnline.role ? userOnline.role.toString() : null;
+      return { user: userOnline, role: role };
+    }
+    return { user: null, role: null };
+  }
+
+  isUserLoggedIn(): boolean {
+    const { user, role } = this.IsOnline();
+    return user !== null && role === "ROLE_ENTREPRISE";
+  }
+  isUserLogged(): boolean {
+    const { user, role } = this.IsOnline();
+    return user !== null && role === "ROLE_APPRENANT";
+  }
+
+  inscriptionApprenant(user: any): Observable<any> {
+    return this.http.post<any>(`${url}/apprenant/inscription`, user);
+  }
+  inscriptionAssociation(user: any): Observable<any> {
+    return this.http.post<any>(`${url}/association/inscription`, user);
+  }
+  inscriptionEntreprise(user: any): Observable<any> {
+    return this.http.post<any>(`${url}/entreprise/inscription`, user);
   }
 }

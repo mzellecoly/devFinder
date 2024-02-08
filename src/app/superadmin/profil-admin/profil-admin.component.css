@@ -3,6 +3,9 @@
 	justify-content: space-around;
 	flex-wrap: wrap
 }
+.right-profil {
+  margin: 0 auto;
+}
 .right-profil input{
 	width: 70%;
 	border: 1px solid #0F2A3D;

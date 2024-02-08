@@ -1,0 +1,40 @@
+<app-header></app-header>
+<div class="recrue container">
+  <h3 class="text-center">Liste de mes Recrues</h3>
+  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" *ngIf="listeUsers.length>0">
+    <thead>
+      <tr>
+        <th class="thHead">Nom</th>
+        <th class="thHead">Email</th>
+        <th class="thHead">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="thHead" *ngFor="let recrue of listeUsers">
+        <td>{{recrue.nom_complet}}</td>
+        <td>{{recrue.email}}</td>
+        <td>
+          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
+          <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
+          <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table *ngIf="listeUsers.length<0">
+    <thead>
+      <tr>
+        <th class="thHead">Nom</th>
+        <th class="thHead">Email</th>
+        <th class="thHead">Rôle</th>
+        <th class="thHead">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Aucune donnée disponible au niveau du tableau</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-footer></app-footer>

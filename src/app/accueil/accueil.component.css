@@ -352,27 +352,55 @@
 /* Fin Section Témoignages*/
 
 /* <!-- Début Section Entrprise--> */
-.partner{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-.partner img{
-  width: 160px;
-  height: 150px;
+.tag-list{
+  width: 100rem;
+  font-family: "Montserrat";
+  position: relative;
+  overflow: hidden;
   margin: 0 auto;
 }
-.image{
-  width: 140px !important;
-  height: 100px !important;
+.inner{
+  width: fit-content;
+  display: flex;
+  gap: 1rem;
+  animation: loop 10s linear infinite;
 }
-@media screen and (max-width: 950px) and (min-width: 450px){
-  .partner{
-    grid-template-columns: 1fr 1fr 1fr;
+.tag{
+  display: flex;
+  align-items: center;
+  gap: 0 0.2rem;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  /* background-color: #334155; */
+  padding: 0.7rem 1rem;
+  border-radius: 0.4rem;
+  /* box-shadow: 0 0.1rem 0.2rem #00000033, 0 0.1rem 0.5rem #0000004d, 0 0.1rem 1.5rem #00000033; */
+}
+.tag img{
+  width: 100px;
+  height: 100px;
+  border-radius: 30%;
+}
+.tag span{
+  font-size: 1.2rem;
+  color: palevioletred;
+}
+.fade{
+  position: absolute;
+  background: linear-gradient(90deg, #1e293b, transparent 30%, transparent 70%, #1e293b);
+  inset: 0;
+  pointer-events: none;
+}
+.zone1{
+  width: 150px !important;
+  height: 150px !important;
+}
+@keyframes loop {
+  0%{
+      transform: translateX(0);
   }
-}
-@media screen and (width<= 450px){
-  .partner{
-    grid-template-columns: 1fr 1fr;
+  100%{
+      transform: translateX(-50%);
   }
 }
 /* <!-- Début Section Entrprise--> */

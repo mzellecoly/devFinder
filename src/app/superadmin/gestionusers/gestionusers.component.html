@@ -25,11 +25,32 @@
 <!-- Projet en cours -->
 <div class="lignesUrbaine sectionEspace" *ngIf="isProgress">
   <!-- Tableau des projets en cours -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table">
+  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" *ngIf="listeUsers.length>0">
     <thead>
       <tr>
         <th class="thHead">Nom</th>
-        <th class="thHead">Prenom</th>
+        <th class="thHead">Email</th>
+        <th class="thHead">Rôle</th>
+        <th class="thHead">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of listeUsers">
+        <td>{{user.nom_complet}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.roles}}</td>
+        <td>
+          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
+          <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
+          <i  class="bi ms-4" [ngClass]="{ 'bi-ban': !user.est_bloquer, 'bi bi-unlock': user.est_bloquer }"type="button" (click)="user.est_bloquer ? debloquerUtilisateur(user.id) : bloquerUtilisateur(user.id)" style="color: #017D03;font-size: 24px; font-weight: bold;"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table *ngIf="listeUsers.length<0">
+    <thead>
+      <tr>
+        <th class="thHead">Nom</th>
         <th class="thHead">Email</th>
         <th class="thHead">Rôle</th>
         <th class="thHead">Action</th>
@@ -37,52 +58,7 @@
     </thead>
     <tbody>
       <tr>
-        <td>Portfolio</td>
-        <td>HTML CSS JS</td>
-        <td><span class="designer">En cours</span></td>
-        <td>15/02/2024</td>
-        <td>
-          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <i class="fa-solid fa-eye ms-3" style="color: #0F2A3D; font-size: 20px;" ></i>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 18L16 14L14.6 12.6L13 14.2V10H11V14.2L9.4 12.6L8 14L12 18ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 10L8 14L9.4 15.4L11 13.8V18H13V13.8L14.6 15.4L16 14L12 10ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-        </td>
-      </tr>
-      <tr>
-        <td>Calculateur d'age</td>
-        <td>HTML CSS JS</td>
-        <td><span class="designer">En cours</span></td>
-        <td>15/02/2024</td>
-        <td>
-          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <i class="fa-solid fa-eye ms-3" style="color: #0F2A3D; font-size: 20px;"></i>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 18L16 14L14.6 12.6L13 14.2V10H11V14.2L9.4 12.6L8 14L12 18ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 10L8 14L9.4 15.4L11 13.8V18H13V13.8L14.6 15.4L16 14L12 10ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-        </td>
-      </tr>
-      <tr>
-        <td>Dictionnaire</td>
-        <td>HTML CSS API</td>
-        <td><span class="designer ">En cours</span></td>
-        <td>15/02/2024</td>
-        <td>
-          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <i class="fa-solid fa-eye ms-3" style="color: #0F2A3D; font-size: 20px;"></i>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 18L16 14L14.6 12.6L13 14.2V10H11V14.2L9.4 12.6L8 14L12 18ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 10L8 14L9.4 15.4L11 13.8V18H13V13.8L14.6 15.4L16 14L12 10ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-        </td>
+        <td>Aucune donnée disponible au niveau du tableau</td>
       </tr>
     </tbody>
   </table>
@@ -95,7 +71,6 @@
     <thead class="thHead">
       <tr class="thHead">
         <th class="thHead">Nom</th>
-        <th class="thHead">Prénom</th>
         <th class="thHead">Email</th>
         <th class="thHead">Rôle</th>
         <th class="thHead">Action</th>
@@ -106,7 +81,6 @@
         <td>Site e-commerce</td>
         <td>HTML CSS</td>
         <td><span class="termin">Terminé</span></td>
-        <td>15/02/2024</td>
         <td>
           <i class="fa-solid fa-eye" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
           <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -121,7 +95,6 @@
         <td>Gestion école</td>
         <td>HTML CSS JS</td>
         <td><span class="termin">Terminé</span></td>
-        <td>15/02/2024</td>
         <td>
           <i class="fa-solid fa-eye" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
           <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -134,6 +107,7 @@
       </tr>
     </tbody>
   </table>
+
 </div>
 
 <!-- Projet annulé -->

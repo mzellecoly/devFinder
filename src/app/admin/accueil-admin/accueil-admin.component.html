@@ -6,14 +6,14 @@
     </div>
     <div class="ml-5">
       <p class="pp text-center" style="font-size: 25px; font-weight: bold;">Nombre projets</p>
-      <p class="p text-center" style="font-size: 25px;" *ngIf="listeprojet"{{ listeprojet.length }}>0</p>
+      <p class="p text-center" style="font-size: 25px;" *ngIf="listeprojet">{{ listeprojet.length }}</p>
     </div>
   </div>
   <div class="carte-items py-2 px-5 rounded">
     <i class="fa-solid fa-user" style="color: #FFA439; font-size: 50px; display: flex; justify-content: center;"></i>
     <div class="ml-5">
-      <p class="pp text-center" style="font-size: 25px; font-weight: bold;">Projets en cours</p>
-      <p class="p text-center" style="font-size: 25px;">0</p>
+      <p class="pp text-center" style="font-size: 25px; font-weight: bold;">Langage</p>
+      <p class="p text-center" style="font-size: 25px;" *ngIf="listeLangage">{{ listeLangage.length }}</p>
     </div>
   </div>
   <div class="carte-items py-2 px-5 rounded" >
@@ -23,19 +23,23 @@
   <div class="ml-5">
     <p class="pp text-center" style="font-size: 25px; font-weight: bold;">Projets terminés</p>
     <p class="p text-center" style="font-size: 25px;">0</p>
+    <!-- <p class="p text-center" style="font-size: 25px;" *ngIf="listeprojet">{{ listeprojet.length }}</p> -->
   </div>
   </div>
 </div>
 <div class="cartes mt-5">
   <h4 class="ms-3">Projets</h4>
-  <div class="container mt-4 cartes">
-    <div class="dieyna" id="cartes" *ngFor="let projet of listeprojet">
-      <div class="card" style="width: 20rem;">
+  <div class="container mt-4 cartes" >
+    <div class="dieyna" id="cartes">
+      <div class="card" style="width: 20rem;" *ngFor="let projet of listeprojet">
           <img src="https://img.freepik.com/vecteurs-libre/temps-impots_24877-49137.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{projet.titre}}</h5>
-            <span>{{projet.langage_de_programmation}}</span>
+              <span *ngFor="let langageUrl of projet.langage_de_programmation">
+                {{ getLangageName(langageUrl) }}
+              </span>
             <p class="card-text">{{projet.nombre_de_participant}}</p>
+            <p class="card-text">{{projet.description}}</p>
             <p class="card-text">{{projet.date_limite}}</p>
             <a href="#" class="btn bouton">Détails</a>
           </div>

@@ -372,7 +372,6 @@ export class RessourceComponent implements OnInit{
     // fonction pour modifier Immersion
   modifierImmersion(id: any) {
     this.idImmersion = id;
-    // console.error('L\'immersion à update est :', id);
     const data = {
       titre: this.titre,
       description: this.description,
@@ -381,8 +380,6 @@ export class RessourceComponent implements OnInit{
       niveau_de_competence: this.niveau_de_competence,
     }
     this.ressourceService.updateImmersion(id, data).subscribe((response) => {
-      // console.warn('L\'id d\'abord si ca affiche', id)
-      // console.error('La reponse du service est :', response);
     });
     this.viderChamps();
     this.getImerssion();

@@ -3,6 +3,7 @@ import { Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../services/auth.service';
 import { BehaviorSubject } from 'rxjs';
+import { User } from '../models/user.modele';
 
 @Component({
   selector: 'app-auth',
@@ -18,6 +19,7 @@ export class AuthComponent implements OnInit {
   image: string = '';
   role: string = '';
   emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+  formChoice = true
 
   private isAuthenticatedSubject: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
@@ -85,6 +87,11 @@ export class AuthComponent implements OnInit {
       // Envoyer les informations d'identification au backend via une API
       this.authService.login(this.email, this.mot_de_passe).subscribe(
         (response) => {
+          localStorage.setItem("userOnline", JSON.stringify(response));
+          localStorage.setItem(
+            'access_token',
+            JSON.stringify(response.token).replace(/['"]+/g, '')
+          );
           // Gérer la réponse réussie du backend
           console.log(response);
           console.log('Role:', response.role);
@@ -143,5 +150,82 @@ export class AuthComponent implements OnInit {
       title: title,
       text: text,
     });
+  }
+  // Déconnexion de l'utisateur
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/auth']);
+  }
+
+  isUserLoggedIn(): boolean {
+    return this.authService.isUserLoggedIn();
+  }
+  inscriptionUser() {
+    if (this.nom_complet == '') {
+      this.alertMessage('error', 'Attention', 'Merci de renseigner votre nom complet!');
+    }else if (this.email == '') {
+      this.alertMessage(
+        'error',
+        'Attention',
+        'Merci de renseigner votre email!'
+      );
+    } else if (!this.email.match(this.emailPattern)) {
+      this.alertMessage(
+        'error',
+        'Attention',
+        'Merci de renseigner un email valide!'
+      );
+    } else if (this.mot_de_passe == '') {
+      this.alertMessage(
+        'error',
+        'Attention',
+        'Merci de renseigner le mot de passe!'
+      );
+    } else if (this.mot_de_passe.length < 8) {
+      this.alertMessage(
+        'error',
+        'Attention',
+        'le mot de ppasse doit etre supérieur ou égal à 8!'
+      );
+    } else {
+      let newUser: User = {
+        nom_complet: this.nom_complet,
+        // prenom: this.prenom,
+        email: this.email,
+        mot_de_passe: this.mot_de_passe,
+      };
+
+      console.log(newUser);
+      // Appel du service pour ajouter le nouvel utilisateur
+      this.authService.inscriptionApprenant(newUser).subscribe(
+        (addedUser) => {
+          // L'utilisateur a été ajouté avec succès
+          this.alertMessage(
+            'success',
+            'Super',
+            'Inscription réussie avec succés!'
+          );
+          console.log('Utilisateur ajouté:', addedUser);
+          this.ShowForm();
+          // Rediriger vers la page de connexion
+          // this.router.navigate(['/login']);
+        },
+        (error) => {
+          // Gestion des erreurs lors de l'ajout de l'utilisateur
+          console.error("Erreur lors de l'ajout de l'utilisateur:", error);
+          this.alertMessage(
+            'error',
+            'Erreur',
+            "Erreur lors de l'inscription. Veuillez réessayer."
+          );
+        }
+      );
+    }
+  }
+  
+  ShowForm(){
+    this.email='';
+    this.mot_de_passe='';
+    this.formChoice= !this.formChoice;
   }
 }

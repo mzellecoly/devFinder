@@ -18,6 +18,7 @@ import { ProfilsComponent } from './profils/profils.component';
 import { AccueilEntrepriseComponent } from './accueil-entreprise/accueil-entreprise.component';
 import { AccueilsuperadminComponent } from './superadmin/accueilsuperadmin/accueilsuperadmin.component';
 import { EditProfilComponent } from './edit-profil/edit-profil.component';
+import { ProfilRecrueComponent } from './profil-recrue/profil-recrue.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { EditProfilComponent } from './edit-profil/edit-profil.component';
     AccueilEntrepriseComponent,
     AccueilsuperadminComponent,
     EditProfilComponent,
+    ProfilRecrueComponent,
   ],
   imports: [
     BrowserModule,

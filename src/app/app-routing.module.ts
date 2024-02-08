@@ -12,6 +12,8 @@ import { ConditionComponent } from './condition/condition.component';
 import { ProfilsComponent } from './profils/profils.component';
 import { AccueilEntrepriseComponent } from './accueil-entreprise/accueil-entreprise.component';
 import { EditProfilComponent } from './edit-profil/edit-profil.component';
+import { adminGuardGuard } from './guard/admin-guard.guard';
+import { ProfilRecrueComponent } from './profil-recrue/profil-recrue.component';
 const routes: Routes = [
   {path: '', redirectTo:'auth', pathMatch:'full'},
   {path: 'auth', component:AuthComponent},
@@ -26,9 +28,10 @@ const routes: Routes = [
   {path: 'profils', component:ProfilsComponent},
   {path: 'editprofil', component:EditProfilComponent},
   {path: 'accueilentreprise', component:AccueilEntrepriseComponent},
+  {path: 'mesprofils', component:ProfilRecrueComponent},
   {path: 'admin', loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule)},
   {path: 'developpeur', loadChildren:()=>import('./developpeur/developpeur.module').then(m=>m.DeveloppeurModule)},
-  {path: 'superadmin', loadChildren:()=>import('./superadmin/superadmin.module').then(m=>m.SuperadminModule)},
+  {path: 'superadmin', loadChildren:()=>import('./superadmin/superadmin.module').then(m=>m.SuperadminModule), canActivate:[adminGuardGuard]},
 ];
 
 @NgModule({

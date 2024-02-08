@@ -6,7 +6,7 @@
     </div>
     <div class="ml-5">
       <p class="pp text-center" style="font-size: 25px; font-weight: bold;">Nombre projets</p>
-      <p class="p text-center" style="font-size: 25px;">0</p>
+      <p class="p text-center" style="font-size: 25px;" *ngIf="listeProjet">{{ listeProjet.length }}</p>
     </div>
   </div>
   <div class="carte-items py-2 px-5 rounded">
@@ -30,30 +30,12 @@
   <h4 class="ms-3">Projets</h4>
   <div class="container mt-4 cartes">
     <div class="dieyna" id="cartes">
-      <div class="card" style="width: 20rem;">
+      <div class="card" style="width: 20rem;" *ngFor="let projet of listeProjet">
           <img src="https://img.freepik.com/vecteurs-libre/temps-impots_24877-49137.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Calculatrice d'âge</h5>
+            <h5 class="card-title">{{projet.titre}}</h5>
             <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
-            <p class="card-text">Ce projet est conçu pour aiguiser vos compétences en matière de JavaScript et de validation de formulaire. Travailler avec des dates en JavaScript peut être délicat, ce sera donc un bon test !</p>
-            <a href="#" class="btn bouton">Détails</a>
-          </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-          <img src="../../assets/dictionnaire.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Dictionnaire</h5>
-            <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span><span class="secondletter ms-3">API</span>
-            <p class="card-text">Dans ce projet, vous intégrerez l'API Dictionnaire pour créer une application web de dictionnaire du monde réel. Les tests supplémentaires portent sur les thèmes de couleurs et la sélection des polices de caractères.</p>
-            <a href="#" class="btn bouton">Détails</a>
-          </div>
-      </div>
-      <div class="card" style="width: 20rem;">
-          <img src="../../assets/portfolio.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Portfolio développeur</h5>
-            <span>HTML</span><span class="secondletter ms-3">CSS</span><span class="ms-3">JS</span>
-            <p class="card-text">Testez vos compétences en HTML et CSS avec ce site portfolio. Des connaissances de base en JS sont nécessaires pour la validation du formulaire. Vous pouvez même le personnaliser et l'utiliser comme votre propre site !</p>
+            <p class="card-text">{{projet.description}}</p>
             <a href="#" class="btn bouton">Détails</a>
           </div>
       </div>

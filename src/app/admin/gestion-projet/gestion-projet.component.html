@@ -39,15 +39,19 @@
     <tbody>
       <tr *ngFor="let projet of listeprojet">
         <td>{{projet.titre}}</td>
-        <td>{{projet.langage_de_programmation}}</td>
+        <td>
+          <span class="langage" *ngFor="let langageUrl of projet.langage_de_programmation">
+            {{ getLangageName(langageUrl) }}
+          </span>
+        </td>
         <td>{{projet.nombre_de_participant}}</td>
         <td><span class="designer">{{projet.statu}}</span></td>
         <td>{{projet.date_limite}}</td>
         <td>
-          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
-          <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;"></i>
-      </td>
+          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosProjet(projet)"></i>
+          <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="afficherDetailsProjet(projet)"></i>
+          <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;"(click)="supprimerProjet(projet)"></i>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -146,11 +150,12 @@
         </div>
         <div class="mb-3 inputAjout">
           <label for="">Langage de programmation</label>
-        <select class="form-select" aria-label="Default select example" name="langage_de_programmation" [(ngModel)]="langage_de_programmation">
-          <option selected>Choisir le langage</option>
-          <option  *ngFor="let langage of listeLangage" [value]="langage_de_programmation">{{ langage.nom }}</option>
-        </select>
+          <select class="form-select" aria-label="Default select example" name="langage_de_programmation" [(ngModel)]="langage_de_programmation">
+            <option selected>Choisir le langage</option>
+            <option *ngFor="let langage of listeLangage" [value]="langage['@id']">{{ langage.nom }}</option>
+          </select>
         </div>
+
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Description</label>
           <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
@@ -168,59 +173,59 @@
   </div>
 </div>
 <!-- PopUp modifier -->
-<div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifiermodalLabel" aria-hidden="true">
+<div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modifiermodalLabel">Modifier un projet</h1>
+        <h1 class="modal-title fs-5" id="modifierModalLabel">Ajouter un projet</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Titre</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre du projet">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre du projet" name="titre" [(ngModel)]="titre">
         </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Technologies</label>
-          <div class="check">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                HTML
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                CSS
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                JS
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                API
-              </label>
-            </div>
-          </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Participants</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre de Participants" name="nombre_de_participant" [(ngModel)]="nombre_de_participant">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="">Langage de programmation</label>
+        <select class="form-select" aria-label="Default select example" name="langage_de_programmation" [(ngModel)]="langage_de_programmation">
+          <option selected>Choisir le langage</option>
+          <option  *ngFor="let langage of listeLangage" [value]="langage_de_programmation">{{ langage.nom }}</option>
+        </select>
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Description</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Date limite</label>
-          <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date">
+          <input class="form-control" id="exampleFormControlInput1" placeholder="Date" name="date_limite" [(ngModel)]="date_limite">
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btnAjout">Modifier</button>
+        <button type="button" class="btn btnAjout" (click)=" modifierProjet(idProjet)">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PopUp pour détail -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailmodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="detailmodalLabel">Détails du projet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body detail">
+        <p class="fw-bold">Titre : <span>{{projetSelectionne.titre}}</span></p>
+        <p>Description : {{projetSelectionne.description}}</p>
+        <p>Langage : {{projetSelectionne.langage_de_programmation}}</p>
+        <p>Participants : {{projetSelectionne.nombre_de_participant}}</p>
+        <p>Date limite : {{projetSelectionne.date_limite}}</p>
       </div>
     </div>
   </div>

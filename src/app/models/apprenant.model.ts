@@ -1,8 +1,8 @@
-export interface User{
+export interface Apprenant{
   id?: number;
   email: string;
   mot_de_passe: string;
   nom_complet: string;
-  // roles: string;
-  // userProfile:string
+  roles: string;
+  projet: [];
 }

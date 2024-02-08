@@ -75,4 +75,12 @@ span {
   background-color: rgba(255, 0, 0, 0.354);
   color: red;
 }
-
+.langage{
+  border-radius: none !important;
+  background-color: none !important;
+}
+.detail span{
+  background-color: white !important;
+  font-weight: normal;
+  font-size: 15px;
+}

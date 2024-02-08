@@ -12,7 +12,7 @@ const routes: Routes = [
     {path: 'user', component:GestionusersComponent},
     {path: 'profiladmin', component:ProfilAdminComponent},
     {path: 'ressource', component:RessourceComponent},
-    {path: '', redirectTo:'accueiladmin', pathMatch:'full'},
+    {path: '', redirectTo:'accueilsuperadmin', pathMatch:'full'},
   ]},
 ];
 

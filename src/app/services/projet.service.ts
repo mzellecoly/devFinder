@@ -39,6 +39,17 @@ export class ProjetService {
     return this.http.delete<{ message: string }>(`${url}/projet/` + id, httpOptions);
   }
 
+    // Modifier projet
+    updateProjet(id: number, projet:any): Observable<any> {
+      const token = localStorage.getItem('token');
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+        }),
+      };
+      return this.http.put<any>(`${url}/projet/` +id, projet, httpOptions);
+    }
+
   showAlert(title: any, text: any, icon: any) {
     Swal.fire({
       title:title,
