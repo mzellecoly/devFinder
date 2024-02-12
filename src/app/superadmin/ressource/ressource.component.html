@@ -28,7 +28,6 @@
       <tr>
         <th class="thHead">Titre</th>
         <th class="thHead">Description</th>
-        <th class="thHead">Niveau de compétence</th>
         <th class="thHead">Action</th>
       </tr>
     </thead>
@@ -36,7 +35,6 @@
       <tr *ngFor="let ressource of listeImerssion">
         <td>{{ressource.titre}}</td>
         <td>{{ getPartieDuTexte(ressource.description, 20) }}</td>
-        <td>{{ressource.niveau_de_competence}}</td>
         <td>
           <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosImmersion(ressource)"></i>
           <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="afficherDetailsImerssion(ressource)" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
@@ -50,7 +48,6 @@
       <tr>
         <th class="thHead">Titre</th>
         <th class="thHead">Description</th>
-        <th class="thHead">Niveau de compétence</th>
         <th class="thHead">Action</th>
       </tr>
     </thead>
@@ -70,7 +67,8 @@
       <tr class="thHead">
         <th class="thHead">Titre</th>
         <th class="thHead">Description</th>
-        <th class="thHead">Compétence</th>
+        <th class="thHead">Description</th>
+        <th class="thHead">Description</th>
         <th class="thHead">Action</th>
       </tr>
     </thead>
@@ -78,6 +76,7 @@
       <tr *ngFor="let ressource of listeBrief">
         <td>{{ressource.titre}}</td>
         <td>{{ getPartieDuTexte(ressource.description, 20) }}</td>
+        <td>{{ressource.lient_support}}</td>
         <td>{{ressource.niveau_de_competence}}</td>
         <td>
           <!-- <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="afficherDetailsBrief(ressource)" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i> -->
@@ -113,14 +112,6 @@
           <label for="exampleFormControlInput1" class="form-label">Lien support</label>
           <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support">
         </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Niveau</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau de compétence" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Lien git</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien git" name="lien_du_livrable" [(ngModel)]="lien_du_livrable">
-        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -148,15 +139,11 @@
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Lien support</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lient_support" [(ngModel)]="lient_support">
         </div>
         <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Niveau</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau de compétence" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Lien git</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien git" name="lien_du_livrable" [(ngModel)]="lien_du_livrable">
+          <label for="exampleFormControlInput1" class="form-label">Niveau compétence</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
         </div>
       </div>
       <div class="modal-footer">
@@ -171,7 +158,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modifiermodalLabel">Modifier un projet</h1>
+        <h1 class="modal-title fs-5" id="modifiermodalLabel">Modifier une immersion</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -186,14 +173,6 @@
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Lien support</label>
           <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Niveau</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau de compétence" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Lien git</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien git" name="lien_du_livrable" [(ngModel)]="lien_du_livrable">
         </div>
       </div>
       <div class="modal-footer">
@@ -208,7 +187,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modifiermodalBriefLabel">Modifier un projet</h1>
+        <h1 class="modal-title fs-5" id="modifiermodalBriefLabel">Modifier un brief</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -222,15 +201,7 @@
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Lien support</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Niveau</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau de compétence" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Lien git</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien git" name="lien_du_livrable" [(ngModel)]="lien_du_livrable">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lient_support" [(ngModel)]="lient_support">
         </div>
       </div>
       <div class="modal-footer">
@@ -250,9 +221,8 @@
       </div>
       <div class="modal-body">
         <p>{{briefSelectionne.description}}</p>
-        <p>{{briefSelectionne.niveau_de_competence}}</p>
         <p>{{briefSelectionne.lien_support}}</p>
-        <p>{{briefSelectionne.lien_du_livrable}}</p>
+        <p>{{briefSelectionne.lient_support}}</p>
       </div>
     </div>
   </div>

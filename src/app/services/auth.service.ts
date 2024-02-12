@@ -23,12 +23,12 @@ isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
   login(email: string, mot_de_passe: string): Observable<any> {
     const credentials = { email: email, mot_de_passe: mot_de_passe };
 
-    return this.http.post<any>(`${this.urlAuth}/connexion`, credentials).pipe(
+    return this.http.post<any>(`${url}/connexion`, credentials).pipe(
       tap((response) => {
-        // console.log("reponse backend auth :");
-        // console.log(response);
+        console.log("reponse backend auth :");
+        console.log(response);
         if (response) {
-          // console.log("userConnecté :");
+          console.log("userConnecté :");
           console.log("user",response);
           localStorage.setItem("token",response.token);
           localStorage.setItem("userId", response.id);

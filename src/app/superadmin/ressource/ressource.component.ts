@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { data } from 'jquery';
 import { toArray } from 'rxjs';
 import { Brief } from 'src/app/models/brief.model';
 import { Imerssion } from 'src/app/models/immersion.model';
@@ -70,6 +71,8 @@ export class RessourceComponent implements OnInit{
     this.texteComplet = this.projet1.description;
     this.partieDuTexte = this.getPartieDuTexte(this.texteComplet, 50);
     this.getBrief();
+    // this.getBrief1();
+    // this.getImerssion1();
     this.getImerssion();
   }
 
@@ -118,7 +121,7 @@ export class RessourceComponent implements OnInit{
 
       if ([data][0]['hydra:member'].length != 0) {
         this.listeBrief = [data][0]['hydra:member'];
-        console.log(this.listeBrief);
+        console.log('la liste des briefs', this.listeBrief);
       }
       },
       (error) => {
@@ -126,6 +129,13 @@ export class RessourceComponent implements OnInit{
       }
     );
   }
+  getBrief1(): void {
+    this.ressourceService.getBrief().subscribe((data :any)=>{
+        this.listeBrief = data;
+        console.log("les briefs sont là :", this.listeBrief);
+    });
+  }
+
   // Liste des imerssions ajoutés
   getImerssion(): void {
     this.ressourceService.getImerssion().subscribe((data: any) => {
@@ -140,13 +150,18 @@ export class RessourceComponent implements OnInit{
       }
     );
   }
+  getImerssion1(): void {
+    this.ressourceService.getImerssion().subscribe((data :any)=>{
+      this.listeImerssion = data;
+      console.log("les immersions sont là :", this.listeImerssion);
+  });
+  }
   viderChamps(){
     this.titre='';
     this.description='';
-    this.niveau_de_competence='';
     this.lien_support='';
     this.lient_support='';
-    this.lien_du_livrable='';
+    this.niveau_de_competence='';
   }
 
   // Ajout des immersion
@@ -164,48 +179,32 @@ export class RessourceComponent implements OnInit{
         'Renseigner une description'
       );
 
-    } else if (this.niveau_de_competence =='') {
-      this.ressourceService. showAlert(
-        'error',
-        'Attention',
-        'Renseigner un niveau de compétence'
-      );
-
     } else if (this.lien_support =='') {
       this.ressourceService. showAlert(
         'error',
         'Attention',
         'Renseigner un lien de support'
       );
-    } else if (this.lien_du_livrable =='') {
-      this.ressourceService. showAlert(
-        'error',
-        'Attention',
-        'Renseigner un lien git'
-      );
     }
     else {
-      console.log('Avant ajout :', this.titre, this.description, this.niveau_de_competence, this.lien_support, this.lien_du_livrable);
+      // console.log('Avant ajout :', this.titre, this.description, this.lien_support);
       const newImerssion: Imerssion = {
         titre:this.titre,
         description:this.description,
-        niveau_de_competence:this.niveau_de_competence,
         lien_support:this.lien_support,
-        // lient_support:this.lien_support,
-        lien_du_livrable:this.lien_du_livrable
       };
-      console.log('Après ajout :', this.titre, this.description, this.niveau_de_competence, this.lien_support, this.lien_du_livrable);
+      console.log('Après ajout :', this.titre, this.description, this.lien_support);
 
       this.ressourceService.ajoutImmersion(newImerssion).subscribe((reponse) => {
         console.log('Réponse du service :', reponse);
 
         this.ressourceService. showAlert(
-          'success',
           'Bravo!',
-          'Imerssion ajouté avec succés'
+          'Imerssion ajouté avec succéBravo!',
+          'success'
         );
         this.viderChamps();
-        this.getImerssion();
+        this.getImerssion1();
       });
     }
   }
@@ -225,48 +224,32 @@ export class RessourceComponent implements OnInit{
         'Renseigner une description'
       );
 
-    } else if (this.niveau_de_competence =='') {
-      this.ressourceService. showAlert(
-        'error',
-        'Attention',
-        'Renseigner un niveau de compétence'
-      );
-
-    } else if (this.lien_support =='') {
+    } else if (this.lient_support =='') {
       this.ressourceService. showAlert(
         'error',
         'Attention',
         'Renseigner un lien de support'
       );
-    } else if (this.lien_du_livrable =='') {
-      this.ressourceService. showAlert(
-        'error',
-        'Attention',
-        'Renseigner un lien git'
-      );
-    }
-    else {
-      console.log('Avant ajout :', this.titre, this.description, this.niveau_de_competence, this.lien_support, this.lien_du_livrable);
+    } else {
+      // console.log('Avant ajout :', this.titre, this.description, this.lient_support, this.niveau_de_competence);
       const newBrief: Brief = {
         titre: this.titre,
         description: this.description,
         niveau_de_competence: this.niveau_de_competence,
-        lient_support: this.lien_support,
-        lien_du_livrable: this.lien_du_livrable,
-        // lien_support: ''
+        lient_support: this.lient_support,
       };
-      console.log('Après ajout brief:', this.titre, this.description, this.niveau_de_competence, this.lien_support, this.lien_du_livrable);
+      console.log('Après ajout brief:', this.titre, this.description, this.niveau_de_competence, this.lient_support);
 
       this.ressourceService.ajoutBrief(newBrief).subscribe((reponse) => {
         console.log('Réponse du service :', reponse);
 
         this.ressourceService. showAlert(
-          'success',
           'Bravo!',
-          'Brief ajouté avec succés'
+          'Brief ajouté avec succés',
+          'success'
         );
         this.viderChamps();
-        this.getBrief();
+        this.getBrief1();
       });
     }
   }
@@ -291,6 +274,7 @@ export class RessourceComponent implements OnInit{
       }
     }
 
+
   supprimerImmersion(immersion : any) {
     this.objToArray = Object.keys(immersion).map(key => {
       return { cle: key, valeur: immersion[key]
@@ -310,9 +294,9 @@ export class RessourceComponent implements OnInit{
           if (id) {
             this.ressourceService.deleteImmersion(id).subscribe(() => {
               this.ressourceService.showAlert(
-                'success',
-                'Supprimé!',
-                'Immersion supprimé avec succès'
+                'Féliciation',
+                'Immersion supprimé avec succès',
+                'success'
               );
               this.getImerssion();
             });
@@ -341,9 +325,9 @@ export class RessourceComponent implements OnInit{
           if (id) {
             this.ressourceService.deleteBrief(id).subscribe(() => {
               this.ressourceService.showAlert(
-                'success',
-                'Supprimé!',
-                'Brief supprimé avec succès'
+                'Féliciation',
+                'Brief supprimé avec succès',
+                'success'
               );
               this.getBrief();
             });
@@ -364,9 +348,7 @@ export class RessourceComponent implements OnInit{
     this.idImmersion = id;
     this.titre = immersion.titre;
     this.description = immersion.description;
-    this.lien_du_livrable = immersion.lien_du_livrable;
     this.lien_support = immersion.lien_support;
-    this.niveau_de_competence = immersion.niveau_de_competence;
     }
 
     // fonction pour modifier Immersion
@@ -381,6 +363,11 @@ export class RessourceComponent implements OnInit{
     }
     this.ressourceService.updateImmersion(id, data).subscribe((response) => {
     });
+    this.ressourceService. showAlert(
+      'Bravo!',
+      'Immersion modifié avec succés',
+      'success'
+    );
     this.viderChamps();
     this.getImerssion();
   }
@@ -394,9 +381,7 @@ export class RessourceComponent implements OnInit{
     this.idBrief = id;
     this.titre = brief.titre;
     this.description = brief.description;
-    this.lien_du_livrable = brief.lien_du_livrable;
     this.lient_support = brief.lient_support;
-    this.niveau_de_competence = brief.niveau_de_competence;
     }
 
     // fonction pour modifier Brief
@@ -415,8 +400,13 @@ export class RessourceComponent implements OnInit{
       console.warn('L\'id d\'abord si ca affiche', id)
       console.error('La reponse du service est :', response);
     });
-    this.viderChamps();
+    this.ressourceService. showAlert(
+      'Bravo!',
+      'Brief modifié avec succés',
+      'success'
+    );
     this.getBrief();
+    this.viderChamps();
   }
 
 }

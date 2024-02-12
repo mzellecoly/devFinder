@@ -91,4 +91,5 @@ export class RessourcesService {
       };
       return this.http.put<any>(`${url}/brief/` +id, brief, httpOptions);
     }
+    
 }
