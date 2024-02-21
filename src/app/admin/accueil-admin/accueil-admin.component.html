@@ -27,11 +27,17 @@
   </div>
   </div>
 </div>
+<form action="#" class="formSearch mt-5">
+  <div class="form-input">
+    <input type="search" placeholder="Rechercher..." name ="search" [(ngModel)]="searchProjet" (input)="getArticlesPage()">
+    <button type="submit" class="search-btn mt-1"><i class='bx bx-search' ></i></button>
+  </div>
+</form>
 <div class="cartes mt-5">
   <h4 class="ms-3">Projets</h4>
   <div class="container mt-4 cartes" >
     <div class="dieyna" id="cartes">
-      <div class="card" style="width: 20rem;" *ngFor="let projet of listeprojet">
+      <div class="card" style="width: 20rem;" *ngFor="let projet of getArticlesPage()">
           <img src="https://img.freepik.com/vecteurs-libre/temps-impots_24877-49137.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{projet.titre}}</h5>
@@ -39,11 +45,22 @@
                 {{ getLangageName(langageUrl) }}
               </span>
             <p class="card-text">{{projet.nombre_de_participant}}</p>
-            <p class="card-text">{{projet.description}}</p>
-            <p class="card-text">{{projet.date_limite}}</p>
-            <a href="#" class="btn bouton">Détails</a>
+            <p class="card-text limit-description">{{projet.description}}</p>
+            <p class="card-text">{{projet.date_limite |  date: 'dd/MM/yyyy'}}</p>
           </div>
       </div>
     </div>
+  </div>
+    <!-- pour la pagination -->
+  <div class="d-flex justify-content-center my-5">
+    <button class="btn btnColore me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
+      Précédent
+    </button>
+    <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
+      {{ page }}
+    </button>
+    <button class="btn btnColore ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
+      Suivant
+    </button>
   </div>
 </div>

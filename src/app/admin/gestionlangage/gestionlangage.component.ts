@@ -61,9 +61,9 @@ export class GestionlangageComponent implements OnInit{
           console.log('Réponse du service :', reponse);
 
           this.langage. showAlert(
-            'Success',
             'Bravo!',
-            'Langage ajouté avec succés'
+            'Langage ajouté avec succés',
+            'success'
           );
           this.viderChamps();
           this.getLangage();

@@ -8,4 +8,6 @@ export interface Projet{
   // langage_de_programmation: string[]
   date_limite: string;
   hasParticipated?: boolean;
+  statu?: string;
+  date_creation:string;
 }

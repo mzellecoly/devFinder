@@ -49,6 +49,7 @@ export class ProjetService {
       };
       return this.http.put<any>(`${url}/projet/` +id, projet, httpOptions);
     }
+    
 
   showAlert(title: any, text: any, icon: any) {
     Swal.fire({

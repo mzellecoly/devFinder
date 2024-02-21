@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from 'src/app/models/user.modele';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
 import Swal from 'sweetalert2';
 
@@ -10,7 +11,10 @@ import Swal from 'sweetalert2';
 export class GestionusersComponent {
   dtOptions: DataTables.Settings = {};
   email: string = '';
+  etat:boolean = false;
   listeUsers: any[] = [];
+  userSelectionne: any ={};
+  listeUsersBloque: any[] = [];
 
   constructor(
     private user : UtilisateurService
@@ -29,14 +33,16 @@ export class GestionusersComponent {
         url: 'https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json'
       }
     };
-    // this.getUsers();
     this.getUser();
+
+    this.getUserBloque();
   }
 
   // Déclaration des variables
   isProgress:boolean = true;
   isTerminate:boolean = false;
   isCancel:boolean = false;
+  // etat:boolean=true
 
   // Déclaration des méthodes
   // Voir les projets urbaines
@@ -53,12 +59,6 @@ export class GestionusersComponent {
     this.isCancel = false;
   }
 
-  // Voir les projets Cancel
-  showCancel(){
-    this.isProgress = false;
-    this.isTerminate = false;
-    this.isCancel = true;
-  }
 
   // getUsers(): void {
   //   this.user.getUser().subscribe((data: any) => {
@@ -77,60 +77,58 @@ export class GestionusersComponent {
   getUser = () => {
     this.user.getUser().subscribe((data :any)=>{
         this.listeUsers = data.utilisateurs;
-        // console.log(data);
         console.log('La liste est :', this.listeUsers);
     });
   }
-  bloquerUtilisateur(id: number): void {
-    // Affichez une fenêtre de confirmation avant de bloquer l'utilisateur
-    Swal.fire({
-      title: 'Êtes-vous sûr?',
-      text: 'Vous ne pourrez pas revenir en arrière après cette action!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#017D03',
-      cancelButtonColor: '#FF9C00',
-      confirmButtonText: 'Oui, bloquer!',
-      cancelButtonText: 'Annuler',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Si l'utilisateur confirme, déterminez le nouvel état de blocage
-        const newState = true;
+    // Méthode pour afficher les détails de l'utilisateur sélectionné
+    afficherDetailsUser(user: User) {
+      this.userSelectionne = user;
+      console.log('la reponse est :', this.userSelectionne);
+    }
 
-        // Appelez la fonction bloquerUtilisateur avec les deux arguments requis
-        this.user.bloquerUtilisateur(id, newState).subscribe(
-          () => {
-            // Mettez à jour la liste des utilisateurs après le blocage réussi
-            this.getUser();
-            // Affichez un message de succès
-            Swal.fire(
-              'Utilisateur bloqué!',
-              "L'utilisateur a été bloqué avec succès.",
-              'success'
-            );
-          },
-          (error) => {
-            // Affichez un message d'erreur s'il y a un problème lors du blocage
-            Swal.fire(
-              'Erreur!',
-              "Une erreur est survenue lors du blocage de l'utilisateur.",
-              'error'
-            );
-            console.error("Erreur lors du blocage de l'utilisateur :", error);
-          }
-        );
+    blockUser(userId: number) {
+      const state = {
+        etat: true
       }
-    });
-  }
-  debloquerUtilisateur(id: number): void {
-    Swal.fire({
-      icon: 'success',
-      title: 'Utilisateur débloqué!',
-      text: "L'utilisateur a été débloqué avec succès.",
-    });
+      this.user.blockUser(userId,state).subscribe((resp) => {
 
-    this.user.debloquerUtilisateur(id).subscribe(() => {
-      this.getUser();
-    });
-  }
+          console.log(resp);
+
+        Swal.fire('Utilisateur bloqué avec succès!', '', 'success');
+        // Retirer l'utilisateur bloqué de la liste des utilisateurs actifs
+        this.listeUsers = this.listeUsers.filter(user => user.id !== userId);
+        // this.getUser(); // Actualiser la liste des utilisateurs après avoir bloqué un utilisateur
+        this.getUserBloque();
+      }, error => {
+        console.error('Erreur lors du blocage de l\'utilisateur', error);
+        Swal.fire('Erreur lors du blocage de l\'utilisateur', '', 'error');
+      });
+    }
+    deblockUser(userId: number) {
+      const state = {
+        etat: false
+      }
+      this.user.blockUser(userId,state).subscribe((resp) => {
+
+          console.log(resp);
+
+        Swal.fire('Utilisateur débloqué avec succès!', '', 'success');
+        // this.getUser(); // Actualiser la liste des utilisateurs après avoir bloqué un utilisateur
+        this.getUserBloque();
+      }, error => {
+        console.error('Erreur lors du blocage de l\'utilisateur', error);
+        Swal.fire('Erreur lors du blocage de l\'utilisateur', '', 'error');
+      });
+    }
+
+    getUserBloque(){
+      // alert('gkfdf')
+      this.user.getUserBan().subscribe((data :any)=>{
+        // console.log("dfdjfhddfdfjd");
+
+          this.listeUsersBloque = data.utilisateursBloque;
+          // console.log(data);
+          console.log('La liste des bloqué :', this.listeUsersBloque);
+      });
+    }
 }

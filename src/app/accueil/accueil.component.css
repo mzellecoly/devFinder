@@ -37,14 +37,31 @@
   height: 150px;
   background-color: white;
 }
-@media screen and (width<= 950px){
+.user{
+  color: white;
+  background-color: #FFA439;
+  padding: 7px 7px;
+  border-radius: 5px;
+  margin-top: 100px;
+}
+.user a{
+  margin-top: 110px;
+}
+.limit-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  max-height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
+@media screen and (width<= 985px){
   .carte{
     grid-template-columns: 1fr;
   }
   .banner{
     display: flex;
     flex-direction: column;
-
   }
   .imgBanner{
     height: 45vh;

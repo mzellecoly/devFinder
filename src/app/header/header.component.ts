@@ -8,13 +8,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+
+  nom_complet: string='';
   constructor(
     private authService: AuthService,
     private router : Router
     ){
   }
+  isUserLog(): boolean {
+    return this.authService.isUserLoggedIn();
+  }
   isUserLoggedIn(): boolean {
     return this.authService.isUserLoggedIn();
+  }
+  isUserLoggedInn(): boolean {
+    return this.authService.isUserLoggedInn();
   }
   isUserLogged(): boolean {
     return this.authService.isUserLogged();

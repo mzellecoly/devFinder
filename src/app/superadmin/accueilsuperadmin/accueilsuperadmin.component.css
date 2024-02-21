@@ -1,0 +1,138 @@
+.carte{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+}
+.carte-items{
+  background-color: white;
+  box-shadow: 5px 5px 5px 2px #D3D3D3;
+  height: 150px;
+}
+.p{
+  margin-top: -20px;
+}
+/* Début Section Projet*/
+.bouton{
+  background-color: #0F2A3D;
+  color: white;
+  font-weight: bold;
+  margin-right: 90px;
+}
+#cartes{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 auto !important;
+  /* background-color: red; */
+  /* border: 2px solid red; */
+}
+.dieyna{
+  margin: 0 auto !important;
+}
+.card{
+  box-shadow: 5px 4px 4px rgba(128, 128, 128, 0.611);
+}
+.card span{
+  font-weight: bold;
+}
+.card img{
+  height: 200px;
+}
+#carte img{
+  height: 220px;
+}
+.btnProjet{
+  float: right;
+}
+.btnColore{
+  background-color: #FFA439;
+  color: white;
+}
+.btnColor{
+  background-color: #0F2A3D;
+  color: white;
+  font-weight: bold;
+}
+.form-input input {
+	flex-grow: 1;
+	padding: 3px 16px;
+	height: 100%;
+	border: none;
+	background: rgba(128, 128, 128, 0.192);
+	border-radius: 36px 0 0 36px;
+	outline: none;
+	width: 80%;
+	color: black;
+}
+.form-input button {
+	width: 36px;
+	height: 100%;
+	background: #0F2A3D;
+	color: white;
+	font-weight: bold;
+	font-size: 20px;
+	border: none;
+	outline: none;
+	border-radius: 0 36px 36px 0;
+	cursor: pointer;
+}
+.formSearch{
+  float: right;
+}
+.btnColore{
+  background-color: #FFA439;
+  color: white;
+}
+
+.btnColor{
+  background-color: #0F2A3D;
+  color: white;
+  font-weight: bold;
+}
+@media screen and (width<= 950px){
+  .carte{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: red;
+  }
+  #cartes{
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 0 auto;
+
+  }
+  .btnProjet{
+    float: none;
+    margin-left: 100px;
+  }
+}
+@media screen and (max-width: 900px) and (min-width: 200px){
+  .carte{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: yellow;
+  }
+  #cartes{
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+  }
+  .card{
+    margin: 0 auto;
+
+  }
+  .btnProjet{
+    float: none;
+    margin-left: 100px;
+  }
+}
+@media screen and (max-width: 795px) and (min-width: 200px){
+  .carte{
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: yellow;
+  }
+
+}

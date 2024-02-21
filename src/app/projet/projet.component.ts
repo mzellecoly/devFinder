@@ -30,36 +30,6 @@ export class ProjetComponent implements OnInit {
   projetParPage = 3; // Nombre d'projet par page
   pageActuelle = 1; // Page actuelle
 
-  // reacherche
-  tabNewsFilter: any[] = [];
-  filterValue: string = '';
-  tabNews: any = [] = this.listeProjet;
-  // onSearch() {
-  //   // Recherche se fait selon le nom ou le prenom
-  //   this.filterValue = this.filterValue.toLowerCase();
-  //   this.tabNewsFilter = this.listeProjet.filter((elt: any) =>
-  //    elt?.titre.toLowerCase().includes(this.filterValue.toLowerCase())
-  //   );
-
-  //   console.log('je suis le filter', this.tabNewsFilter);
-  // }
-
-  onSearch() {
-    // Convertir la valeur de recherche en minuscules
-    const searchValue = this.filterValue.toLowerCase();
-
-    // Filtrer les projets en fonction du titre
-    this.tabNewsFilter = this.listeProjet.filter((projet: any) =>
-      projet.titre.toLowerCase().includes(searchValue) ||
-      projet.description.toLowerCase().includes(searchValue)
-    );
-
-    // Afficher les résultats dans la console à des fins de débogage
-    console.log('Résultats de la recherche :', this.tabNewsFilter);
-  }
-
-
-
 
   constructor(
     private projetService: ProjetService,
@@ -83,26 +53,27 @@ export class ProjetComponent implements OnInit {
     );
     this.getProjet();
     this.getLangage();
+    // this.getAllProjets();
   }
 
+  // getAllProjets = () => {
+  //   this.projetService.getProjet().subscribe((data :any)=>{
+  //       this.listeprojet = data;
+  //       console.log('les projets', this.listeprojet);
+  //   });
+  // }
   // Liste des Projets ajoutés
   getProjet(): void {
     this.projetService.getProjet().subscribe(
       (data: any) => {
         if ([data][0]['hydra:member'].length != 0) {
           this.listeprojet = [data][0]['hydra:member'];
-          // Filtrer les projets en fonction du langage sélectionné
-          if (this.selectedLangage) {
-            this.listeprojet = this.listeprojet.filter((projet) =>
-              projet.langage_de_programmation.includes(this.selectedLangage)
-            );
-          }
 
-          console.log(this.listeprojet);
+          console.log('La liste des projets est :',this.listeprojet);
         }
       },
       (error) => {
-        console.error('Erreur lors de la récupération des briefs', error);
+        console.error('Erreur lors de la récupération des projets', error);
       }
     );
   }
@@ -154,14 +125,14 @@ export class ProjetComponent implements OnInit {
     if (this.seletedProjet) {
       const idProjet = this.getId(this.seletedProjet['@id']);
       let projetChoisi= this.listeProjet.find((element:any)=> element.id==idProjet)
+      console.log('l\'id est :', idProjet);
       if (projetChoisi) {
         this.alertMessage(
           'error',
-          'Attention',
-          'Vous participer déja à ce projet!'
+          'Attention!!',
+          'Vous participer déja à ce projet'
         );
       } else{
-
       // Appeler le service pour récupérer le projet par son ID
       this.apprenantService.getById(idProjet).subscribe(
         (projet) => {
@@ -171,8 +142,8 @@ export class ProjetComponent implements OnInit {
           console.error('Projet récupéré :', idProjet);
           // Vous pouvez maintenant utiliser le projet dans votre composant
           this.alertMessage(
-            'succes',
-            'Feliciation',
+            'success',
+            'Felicitation!!',
             'Vous participer maintenant à ce projet!'
           );
         },
@@ -185,11 +156,18 @@ export class ProjetComponent implements OnInit {
     }
   }
 
+  dataProjet : any []=[];
+  searchProjet : string='';
+
   // Méthode pour déterminer lesprojet à afficher sur la page actuelle
   getArticlesPage(): any[] {
     const indexDebut = (this.pageActuelle - 1) * this.projetParPage;
     const indexFin = indexDebut + this.projetParPage;
-    return this.listeprojet.slice(indexDebut, indexFin);
+    this.dataProjet = this.listeprojet.filter((publica: { description: string; titre: string; }) =>
+    publica.description.toLowerCase().includes(this.searchProjet.toLowerCase())||
+    publica.titre.toLowerCase().includes(this.searchProjet.toLowerCase())
+    );
+    return this.dataProjet.slice(indexDebut, indexFin);
   }
   // Méthode pour générer la liste des pages
   get pages(): number[] {

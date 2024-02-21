@@ -14,13 +14,22 @@ import { AccueilEntrepriseComponent } from './accueil-entreprise/accueil-entrepr
 import { EditProfilComponent } from './edit-profil/edit-profil.component';
 import { adminGuardGuard } from './guard/admin-guard.guard';
 import { ProfilRecrueComponent } from './profil-recrue/profil-recrue.component';
+import { appguardGuard } from './guard/appguard.guard';
+import { assoguardGuard } from './guard/assoguard.guard';
+import { AuthAssoComponent } from './auth-asso/auth-asso.component';
+import { AuthEntrepriseComponent } from './auth-entreprise/auth-entreprise.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { ArticleComponent } from './article/article.component';
 const routes: Routes = [
   {path: '', redirectTo:'auth', pathMatch:'full'},
   {path: 'auth', component:AuthComponent},
+  {path: 'authAssociation', component:AuthAssoComponent},
+  {path: 'authEntreprise', component:AuthEntrepriseComponent},
   {path: 'accueil', component:AccueilComponent},
   {path: 'contact', component:ContactComponent},
   {path: 'header', component:HeaderComponent},
   {path: 'footer', component:FooterComponent},
+  {path: 'article', component:ArticleComponent},
   {path: 'about', component:AboutComponent},
   {path: 'projet', component:ProjetComponent},
   {path: 'politique', component:PolitiqueComponent},
@@ -29,9 +38,10 @@ const routes: Routes = [
   {path: 'editprofil', component:EditProfilComponent},
   {path: 'accueilentreprise', component:AccueilEntrepriseComponent},
   {path: 'mesprofils', component:ProfilRecrueComponent},
-  {path: 'admin', loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule)},
-  {path: 'developpeur', loadChildren:()=>import('./developpeur/developpeur.module').then(m=>m.DeveloppeurModule)},
+  {path: 'admin', loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule), canActivate:[assoguardGuard]},
+  {path: 'developpeur', loadChildren:()=>import('./developpeur/developpeur.module').then(m=>m.DeveloppeurModule), canActivate:[appguardGuard]},
   {path: 'superadmin', loadChildren:()=>import('./superadmin/superadmin.module').then(m=>m.SuperadminModule), canActivate:[adminGuardGuard]},
+  {path: '**', component:MaintenanceComponent},
 ];
 
 @NgModule({

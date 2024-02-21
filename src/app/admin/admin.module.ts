@@ -14,6 +14,7 @@ import { EditprofilComponent } from './editprofil/editprofil.component';
 import { GestionlangageComponent } from './gestionlangage/gestionlangage.component';
 import { SharedModule } from '../shared/shared.module';
 import { LangageProgramPipe } from '../shared/langage-program.pipe';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,10 @@ import { LangageProgramPipe } from '../shared/langage-program.pipe';
     FormsModule,
     HttpClientModule,
     SharedModule,
+    EditorModule
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
 })
 export class AdminModule {}

@@ -16,6 +16,9 @@ body{
     flex-direction: column;
     height: 100vh;
 }
+.users{
+  margin-top: 20vh;
+}
 .headertext{
   position: relative;
   z-index: 2000;
@@ -28,12 +31,12 @@ body{
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 600px;
     margin: 150px auto;
   }
 .container p{
     font-size: 14px;
-    line-height: 20px;
+    /* line-height: 20px; */
     letter-spacing: 0.3px;
     margin: 20px 0;
 }
@@ -205,4 +208,7 @@ body{
 
 .container.active .toggle-right{
     transform: translateX(200%);
+}
+.sign-up form p{
+
 }

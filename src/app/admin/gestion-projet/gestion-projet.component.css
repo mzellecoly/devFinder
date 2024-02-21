@@ -22,6 +22,7 @@
  color: #FFA439 !important;
  border: none;
 }
+
 /* CSS Tableau */
 .thHead{
   background-color: #0F2A3D !important;
@@ -83,4 +84,21 @@ span {
   background-color: white !important;
   font-weight: normal;
   font-size: 15px;
+}
+.statut-terminé {
+  background-color: #27ae5f2a;
+  color: #27AE60;
+}
+.statut-attente {
+  background-color: #ff9d0056;
+  color: #FFA439;
+}
+.editeur{
+  background-color: red;
+  color: black;
+}
+@media screen and (max-width: 900px) and (min-width: 200px){
+  .menuFiltre{
+   flex-direction: column;
+  }
 }

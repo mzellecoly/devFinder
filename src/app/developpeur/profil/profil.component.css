@@ -24,12 +24,9 @@
 .profil{
   display: flex;
   width: 995px;
-  /* height: 967px; */
   align-items: flex-start;
-  /* gap: 0px; */
   flex-shrink: 0;
   margin: 0 auto;
-  border: 2px solid red;
 }
 .profilUp img{
   width: 150px;

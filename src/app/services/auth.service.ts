@@ -10,13 +10,17 @@ import { url } from './api-url.service';
 })
 export class AuthService {
   isAdmin$ = new BehaviorSubject<boolean>(false);
-  urlAuth="http://localhost:8000";
+  // urlAuth = 'http://localhost:8000';
 
-isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+  isAuthenticatedSubject: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+  public isAuthenticated$: Observable<boolean> =
+    this.isAuthenticatedSubject.asObservable();
 
-  private userProfileSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-  public userProfile$: Observable<User | null> = this.userProfileSubject.asObservable();
+  private userProfileSubject: BehaviorSubject<User | null> =
+    new BehaviorSubject<User | null>(null);
+  public userProfile$: Observable<User | null> =
+    this.userProfileSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -25,16 +29,18 @@ isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
 
     return this.http.post<any>(`${url}/connexion`, credentials).pipe(
       tap((response) => {
-        console.log("reponse backend auth :");
+        console.log('reponse backend auth :');
         console.log(response);
         if (response) {
-          console.log("userConnecté :");
-          console.log("user",response);
-          localStorage.setItem("token",response.token);
-          localStorage.setItem("userId", response.id);
+          console.log('userConnecté :');
+          console.log('user', response);
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('userId', response.id);
           this.isAuthenticatedSubject.next(true);
-          this.isAdmin$.next(response.email === 'admin@admin.com' && response.mot_de_passe ==='password'); // Mettez à jour en fonction de votre logique de rôle
-          // Gérer la redirection ici si nécessaire
+          this.isAdmin$.next(
+            response.email === 'admin@admin.com' &&
+              response.mot_de_passe === 'password'
+          );
           this.router.navigate(['/superadmin']);
         }
       })
@@ -47,12 +53,14 @@ isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     localStorage.removeItem('access_token');
     localStorage.removeItem('userOnline');
     localStorage.removeItem('userId');
-    this.isAuthenticatedSubject.next(false);
-    this.isAdmin$.next(false);
+
+    this.router.navigate(['/auth']);
   }
+
   get isAuthenticated(): boolean {
     return this.isAuthenticatedSubject.value;
   }
+
   getUserProfile(): Observable<User> {
     return this.http.get<User>(`${url}/utilisateur/connecter`).pipe(
       tap((userProfile) => {
@@ -66,19 +74,27 @@ isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     const userOnlineString = localStorage.getItem('userOnline');
     if (userOnlineString) {
       const userOnline = JSON.parse(userOnlineString);
-      const role = userOnline && userOnline.role ? userOnline.role.toString() : null;
+      const role =
+        userOnline && userOnline.role ? userOnline.role.toString() : null;
       return { user: userOnline, role: role };
     }
     return { user: null, role: null };
   }
-
+  isUserLog(): boolean {
+    const { user } = this.IsOnline();
+    return user !== null ;
+  }
   isUserLoggedIn(): boolean {
     const { user, role } = this.IsOnline();
-    return user !== null && role === "ROLE_ENTREPRISE";
+    return user !== null && role === 'ROLE_ENTREPRISE';
+  }
+  isUserLoggedInn(): boolean {
+    const { user, role } = this.IsOnline();
+    return user !== null && role === 'ROLE_APPRENANT';
   }
   isUserLogged(): boolean {
     const { user, role } = this.IsOnline();
-    return user !== null && role === "ROLE_APPRENANT";
+    return user !== null && role === 'ROLE_APPRENANT';
   }
 
   inscriptionApprenant(user: any): Observable<any> {

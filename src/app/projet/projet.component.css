@@ -39,7 +39,7 @@ hr{
   background-color: #0F2A3D;
 }
 .listesprojet input{
-  background-color: red;
+  /* background-color: red; */
 }
 .liste a{
   border-bottom: 1px solid  !important;
@@ -90,6 +90,26 @@ hr{
   color: white;
   font-weight: bold;
 }
+.vh-100 {
+  height: 40vh !important;
+}
+.limit-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  max-height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
+.recherche button{
+  background-color: #0F2A3D;
+  color: white;
+  border: none;
+  padding: 2px 6px;
+}
+.formSearch{
+  margin-right: 15px;
+}
 @media screen and (max-width: 1178px) and (min-width: 850px){
   #cartes{
     grid-template-columns: 1fr 1fr;
@@ -98,14 +118,28 @@ hr{
   .card{
     margin: 0 auto;
   }
+  .projetAsso{
+    display: flex;
+    flex-direction: column;
+  }
 }
 @media screen and (max-width: 900px) and (min-width: 200px){
   #cartes{
     grid-template-columns: 1fr;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    /* background-color: yellow; */
   }
-  .card{
-    margin: 0 auto;
+  .projetAsso{
+    display: flex;
+    flex-direction: column;
+  }
+  .col-3 {
+    width: 100%;
+  }
+  .cardProjet{
+    margin-left: 100px;
+    /* margin: 0 auto !important; */
+    /* background-color: red; */
   }
 }
 /* Fin Section Projet*/

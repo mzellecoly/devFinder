@@ -4,6 +4,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Langage } from '../models/langage.model';
 import { url } from './api-url.service';
 import Swal from 'sweetalert2';
+import { User } from '../models/user.modele';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class LangageService {
    // Liste
    getLangage() : Observable<any>{
     return this.http.get<Langage[]>(`${url}/langage/liste`);
+  }
+   // Liste
+   getAssociation() : Observable<any>{
+    return this.http.get<User[]>(`${url}/association/liste`);
   }
 
   // Ajouter

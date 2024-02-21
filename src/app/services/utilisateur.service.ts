@@ -13,7 +13,7 @@ export class UtilisateurService {
 
   constructor(private http: HttpClient, private router: Router,) { }
 
-  // Lister les briefs
+  // Lister les utilisateurs
   getUser(): Observable<any> {
     const token = localStorage.getItem('token');
     const httpOptions = {
@@ -21,7 +21,16 @@ export class UtilisateurService {
         Authorization: `Bearer ${token}`,
       }),
     };
-    return this.http.get<User[]>(`${url}/administrateur/liste/utilisateur`, httpOptions);
+    return this.http.get<User[]>(`${url}/administrateur/liste/utilisateurs`, httpOptions);
+  }
+  getUserBan(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+    return this.http.get<User[]>(`${url}/administrateur/liste/utilisateursBloque`, httpOptions);
   }
   getBrief(): Observable<any> {
     return this.http.get<User[]>(`${url}/brief/liste`);
@@ -38,7 +47,16 @@ export class UtilisateurService {
         Authorization: `Bearer ${token}`,
       }),
     };
-    return this.http.put<any>(`${url}/administrateur/` +id, projet, httpOptions);
+    return this.http.put<any>(`${url}/administrateur/${id}`, projet, httpOptions);
+  }
+  updateAsso(id: number, projet:any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+    return this.http.put<any>(`${url}/association/${id}`, projet, httpOptions);
   }
 
   getProfil(): Observable<any> {
@@ -53,23 +71,32 @@ export class UtilisateurService {
     };
     return this.http.get<Entreprise>(`${url}/entreprise/${id}`, httpOptions);
   }
-
-  bloquerUtilisateur(id: number, newState: boolean): Observable<{ message: string }> {
-    const accessToken = localStorage.getItem('access_token');
-    if (!accessToken) {
+   // Méthode pour bloquer un utilisateur
+   blockUser(id: number, data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+    return this.http.patch<any>(`${url}/apprenant/monitorerAccess/${id}`, data, httpOptions);
+  }
+  // Cest le service
+  bloquerUtilisateur(id: number,newState: boolean): Observable<{ message: string }> {
+    const token = localStorage.getItem('token');
+    if (!token) {
       return throwError('Utilisateur non connecté');
     }
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${token}`,
     });
 
     // Construire l'URL en fonction du nouvel état de blocage
-    const urlWithState = `${url}/apprenant/monitorer/${id}?bloque=${newState}`;
+    const urlWithState = `${url}/apprenant/monitorerAccess/${id}`;
 
-    return this.http.delete<{ message: string }>(urlWithState, { headers });
+    return this.http.patch<{ message: string }>(urlWithState, { headers });
   }
-
   debloquerUtilisateur(id: number): Observable<{ message: string }> {
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
@@ -80,8 +107,8 @@ export class UtilisateurService {
       Authorization: `Bearer ${accessToken}`,
     });
 
-    const urlWithState =` ${url}/debloquerUser/${id}`;
+    const urlWithState = `${url}/debloquerUser/${id}`;
 
-    return this.http.delete<{ message: string }>(urlWithState, { headers });
+    return this.http.patch<{ message: string }>(urlWithState, { headers });
   }
 }

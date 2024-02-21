@@ -10,6 +10,7 @@ import { LangageService } from '../services/langage.service';
 export class AccueilComponent implements OnInit {
   listeprojet: any[] = [];
   listeLangage: any[] = [];
+  seletedProjet: any = {};
 
   constructor(
     private projetService: ProjetService,
@@ -20,10 +21,10 @@ export class AccueilComponent implements OnInit {
     const script = document.createElement('script');
     script.src = '../../../assets/js/script.js';
     document.body.appendChild(script);
-
+    localStorage.setItem('userOnline', JSON.stringify([]));
     this.getProjet();
     this.getLangage();
-    this.getTopThreeProjects()
+    // this.getTopThreeProjects()
   }
 
   // Liste des Projets ajoutés
@@ -32,11 +33,11 @@ export class AccueilComponent implements OnInit {
       (data: any) => {
         if ([data][0]['hydra:member'].length != 0) {
           this.listeprojet = [data][0]['hydra:member'];
-          console.log(this.listeprojet);
+          console.log('les projets :',this.listeprojet);
         }
       },
       (error) => {
-        console.error('Erreur lors de la récupération des briefs', error);
+        console.error('Erreur lors de la récupération des projet', error);
       }
     );
   }
@@ -68,7 +69,7 @@ export class AccueilComponent implements OnInit {
       (data: any) => {
         if (data && data['hydra:member'] && data['hydra:member'].length >= 3) {
           this.listeprojet = data['hydra:member'].slice(0, 3); // Récupérer les trois premiers projets
-          console.log(this.listeprojet);
+          console.log('la liste esst :',this.listeprojet);
         } else {
           console.error("Il n'y a pas suffisamment de projets pour afficher trois projets.");
         }
@@ -77,5 +78,8 @@ export class AccueilComponent implements OnInit {
         console.error('Erreur lors de la récupération des projets', error);
       }
     );
+  }
+  getDetailProjet(projet: any) {
+    this.seletedProjet = projet;
   }
 }

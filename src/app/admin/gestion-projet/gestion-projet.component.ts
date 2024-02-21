@@ -3,6 +3,7 @@ import { Projet } from 'src/app/models/projet.model';
 import { LangageService } from 'src/app/services/langage.service';
 import { ProjetService } from 'src/app/services/projet.service';
 import Swal from 'sweetalert2';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @Component({
   selector: 'app-gestion-projet',
@@ -12,6 +13,11 @@ import Swal from 'sweetalert2';
 export class GestionProjetComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
 
+  editorConfig = {
+    base_url: '/tinymce',
+    suffix: '.min',
+    plugins:'lists link image table wordcount'
+  }
   // Les variables
   listeprojet: any[] = [];
   listeLangage: any[] = [];
@@ -31,6 +37,7 @@ export class GestionProjetComponent implements OnInit {
     private langage: LangageService
   ) // private http : HttpClient,
   {}
+
 
   ngOnInit(): void {
     const script = document.createElement('script');
@@ -53,6 +60,7 @@ export class GestionProjetComponent implements OnInit {
   isProgress: boolean = true;
   isTerminate: boolean = false;
   isCancel: boolean = false;
+  IsStatu:boolean=false;
 
   // Déclaration des méthodes
   // Voir les projets urbaines
@@ -83,6 +91,7 @@ export class GestionProjetComponent implements OnInit {
         if ([data][0]['hydra:member'].length != 0) {
           this.listeprojet = [data][0]['hydra:member'];
           console.log(this.listeprojet);
+          this.updateStatutProjets();
         }
       },
       (error) => {
@@ -119,69 +128,22 @@ export class GestionProjetComponent implements OnInit {
     this.description = '';
     this.nombre_de_participant = 0;
     this.date_limite = '';
+    this.langage_de_programmation='';
   }
-  // Ajout de projet
-  // AjoutProjet() {
-  //   if (this.titre == '') {
-  //     this.projetService.showAlert('error', 'Attention', 'Renseigner un titre');
-  //   } else if (this.description == '') {
-  //     this.projetService.showAlert(
-  //       'error',
-  //       'Attention',
-  //       'Renseigner une description'
-  //     );
-  //   } else if (this.nombre_de_participant == 0) {
-  //     this.projetService.showAlert(
-  //       'error',
-  //       'Attention',
-  //       'Renseigner le nombre de participant'
-  //     );
-  //   } else if (this.date_limite == '') {
-  //     this.projetService.showAlert(
-  //       'error',
-  //       'Attention',
-  //       'Renseigner un lien git'
-  //     );
-  //   } else {
-  //     const newProjet: Projet = {
-  //       titre: this.titre,
-  //       description: this.description,
-  //       langage_de_programmation: this.langage_de_programmation
-  //         ? [this.langage_de_programmation]
-  //         : [],
-  //       nombre_de_participant: +this.nombre_de_participant,
-  //       date_limite: this.date_limite,
-  //     };
-  //     console.log(
-  //       'Après ajout :',
-  //       this.langage_de_programmation
-  //     );
-
-  //     this.projetService.addProjet(newProjet).subscribe((reponse) => {
-  //       console.log('Réponse du service :', reponse);
-
-  //       this.projetService.showAlert(
-  //         'success',
-  //         'Bravo!',
-  //         'Projet ajouté avec succés'
-  //       );
-  //       this.viderChamps();
-  //       this.getProjet();
-  //     });
-  //   }
-  // }
 
   AjoutProjet() {
     if (this.titre == '') {
-      this.projetService.showAlert('error', 'Attention', 'Renseigner un titre');
+      this.projetService.showAlert('Attention !!', 'Renseigner un titre', 'error');
     } else if (this.description == '') {
-      this.projetService.showAlert('error', 'Attention', 'Renseigner une description');
+      this.projetService.showAlert('Attention !!', 'Renseigner une description', 'error');
     } else if (this.nombre_de_participant == 0) {
-      this.projetService.showAlert('error', 'Attention', 'Renseigner le nombre de participant');
+      this.projetService.showAlert('Attention !!', 'Renseigner le nombre de participant', 'error');
     } else if (this.date_limite == '') {
-      this.projetService.showAlert('error', 'Attention', 'Renseigner une date limite');
+      this.projetService.showAlert('Attention !!', 'Renseigner une date limite', 'error');
+    } else if (new Date(this.date_limite) < new Date()) {
+      this.projetService.showAlert('Attention !!', 'La date limite ne peut pas être une date passée', 'error');
     } else if (this.langage_de_programmation == '') {
-      this.projetService.showAlert('error', 'Attention', 'Sélectionner un langage de programmation');
+      this.projetService.showAlert('Attention !!', 'Sélectionner un langage de programmation', 'error');
     } else {
       const newProjet: Projet = {
         titre: this.titre,
@@ -189,16 +151,39 @@ export class GestionProjetComponent implements OnInit {
         langage_de_programmation: [this.langage_de_programmation], // Utilisez un tableau avec une seule chaîne
         nombre_de_participant: +this.nombre_de_participant,
         date_limite: this.date_limite,
+        date_creation: new Date().toISOString(),
       };
       this.projetService.addProjet(newProjet).subscribe((reponse) => {
         console.log('Réponse du service :', reponse);
-        this.projetService.showAlert('success', 'Bravo!', 'Projet ajouté avec succès');
+        this.projetService.showAlert('Bravo!!', 'Projet ajouté avec succès', 'success');
         this.viderChamps();
         this.getProjet();
+        // this.updateStatutProjets();
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout du projet :', error);
+        // Gestion des erreurs ici
+        if (error.status === 400) {
+          // Erreur de validation du formulaire
+          const errorMessages = error.error['hydra:description'];
+          if (Array.isArray(errorMessages)) {
+            // Si le message d'erreur est un tableau, vous pouvez le parcourir pour l'afficher
+            errorMessages.forEach(errorMessage => {
+              this.projetService.showAlert('Erreur !!', errorMessage, 'error');
+            });
+          } else {
+            // Sinon, affichez le message d'erreur directement
+            this.projetService.showAlert('Erreur !!', errorMessages, 'error');
+          }
+        } else {
+          // Gestion des autres types d'erreurs
+          this.projetService.showAlert('Erreur !!', 'Une erreur s\'est produite lors de l\'ajout du projet.', 'error');
+        }
       });
+
     }
   }
-  
+
   // Supprimer projet
   getId(uri: any) {
     const idMatch = uri.match(/\/(\d+)$/);
@@ -229,9 +214,9 @@ export class GestionProjetComponent implements OnInit {
         if (id) {
           this.projetService.deleteProjet(id).subscribe(() => {
             this.projetService.showAlert(
-              'success',
               'Supprimé!',
-              'Projet supprimé avec succès'
+              'Projet supprimé avec succès',
+              'success'
             );
             this.getProjet();
           });
@@ -257,7 +242,29 @@ export class GestionProjetComponent implements OnInit {
   }
 
   // fonction pour modifier Projet
+  // modifierProjet(id: any) {
+  //   this.idProjet = id;
+  //   const data = {
+  //     titre: this.titre,
+  //     description: this.description,
+  //     langage_de_programmation: this.langage_de_programmation,
+  //     nombre_de_participant: this.nombre_de_participant,
+  //     date_limite: this.date_limite,
+  //   };
+  //   this.projetService.updateProjet(id, data).subscribe((response) => {});
+  //   this.getProjet();
+  //   this.projetService.showAlert(
+  //     'Bravo!!',
+  //     'Projet modifié avec succès',
+  //     'success'
+  //   );
+  //   this.viderChamps();
+  // }
   modifierProjet(id: any) {
+   if (new Date(this.date_limite) < new Date()) {
+      this.projetService.showAlert('Attention !!', 'La date limite ne peut pas être une date passée', 'error');
+    }
+    else{
     this.idProjet = id;
     const data = {
       titre: this.titre,
@@ -265,14 +272,44 @@ export class GestionProjetComponent implements OnInit {
       langage_de_programmation: this.langage_de_programmation,
       nombre_de_participant: this.nombre_de_participant,
       date_limite: this.date_limite,
+      statu: 'En cours'
     };
-    this.projetService.updateProjet(id, data).subscribe((response) => {});
-    this.viderChamps();
-    this.getProjet();
+
+    // Appelez la mise à jour du projet dans le service
+    this.projetService.updateProjet(id, data).subscribe((response) => {
+      // Une fois la mise à jour terminée, récupérez les projets mis à jour
+      this.getProjet();
+      this.projetService.showAlert(
+        'Bravo!!',
+        'Projet modifié avec succès',
+        'success'
+      );
+      this.viderChamps();
+    });
+  }
   }
 
   // Méthode pour afficher les détails du projet sélectionné
   afficherDetailsProjet(projet: Projet) {
     this.projetSelectionne = projet;
+  }
+
+  updateStatutProjets(): void {
+    const currentDate = new Date();
+    this.listeprojet.forEach((projet: any) => {
+      const dateLimite = new Date(projet.date_limite);
+      // Comparez la date limite avec la date actuelle
+      if (dateLimite < currentDate) {
+        // Si la date limite est passée, mettez à jour le statut du projet
+        projet.statu = 'Terminé';
+        console.log('statut de projet', projet.statu);
+        // Appelez la méthode de mise à jour du projet dans le service
+        this.projetService.updateProjet(projet.id, { statu: 'Terminé' }).subscribe(() => {
+          console.log('Statut du projet mis à jour avec succès');
+        }, (error) => {
+          console.error('Erreur lors de la mise à jour du statut du projet', error);
+        });
+      }
+    });
   }
 }

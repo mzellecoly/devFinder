@@ -2,8 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
 
 * {
-  margin: 0;
-  padding: 0;
+  /* margin: 0;
+  padding: 0; */
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
 }
@@ -226,7 +226,21 @@ color: white !important;
 .buttons:hover .dropdown-content {
   display: block;
 }
-
+.modal-body select{
+  border: none;
+  border-bottom: 2px solid #FFA439;
+}
+.modal-body select option:hover{
+ background-color: #FFA439 !important;
+}
+.loginUser{
+  background-color: #FFA439;
+  color: white;
+  font-weight: bold;
+}
+.dashboard{
+  cursor: pointer;
+}
 @media screen and (max-width: 1023px) {
   .navbar .logo a {
     font-size: 1.5rem;

@@ -1,1 +1,54 @@
-<p>accueilsuperadmin works!</p>
+<div class="carte mt-3">
+  <div class="carte-items py-2 px-5 rounded">
+    <div class="iconeOffre">
+      <i class="fa-solid fa-user-tie" style="color: #FFA439; font-size: 50px; display: flex; justify-content: center;"></i>
+    </div>
+    <div class="ml-5">
+      <p class="pp text-center" style="font-size: 25px; font-weight: bold;">Nombre Imerssion</p>
+      <p class="p text-center" style="font-size: 25px;" *ngIf="listeImerssion">{{ listeImerssion.length }}</p>
+    </div>
+  </div>
+  <div class="carte-items py-2 px-5 rounded">
+    <i class="fa-solid fa-user" style="color: #FFA439; font-size: 50px; display: flex; justify-content: center;"></i>
+    <div class="ml-5">
+      <p class="pp text-center" style="font-size: 25px; font-weight: bold;">Brief</p>
+      <p class="p text-center" style="font-size: 25px;" *ngIf="listeBrief">{{ listeBrief.length }}</p>
+    </div>
+  </div>
+  <div class="carte-items py-2 px-5 rounded" >
+    <div class="iconeOffre">
+      <i class="fa-regular fa-newspaper" style="color: #FFA439; font-size: 50px; display: flex; justify-content: center;"></i>
+    </div>
+  <div class="ml-5">
+    <p class="pp text-center" style="font-size: 25px; font-weight: bold;">Utilisateurs</p>
+    <p class="p text-center" style="font-size: 25px;"*ngIf="listeUsers">{{ listeUsers.length }}</p>
+    <!-- <p class="p text-center" style="font-size: 25px;" *ngIf="listeprojet">{{ listeprojet.length }}</p> -->
+  </div>
+  </div>
+</div>
+
+<div class="projets mt-5">
+  <div class="container mt-2 cartes">
+    <div class="dieyna" id="cartes">
+      <div class="card" style="width: 20rem" *ngFor="let immersion of getArticlesPage()">
+        <div class="card-body">
+          <h5 class="card-title">{{ immersion.titre }}</h5>
+          <p class="card-text">{{ immersion.description }}</p>
+          <p class="card-text">{{ immersion.date_limite | date: 'dd/MM/yyyy'}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- pour la pagination -->
+<div class="d-flex justify-content-center my-5">
+  <button class="btn btnColore me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
+     Précédent
+  </button>
+  <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
+    {{ page }}
+  </button>
+  <button class="btn btnColore ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
+    Suivant
+  </button>
+</div>
+</div>

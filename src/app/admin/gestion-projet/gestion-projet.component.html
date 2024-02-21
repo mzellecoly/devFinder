@@ -25,36 +25,35 @@
 <!-- Projet en cours -->
 <div class="lignesUrbaine sectionEspace" *ngIf="isProgress">
   <!-- Tableau des projets en cours -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" *ngIf="listeprojet.length>0">
-    <thead>
-      <tr>
-        <th class="thHead">Titre</th>
-        <th class="thHead">Langages</th>
-        <th class="thHead">Participants</th>
-        <th class="thHead">Etat</th>
-        <th class="thHead">Date limite</th>
-        <th class="thHead">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let projet of listeprojet">
-        <td>{{projet.titre}}</td>
-        <td>
-          <span class="langage" *ngFor="let langageUrl of projet.langage_de_programmation">
-            {{ getLangageName(langageUrl) }}
-          </span>
-        </td>
-        <td>{{projet.nombre_de_participant}}</td>
-        <td><span class="designer">{{projet.statu}}</span></td>
-        <td>{{projet.date_limite}}</td>
-        <td>
-          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosProjet(projet)"></i>
-          <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="afficherDetailsProjet(projet)"></i>
-          <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;"(click)="supprimerProjet(projet)"></i>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" *ngIf="listeprojet.length>0">
+      <thead>
+        <tr>
+          <th class="thHead">Titre</th>
+          <th class="thHead">Participants</th>
+          <th class="thHead">Etat</th>
+          <th class="thHead">Date début</th>
+          <th class="thHead">Date limite</th>
+          <th class="thHead">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let projet of listeprojet">
+          <td>{{projet.titre}}</td>
+          <td>{{projet.nombre_de_participant}}</td>
+          <td><span [ngClass]="{'statut-terminé': projet.statu === 'Terminé', 'statut-en-cours': projet.statu === 'En Attente'}">{{projet.statu}}</span></td>
+          <td>{{projet.date_creation |  date: 'dd/MM/yyyy' }}</td>
+          <td>{{projet.date_limite |  date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosProjet(projet)"></i>
+            <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="afficherDetailsProjet(projet)"></i>
+            <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;"(click)="supprimerProjet(projet)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <table class="" *ngIf="listeprojet.length<0">
     <thead>
       <tr>
@@ -75,7 +74,7 @@
 <!-- Projet terminé -->
 <div class="lignesUrbaine sectionEspace" *ngIf="isTerminate">
   <!-- Tableau des projets terminés -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table">
+  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table table-responsive">
     <thead class="thHead">
       <tr class="thHead">
         <th class="thHead">Titre</th>
@@ -87,10 +86,10 @@
     </thead>
     <tbody>
       <tr>
-        <td>Gestion école</td>
-        <td>HTML CSS JS</td>
-        <td><span class="termin">Terminé</span></td>
-        <td>15/02/2024</td>
+        <td></td>
+        <td></td>
+        <td><span class="termin"></span></td>
+        <td></td>
         <td>
           <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
           <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
@@ -104,7 +103,7 @@
 <!-- Projet annulé -->
 <div class="lignesUrbaine sectionEspace" *ngIf="isCancel">
   <!-- Tableau des projets annulés -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table">
+  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table table-responsive">
     <thead>
       <tr>
         <th class="thHead">Titre</th>
@@ -116,10 +115,10 @@
     </thead>
     <tbody>
       <tr>
-        <td>Gestion contact</td>
-        <td>HTML CSS JS</td>
-        <td><span class="cancel">Annulé</span></td>
-        <td>X</td>
+        <td></td>
+        <td></td>
+        <td><span class="cancel"></span></td>
+        <td></td>
         <td>
             <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
             <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
@@ -157,17 +156,25 @@
         </div>
 
         <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Description</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
-        </div>
-        <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Date limite</label>
           <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date" name="date_limite" [(ngModel)]="date_limite">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Description</label>
+          <editor class="editeur" [init]="{
+            base_url: '/tinymce',
+            height: '80vh',
+            toolbar: 'undo redo | formatselect | bold italic backcolor | \
+         alignleft aligncenter alignright alignjustify | \
+         bullist numlist outdent indent | removeformat | help',
+            plugins: 'lists checklist',
+          }" [(ngModel)]="description" style="border-radius: 0 !important; height: 100%;"></editor>
+
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btnAjout" (click)="AjoutProjet()">Ajouter</button>
+        <button type="button" class="btn btnAjout" data-bs-dismiss="modal" (click)="AjoutProjet()">Ajouter</button>
       </div>
     </div>
   </div>
@@ -177,7 +184,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modifierModalLabel">Ajouter un projet</h1>
+        <h1 class="modal-title fs-5" id="modifierModalLabel">Modifier un projet</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -207,7 +214,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btnAjout" (click)=" modifierProjet(idProjet)">Modifier</button>
+        <button type="button" class="btn btnAjout" data-bs-dismiss="modal" (click)=" modifierProjet(idProjet)">Modifier</button>
       </div>
     </div>
   </div>
@@ -225,7 +232,7 @@
         <p>Description : {{projetSelectionne.description}}</p>
         <p>Langage : {{projetSelectionne.langage_de_programmation}}</p>
         <p>Participants : {{projetSelectionne.nombre_de_participant}}</p>
-        <p>Date limite : {{projetSelectionne.date_limite}}</p>
+        <p>Date limite : {{projetSelectionne.date_limite |  date: 'dd/MM/yyyy'}}</p>
       </div>
     </div>
   </div>

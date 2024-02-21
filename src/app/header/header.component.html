@@ -1,28 +1,44 @@
-
-    <header class="header">
-      <nav class="navbar">
-        <h2 class="logo"><a href="#" [routerLink]="['/accueil']"><img src="../../assets/Logo1.png" alt="" height="70px"></a></h2>
-        <input type="checkbox" id="menu-toggle" />
-        <label for="menu-toggle" id="hamburger-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-            <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </label>
-        <ul class="links">
-          <li><a href="#" [routerLink]="['/accueil']" routerLinkActive="active">Accueil</a></li>
-          <li><a href="#" [routerLink]="['/about']" routerLinkActive="active">A propos</a></li>
-          <li><a href="#" [routerLink]="['/projet']" routerLinkActive="active">Projet</a></li>
-          <li><a href="#" [routerLink]="['/profils']" routerLinkActive="active" *ngIf="isUserLoggedIn()">Profils</a></li>
-          <li><a href="#" [routerLink]="['/contact']" routerLinkActive="active">Contact</a></li>
+<header class="header">
+  <nav class="navbar">
+    <h2 class="logo">
+      <a href="#" [routerLink]="['/accueil']"
+        ><img src="../../assets/Logo1.png" alt="" height="90px"
+      /></a>
+    </h2>
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" id="hamburger-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </label>
+    <ul class="links">
+      <li>
+        <a href="#" [routerLink]="['/accueil']" routerLinkActive="active">Accueil</a>
+      </li>
+      <li>
+        <a href="#" [routerLink]="['/about']" routerLinkActive="active">A propos</a>
+      </li>
+      <li>
+        <a href="#" [routerLink]="['/projet']" routerLinkActive="active">Projet</a>
+      </li>
+      <li>
+        <a href="#" [routerLink]="['/profils']"  *ngIf="isUserLoggedIn()" routerLinkActive="active">Profils</a>
+      </li>
+      <li>
+        <a href="#" [routerLink]="['/contact']" routerLinkActive="active" >Contact</a>
+      </li>
+    </ul>
+    <div class="buttons">
+      <a href="" class="paste-button" *ngIf="!isUserLog()">
+        <a href="#" class="signup" [routerLink]="['/auth']">Connexion</a>
+        <ul class="dropdown-content"  *ngIf="isUserLoggedIn()">
+          <a id="top" href="#" [routerLink]="['/mesprofils']">Mes profils</a>
+          <a id="middle" href="#" (click)="logout()">Se deconnecter</a>
         </ul>
-        <div class="buttons">
-          <a href="" class="paste-button">
-            <a href="#" class="signup" [routerLink]="['/auth']">Connexion</a>
-          <ul class="dropdown-content"  *ngIf="isUserLoggedIn()">
-            <a id="top" href="#" [routerLink]="['/mesprofils']">Mes profils</a>
-            <a id="middle" href="#" (click)="logout()">Se deconnecter</a>
-          </ul>
-          </a>
-        </div>
-      </nav>
-    </header>
+      </a>
+      <p class="" *ngIf="isUserLog()">{{nom_complet}}</p>
+      <i class="fa-solid fa-table-columns dashboard" style="color: #FFA439; font-size: 30px;" [routerLink]="['/developpeur']" *ngIf="isUserLoggedInn()"></i>
+    </div>
+  </nav>
+</header>
+

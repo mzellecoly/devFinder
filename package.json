@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@tinymce/tinymce-angular": "^7.0.0",
     "angular-datatables": "^17.0.0",
     "boostrap": "^2.0.0",
     "bootstrap-icons": "^1.11.3",
@@ -27,6 +28,8 @@
     "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.10.2",
+    "tinymce": "^6.8.3",
+    "ts-cacheable": "^1.0.10",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

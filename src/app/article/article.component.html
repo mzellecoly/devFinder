@@ -1,0 +1,146 @@
+<!-- header -->
+<div class="headertext">
+  <app-header></app-header>
+</div>
+<!-- header -->
+
+<!-- Contenu -->
+<div class="listesprojet">
+  <div class="listecontainer">
+    <div class="recherche d-flex justify-content-end mt-5">
+      <form action="#" class="formSearch mt-5">
+        <div class="form-input">
+          <input type="search" placeholder="Rechercher..." name ="search" [(ngModel)]="searchProjet" (input)="getArticlesPage()">
+          <button type="submit" class="search-btn mt-1"><i class='bx bx-search' ></i></button>
+        </div>
+      </form>
+    </div>
+    <div class="listesprojets">
+      <div class="row mx-0">
+        <div class="col-3 col-sm-3 vh-100" id="theme">
+          <div class="groupe">
+            <div
+              class="list-group rounded-0 liste"
+              id="list-tab"
+              role="tablist"
+            >
+              <a
+                class="list-group-item list-group-item-action fw-medium border active"
+                id="list-html-list"
+                data-bs-toggle="list"
+                href="#list-html"
+                role="tab"
+                aria-controls="list-html"
+                >Imerssion</a
+              >
+              <a
+                class="list-group-item list-group-item-action fw-medium border"
+                id="list-css-list"
+                data-bs-toggle="list"
+                href="#list-css"
+                role="tab"
+                aria-controls="list-css"
+                >Brief</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-9 col-sm-9" id="formation">
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade active show p-4" id="list-html" role="tabpanel" aria-labelledby="list-html-list">
+              <div class="sectiontitle text-center mt-5">
+                <h3 class="text-black fw-bold">Nos articles</h3>
+                <hr class="border-3 opacity-100" />
+              </div>
+              <div class="projets mt-5">
+                <div class="container mt-2 cartes">
+                  <div class="dieyna" id="cartes">
+                    <div class="card" style="width: 20rem" *ngFor="let immersion of getArticlesPage()">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ immersion.titre }}</h5>
+                        <p class="card-text">{{ immersion.description }}</p>
+                        <p class="card-text">{{ immersion.date_limite | date: 'dd/MM/yyyy'}}</p>
+                        <a href="#" class="btn bouton" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getDetailProjet(brief)">Détails</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                          <!-- pour la pagination -->
+          <div class="d-flex justify-content-center my-5">
+            <button class="btn btnColore me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
+              Précédent
+            </button>
+            <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
+              {{ page }}
+            </button>
+            <button class="btn btnColore ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
+              Suivant
+            </button>
+          </div>
+          </div>
+            <div class="tab-pane fade show p-4" id="list-css" role="tabpanel" aria-labelledby="list-css-list">
+              <div class="sectiontitle text-center mt-5">
+                <h3 class="text-black fw-bold">Nos articles</h3>
+                <hr class="border-3 opacity-100" />
+              </div>
+              <div class="projets mt-5">
+                <div class="container mt-2 cartes">
+                  <div class="dieyna" id="cartes">
+                    <div class="card" style="width: 20rem" *ngFor="let brief of getArticlesPages()">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ brief.titre }}</h5>
+                        <p class="card-text">{{ brief.description }}</p>
+                        <p class="card-text">{{ brief.date_limite | date: 'dd/MM/yyyy'}}</p>
+                        <a href="#" class="btn bouton" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getDetailProjet(brief)">Détails</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                          <!-- pour la pagination -->
+          <div class="d-flex justify-content-center my-5">
+            <button class="btn btnColore me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
+              Précédent
+            </button>
+            <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
+              {{ page }}
+            </button>
+            <button class="btn btnColore ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
+              Suivant
+            </button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Contenu -->
+
+<!-- footer -->
+<app-footer></app-footer>
+<!-- footer -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Détail projet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <p>{{seletedArticles.titre}}</p>
+      <p>{{seletedArticles.description}}</p>
+      <!-- <p>{{seletedArticles.}}</p>
+      <p>{{seletedArticles.titre}}</p> -->
+      <!-- <p>{{seletedProjet.titre}}</p> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btnAjout">Participer</button>
+        <!-- <button type="button" class="btn btnAjout" (click)="participerAuProjet(projet)">Participer</button> -->
+      </div>
+    </div>
+  </div>
+</div>

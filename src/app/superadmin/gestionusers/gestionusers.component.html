@@ -1,291 +1,112 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btnAjout" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Ajouter
-</button>
-
-<!-- contenu -->
-<!-- Menu filtre pour le tableau des projets  -->
+  <!-- Menu filtre pour le tableau des projets  -->
 <div class="menuFiltre mt-5 d-flex">
   <div class="filtreSection">
-      <button class="btn filtreActive fw-bold px-3 active" *ngIf="isProgress">Projets en cours</button>
-      <button class="btn fw-bold px-3 active" *ngIf="!isProgress" (click)="showProgress()">Projets en cours</button>
+      <button class="btn filtreActive fw-bold px-3 active" *ngIf="isProgress">Utilisateurs</button>
+      <button class="btn fw-bold px-3 active" *ngIf="!isProgress" (click)="showProgress()">Utilisateurs</button>
   </div>
 
   <div class="filtreSection">
-      <button class="btn filtreActive fw-bold px-3" *ngIf="isTerminate">Projets terminés</button>
-      <button class="btn fw-bold px-3" *ngIf="!isTerminate" (click)="showTerminate()">Projets terminés</button>
-  </div>
-
-  <div class="filtreSection">
-      <button class="btn filtreActive fw-bold px-3" *ngIf="isCancel">Projets annulés</button>
-      <button class="btn fw-bold px-3" *ngIf="!isCancel" (click)="showCancel()">Projets annulés</button>
+      <button class="btn filtreActive fw-bold px-3" *ngIf="isTerminate">Utilisateurs bloqués</button>
+      <button class="btn fw-bold px-3" *ngIf="!isTerminate" (click)="showTerminate()">Utilisateurs bloqués</button>
   </div>
 </div>
+  <div class="lignesUrbaine sectionEspace table-responsive" *ngIf="isProgress">
+    <!-- Tableau detous les utilisateurs -->
+    <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" *ngIf="listeUsers.length>0">
+      <thead>
+        <tr>
+          <th class="thHead">Nom</th>
+          <th class="thHead">Email</th>
+          <th class="thHead">Rôle</th>
+          <th class="thHead">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of listeUsers">
+          <td>{{user.nom_complet}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.roles}}</td>
+          <td>
+            <i class="fa-solid fa-eye ms-3" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="afficherDetailsUser(user)"></i>
+            <!-- <i  class="bi ms-3" [ngClass]="{ 'bi-ban': !user.est_bloquer, 'bi bi-unlock': user.est_bloquer }"type="button" (click)="user.est_bloquer ? debloquerUtilisateur(user.id) : bloquerUtilisateur(user.id)" style="color: #0F2A3D;font-size: 24px; font-weight: bold;"></i> -->
+            <i class="fa-solid fa-ban ms-3" style="color: #0F2A3D;font-size: 24px; font-weight: bold;" (click)="blockUser(user.id)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table *ngIf="listeUsers.length<0">
+      <thead>
+        <tr>
+          <th class="thHead">Nom</th>
+          <th class="thHead">Email</th>
+          <th class="thHead">Rôle</th>
+          <th class="thHead">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Aucune donnée disponible au niveau du tableau</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="lignesUrbaine sectionEspace table-responsive" *ngIf="isTerminate">
+    <!-- Tableau des utilisateurs bloqués -->
+    <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" *ngIf="listeUsers.length>0">
+      <thead>
+        <tr>
+          <th class="thHead">Nom</th>
+          <th class="thHead">Email</th>
+          <th class="thHead">Rôle</th>
+          <th class="thHead">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of listeUsersBloque">
+          <td>{{user.nom_complet}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.roles}}</td>
+          <td>
+            <i class="fa-solid fa-eye ms-3" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="afficherDetailsUser(user)"></i>
+            <!-- <i  class="bi ms-3" [ngClass]="{ 'bi-ban': !user.est_bloquer, 'bi bi-unlock': user.est_bloquer }"type="button" (click)="user.est_bloquer ? debloquerUtilisateur(user.id) : bloquerUtilisateur(user.id)" style="color: #0F2A3D;font-size: 24px; font-weight: bold;"></i> -->
+            <i class="fa-solid fa-ban ms-3" style="color: #0F2A3D;font-size: 24px; font-weight: bold;" (click)="deblockUser(user.id)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table *ngIf="listeUsers.length<0">
+      <thead>
+        <tr>
+          <th class="thHead">Nom</th>
+          <th class="thHead">Email</th>
+          <th class="thHead">Rôle</th>
+          <th class="thHead">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Aucune donnée disponible au niveau du tableau</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- contenu -->
 
-<!-- Projet en cours -->
-<div class="lignesUrbaine sectionEspace" *ngIf="isProgress">
-  <!-- Tableau des projets en cours -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" *ngIf="listeUsers.length>0">
-    <thead>
-      <tr>
-        <th class="thHead">Nom</th>
-        <th class="thHead">Email</th>
-        <th class="thHead">Rôle</th>
-        <th class="thHead">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of listeUsers">
-        <td>{{user.nom_complet}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.roles}}</td>
-        <td>
-          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
-          <i  class="bi ms-4" [ngClass]="{ 'bi-ban': !user.est_bloquer, 'bi bi-unlock': user.est_bloquer }"type="button" (click)="user.est_bloquer ? debloquerUtilisateur(user.id) : bloquerUtilisateur(user.id)" style="color: #017D03;font-size: 24px; font-weight: bold;"></i>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <table *ngIf="listeUsers.length<0">
-    <thead>
-      <tr>
-        <th class="thHead">Nom</th>
-        <th class="thHead">Email</th>
-        <th class="thHead">Rôle</th>
-        <th class="thHead">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Aucune donnée disponible au niveau du tableau</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- Projet terminé -->
-<div class="lignesUrbaine sectionEspace" *ngIf="isTerminate">
-  <!-- Tableau des projets terminés -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table">
-    <thead class="thHead">
-      <tr class="thHead">
-        <th class="thHead">Nom</th>
-        <th class="thHead">Email</th>
-        <th class="thHead">Rôle</th>
-        <th class="thHead">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Site e-commerce</td>
-        <td>HTML CSS</td>
-        <td><span class="termin">Terminé</span></td>
-        <td>
-          <i class="fa-solid fa-eye" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 18L16 14L14.6 12.6L13 14.2V10H11V14.2L9.4 12.6L8 14L12 18ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 10L8 14L9.4 15.4L11 13.8V18H13V13.8L14.6 15.4L16 14L12 10ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-        </td>
-      </tr>
-      <tr>
-        <td>Gestion école</td>
-        <td>HTML CSS JS</td>
-        <td><span class="termin">Terminé</span></td>
-        <td>
-          <i class="fa-solid fa-eye" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 18L16 14L14.6 12.6L13 14.2V10H11V14.2L9.4 12.6L8 14L12 18ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 10L8 14L9.4 15.4L11 13.8V18H13V13.8L14.6 15.4L16 14L12 10ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-</div>
-
-<!-- Projet annulé -->
-<div class="lignesUrbaine sectionEspace" *ngIf="isCancel">
-  <!-- Tableau des projets annulés -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table">
-    <thead>
-      <tr>
-        <th class="thHead">Titre</th>
-        <th class="thHead">Technologies</th>
-        <th class="thHead">Etat</th>
-        <th class="thHead">Date limite</th>
-        <th class="thHead">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Gestion contact</td>
-        <td>HTML CSS JS</td>
-        <td><span class="cancel">Annulé</span></td>
-        <td>X</td>
-        <td>
-          <i class="fa-solid fa-eye" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 18L16 14L14.6 12.6L13 14.2V10H11V14.2L9.4 12.6L8 14L12 18ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 10L8 14L9.4 15.4L11 13.8V18H13V13.8L14.6 15.4L16 14L12 10ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-        </td>
-      </tr>
-      <tr>
-        <td>Sama docteur</td>
-        <td>HTML CSS JS</td>
-        <td><span class="cancel">Annulé</span></td>
-        <td>X</td>
-        <td>
-          <i class="fa-solid fa-eye" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 18L16 14L14.6 12.6L13 14.2V10H11V14.2L9.4 12.6L8 14L12 18ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 10L8 14L9.4 15.4L11 13.8V18H13V13.8L14.6 15.4L16 14L12 10ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-        </td>
-      </tr>
-      <tr>
-        <td>Sunu ndougou</td>
-        <td>HTML CSS API</td>
-        <td><span class="cancel">Annulé</span></td>
-        <td>X</td>
-        <td>
-          <i class="fa-solid fa-eye" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 18L16 14L14.6 12.6L13 14.2V10H11V14.2L9.4 12.6L8 14L12 18ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-          <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 10L8 14L9.4 15.4L11 13.8V18H13V13.8L14.6 15.4L16 14L12 10ZM5 8.00001V19H19V8.00001H5ZM5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V6.52501C3 6.29167 3.03767 6.06667 3.113 5.85001C3.18833 5.63334 3.30067 5.43334 3.45 5.25001L4.7 3.72501C4.88333 3.49167 5.11233 3.31234 5.387 3.18701C5.66167 3.06167 5.94933 2.99934 6.25 3.00001H17.75C18.05 3.00001 18.3377 3.06267 18.613 3.18801C18.8883 3.31334 19.1173 3.49234 19.3 3.72501L20.55 5.25001C20.7 5.43334 20.8127 5.63334 20.888 5.85001C20.9633 6.06667 21.0007 6.29167 21 6.52501V19C21 19.55 20.8043 20.021 20.413 20.413C20.0217 20.805 19.5507 21.0007 19 21H5ZM5.4 6.00001H18.6L17.75 5.00001H6.25L5.4 6.00001Z" fill="#0F2A3D"/>
-          </svg>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<!-- contenu -->
-
-<!-- PopUp ajout -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- PopUp détail -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailmodalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un projet</h1>
+        <h1 class="modal-title fs-5" id="detailmodalLabel">Détail de l'utilisateur</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Titre</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre du projet">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Technologies</label>
-          <div class="check">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                HTML
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                CSS
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                JS
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                API
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Description</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Date limite</label>
-          <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btnAjout">Ajouter</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- PopUp modifier -->
-<div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifiermodalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modifiermodalLabel">Modifier un projet</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Titre</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre du projet">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Technologies</label>
-          <div class="check">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                HTML
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                CSS
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                JS
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                API
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Description</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Date limite</label>
-          <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btnAjout">Modifier</button>
+        <p><strong>Nom complet :</strong>  {{userSelectionne.nom_complet}}</p>
+        <p><strong>Email :</strong>  {{userSelectionne.email}}</p>
+        <p><strong>Description :</strong>  {{userSelectionne.description}}</p>
+        <p><strong>NINEA :</strong>  {{userSelectionne.numero_identification_naitonal}}</p>
+        <p><strong>Téléphone :</strong>  {{userSelectionne.telephone}}</p>
+        <p><strong>Role :</strong>  {{userSelectionne.roles}}</p>
       </div>
     </div>
   </div>

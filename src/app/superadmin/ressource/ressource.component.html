@@ -23,7 +23,7 @@
 <!-- Liste des immerssions -->
 <div class="lignesUrbaine sectionEspace" *ngIf="isProgress">
   <!-- Tableau des projets en cours -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" *ngIf="listeImerssion.length>0">
+  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table table-responsive" *ngIf="listeImerssion.length>0">
     <thead>
       <tr>
         <th class="thHead">Titre</th>
@@ -62,13 +62,12 @@
 <!-- Liste des briefs -->
 <div class="lignesUrbaine sectionEspace" *ngIf="isTerminate">
   <!-- Tableau des projets terminés -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table" >
+  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table table-responsive" >
     <thead class="thHead">
       <tr class="thHead">
         <th class="thHead">Titre</th>
         <th class="thHead">Description</th>
-        <th class="thHead">Description</th>
-        <th class="thHead">Description</th>
+        <th class="thHead">Niveau compétence</th>
         <th class="thHead">Action</th>
       </tr>
     </thead>
@@ -76,7 +75,6 @@
       <tr *ngFor="let ressource of listeBrief">
         <td>{{ressource.titre}}</td>
         <td>{{ getPartieDuTexte(ressource.description, 20) }}</td>
-        <td>{{ressource.lient_support}}</td>
         <td>{{ressource.niveau_de_competence}}</td>
         <td>
           <!-- <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="afficherDetailsBrief(ressource)" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i> -->
@@ -88,7 +86,6 @@
     </tbody>
   </table>
 </div>
-
 <!-- contenu -->
 
 <!-- PopUp ajout immerssion-->
@@ -202,6 +199,11 @@
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Lien support</label>
           <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lient_support" [(ngModel)]="lient_support">
+        </div>
+
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Niveau compétence</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
         </div>
       </div>
       <div class="modal-footer">

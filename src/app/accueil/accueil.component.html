@@ -7,11 +7,13 @@
   <!-- Début Section Bannière -->
   <div class="d-flex banner">
     <div class="mt-5 ps-3">
-      <h1 class="ml2 text-white">Bienvenu sur DevFinders</h1>
+      <h1 class="ml2 text-white">Bienvenue sur DevFinders</h1>
       <p class="text-white">
         Boostez votre expertise, découvrez des projets concrets et mettez en
         lumière vos compétences sur DevFinders
       </p>
+      <a class="user" [routerLink]="['/authEntreprise']">Entreprise</a>
+      <a class="user ms-3" [routerLink]="['/authAssociation']">Association</a>
     </div>
     <div>
       <img class="imgBanner" src="../../assets/banierre.png" alt="" />
@@ -27,14 +29,14 @@
     </div>
     <div class="carteItem text-center">
       <p class="mt-2">
-        DevFinders faciliter la recherche de talents expérimentés et autodidacte
-        pour les entreprises avant les profils des développeurs ayant réalisé
+        DevFinders facilite la recherche de talents expérimentés et autodidactes
+        pour les entreprises avec des profils des développeurs ayant réalisé
         avec succès des projets sur la plateforme
       </p>
     </div>
     <div class="carteItem text-center">
       <p class="px-2 mt-2">
-        Devfinder faciliter l’accompagnement technique des PME en difficulté
+        Devfinder facilite l’accompagnement technique des PME en difficulté
         financière de réaliser leur projet informatique en leur permettant de
         soumettre des projets et trouver des développeurs motivés
       </p>
@@ -53,11 +55,10 @@
         non expérimentés la possibilité de monter en compétence et d'acquérir
         une expérience pratique à travers la réalisation de projets concrets de
         développement d'applications. Ces projets seront soumis par divers
-        porteurs de projets qui peuvent être des personnes physique ou morale
-        qui en raison de contraintes financières ne peuvent pas engager une
+        porteurs de projets qui en raison de contraintes financières ne peuvent pas engager une
         équipe de développeurs. Dans un second temps, elle vise à faciliter la
         recherche de talents pour les entreprises à la recherche de développeurs
-        expérimentés et autodidacte. Elle mettra en avant les profils des
+        expérimentés et autodidactes. Elle mettra en avant les profils des
         développeurs ayant réalisé avec succès des projets sur la plateforme,
         mettant en évidence leurs compétences dans les technologies recherchées.
         Ainsi, "DevFinders" ambitionne de servir comme un pont entre les
@@ -78,16 +79,16 @@
     <div class="container mt-2 cartes">
       <div class="dieyna" id="cartes">
         <div class="card" style="width: 20rem" *ngFor="let projet of listeprojet.slice(0, 3)">
-          <img src="https://img.freepik.com/vecteurs-libre/temps-impots_24877-49137.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" class="card-img-top" alt="..."/>
+          <img src="https://img.freepik.com/photos-gratuite/concept-entreprise-strategie-marketing-document_53876-132231.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=sph" class="card-img-top" alt="..."/>
           <div class="card-body">
             <h5 class="card-title">{{ projet.titre }}</h5>
             <span *ngFor="let langageUrl of projet.langage_de_programmation">
               {{ getLangageName(langageUrl) }}
             </span>
             <p class="card-text">{{ projet.nombre_de_participant }}</p>
-            <p class="card-text">{{ projet.description }}</p>
+            <p class="card-text limit-description">{{ projet.description }}</p>
             <p class="card-text">{{ projet.date_limite }}</p>
-            <a href="#" class="btn bouton">Détails</a>
+            <a href="#" class="btn bouton" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getDetailProjet(projet)">Détails</a>
           </div>
         </div>
       </div>
@@ -287,3 +288,25 @@
 <!-- footer -->
 <app-footer></app-footer>
 <!-- footer -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Détail projet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <p>titre : {{seletedProjet.titre}}</p>
+      <p>{{seletedProjet.description}}</p>
+      <p>{{seletedProjet.nombre_de_participant}}</p>
+      <p>{{seletedProjet.date_limite}}</p>
+      <!-- <p>{{seletedProjet.titre}}</p> -->
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btnAjout" (click)="getProjetById()">Participer</button> -->
+        <!-- <button type="button" class="btn btnAjout" (click)="participerAuProjet(projet)">Participer</button> -->
+      </div>
+    </div>
+  </div>
+</div>

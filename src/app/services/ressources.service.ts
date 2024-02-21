@@ -3,10 +3,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { url } from './api-url.service';
 import { Brief } from '../models/brief.model';
-import { Observable, of } from 'rxjs';
+import { Observable, Subject, of, tap } from 'rxjs';
 import { Imerssion } from '../models/immersion.model';
 import Swal from 'sweetalert2';
+import { Cacheable, LocalStorageStrategy } from 'ts-cacheable';
 
+const cacheBuster$=new Subject<void>()
+cacheBuster$.next()
 @Injectable({
   providedIn: 'root',
 })
@@ -68,7 +71,8 @@ export class RessourcesService {
           Authorization: `Bearer ${token}`,
         }),
       };
-      return this.http.delete<{ message: string }>(`${url}/brief/` + id, httpOptions);
+      return this.http.delete<{ message: string }>(`${url}/brief/` + id, httpOptions)
+      .pipe(tap(()=>cacheBuster$.next()));
     }
 
     // Modifier immersion
@@ -89,7 +93,8 @@ export class RessourcesService {
           Authorization: `Bearer ${token}`,
         }),
       };
-      return this.http.put<any>(`${url}/brief/` +id, brief, httpOptions);
+      return this.http.put<any>(`${url}/brief/` +id, brief, httpOptions)
+      .pipe(tap(()=>cacheBuster$.next()));
     }
-    
+
 }

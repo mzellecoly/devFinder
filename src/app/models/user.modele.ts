@@ -3,6 +3,8 @@ export interface User{
   email: string;
   mot_de_passe: string;
   nom_complet: string;
-  // roles: string;
-  // userProfile:string
+  telephone: string;
+  description:string
+  numero_identification_naitonal?:string
+  etat?:boolean
 }

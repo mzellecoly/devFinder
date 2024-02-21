@@ -24,8 +24,6 @@
   gap: 10px;
   justify-content: center;
   margin: 0 auto !important;
-  /* background-color: red; */
-  /* border: 2px solid red; */
 }
 .dieyna{
   margin: 0 auto !important;
@@ -45,6 +43,49 @@
 .btnProjet{
   float: right;
 }
+.btnColore{
+  background-color: #FFA439;
+  color: white;
+}
+.btnColor{
+  background-color: #0F2A3D;
+  color: white;
+  font-weight: bold;
+}
+.form-input input {
+	flex-grow: 1;
+	padding: 3px 16px;
+	height: 100%;
+	border: none;
+	background: rgba(128, 128, 128, 0.192);
+	border-radius: 36px 0 0 36px;
+	outline: none;
+	width: 80%;
+	color: black;
+}
+.form-input button {
+	width: 36px;
+	height: 100%;
+	background: #0F2A3D;
+	color: white;
+	font-weight: bold;
+	font-size: 20px;
+	border: none;
+	outline: none;
+	border-radius: 0 36px 36px 0;
+	cursor: pointer;
+}
+.formSearch{
+  float: right;
+}
+.limit-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  max-height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
 @media screen and (width<= 950px){
   #cartes{
     grid-template-columns: 1fr 1fr;
@@ -57,6 +98,11 @@
   .btnProjet{
     float: none;
     margin-left: 100px;
+  }
+  .carte{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
   }
 }
 @media screen and (max-width: 900px) and (min-width: 200px){
@@ -71,5 +117,12 @@
   .btnProjet{
     float: none;
     margin-left: 100px;
+  }
+}
+@media screen and (max-width: 650px) and (min-width: 200px){
+  .carte{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 15px;
   }
 }

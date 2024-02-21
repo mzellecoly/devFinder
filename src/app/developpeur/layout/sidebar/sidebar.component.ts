@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.modele';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,13 +9,26 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit{
+  userProfile: User | null = null;
+  email: string='';
+  mot_de_passe: string='';
+  nom_complet: string='';
+  roles: string='';
+  seletedUser: any = {};
 
   constructor(
     private authService : AuthService,
     private router: Router
   ){}
     ngOnInit(): void {
-      throw new Error('Method not implemented.');
+      const userString = localStorage.getItem('userOnline');
+
+      if (userString) {
+       this.seletedUser=userString
+        const user = JSON.parse(userString);
+        this.nom_complet = user.nom_complet;
+        console.log('le nom est :', this.nom_complet);
+      }
     }
 
     // Déconnexion de l'utisateur
