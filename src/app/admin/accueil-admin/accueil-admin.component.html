@@ -38,13 +38,13 @@
   <div class="container mt-4 cartes" >
     <div class="dieyna" id="cartes">
       <div class="card" style="width: 20rem;" *ngFor="let projet of getArticlesPage()">
-          <img src="https://img.freepik.com/vecteurs-libre/temps-impots_24877-49137.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" class="card-img-top" alt="...">
+        <img src="https://img.freepik.com/photos-gratuite/concept-entreprise-strategie-marketing-document_53876-132231.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=sph" class="card-img-top" alt="..."/>
           <div class="card-body">
             <h5 class="card-title">{{projet.titre}}</h5>
               <span *ngFor="let langageUrl of projet.langage_de_programmation">
                 {{ getLangageName(langageUrl) }}
               </span>
-            <p class="card-text">{{projet.nombre_de_participant}}</p>
+            <p class="card-text">{{projet.imageName}}</p>
             <p class="card-text limit-description">{{projet.description}}</p>
             <p class="card-text">{{projet.date_limite |  date: 'dd/MM/yyyy'}}</p>
           </div>

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Projet } from '../models/projet.model';
 import { Langage } from '../models/langage.model';
-import { url } from './api-url.service';
+import { url } from './apiUrl';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class ProjetService {
     return this.http.get<Projet[]>(`${url}/projet/liste`);
   }
    // Ajouter
-   addProjet(projet : Projet) {
+   addProjet(projet : any) {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -49,13 +49,15 @@ export class ProjetService {
       };
       return this.http.put<any>(`${url}/projet/` +id, projet, httpOptions);
     }
-    
+
 
   showAlert(title: any, text: any, icon: any) {
     Swal.fire({
-      title:title,
-      text:text,
-      icon:icon,
+      icon: icon,
+      title: title,
+      text: text,
+      showConfirmButton: false,
+      timer: 1500,
     });
   }
 }

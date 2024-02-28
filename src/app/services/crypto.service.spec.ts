@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ApiUrlService } from './api-url.service';
+import { CryptoService } from './crypto.service';
 
-describe('ApiUrlService', () => {
-  let service: ApiUrlService;
+describe('CryptoService', () => {
+  let service: CryptoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ApiUrlService);
+    service = TestBed.inject(CryptoService);
   });
 
   it('should be created', () => {

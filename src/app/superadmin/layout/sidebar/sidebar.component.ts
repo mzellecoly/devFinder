@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit{
   mot_de_passe: string='';
   nom_complet: string='';
   roles: string='';
+  idUser: number = 0;
   seletedUser: any = {};
 
   constructor(
@@ -22,13 +23,16 @@ export class SidebarComponent implements OnInit{
     private router: Router
   ){}
     ngOnInit(): void {
-      const userString = localStorage.getItem('userOnline');
-
+      const userString = localStorage.getItem('user');
+      const id = localStorage.getItem('userId');
       if (userString) {
-       this.seletedUser=userString
-        const user = JSON.parse(userString);
-        this.nom_complet = user.nom_complet;
-        this.email = user.email;
+        this.seletedUser=userString
+         const user = JSON.parse(userString);
+         this.nom_complet = user.nom_complet;
+         this.email = user.email;
+         console.log('l\'id de l\'utilisateur', id);
+        //  this.modifierUser(this.seletedUser)
+        //  this.modifieUser(this.seletedUser)
     }
   }
 

@@ -10,7 +10,7 @@
   </div>
   <div class="d-flex ms-5">
 </div>
-  <h2 class="tittle ms-5">Projets</h2>
+  <h2 class="tittle ms-5">Profils</h2>
   <p class="trait mt-3 ms-5"></p>
 <div class="container cartes">
   <div class="col-md-6 col-lg-4" *ngFor="let profil of getArticlesPage()">
@@ -34,6 +34,7 @@
       </div>
     </div>
   </div>
+</div>
 <!-- pour la pagination -->
 <div class="d-flex justify-content-center my-5">
   <button class="btn btnColore me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
@@ -45,7 +46,6 @@
   <button class="btn btnColore ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
     Suivant
   </button>
-</div>
 </div>
 <app-footer></app-footer>
 <!-- Modal -->
@@ -81,6 +81,8 @@
       <div class="modal-body">
       <p>{{seletedProfil.nom_complet}}</p>
       <p>{{seletedProfil.email}}</p>
+      <p>{{seletedProfil.telephone}}</p>
+      <p>{{seletedProfil.descriptionCompetences}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btnAjout" (click)="getProfilById()">Recruter</button>

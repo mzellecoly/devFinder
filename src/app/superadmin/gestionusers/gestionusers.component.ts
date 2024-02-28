@@ -77,6 +77,7 @@ export class GestionusersComponent {
   getUser = () => {
     this.user.getUser().subscribe((data :any)=>{
         this.listeUsers = data.utilisateurs;
+  
         console.log('La liste est :', this.listeUsers);
     });
   }

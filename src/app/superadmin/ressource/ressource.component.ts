@@ -21,16 +21,30 @@ export class RessourceComponent implements OnInit {
   idBrief: number = 0;
   idImmersion: number = 0;
   titre: string = '';
-  description: string = '';
+  // description: string = '';
   niveau_de_competence: string = '';
   lien_support: string = '';
   lient_support: string = '';
-  lien_du_livrable: string = '';
-
+  // lien_du_livrable: string = '';
+  cahierDecharge: any;
   objToArray: any[] = [];
-
   briefSelectionne: any = {};
   imerssionSelectionne: any = {};
+
+  // Variables pour faire la vérifications
+  verifTitre: String = '';
+  verifNiveau: String = '';
+  verifCahierdeCharge: String = '';
+  verifLiensupport: String = '';
+  // Variables si les champs sont exacts
+  exactTitre: boolean = false;
+  exactDescription: boolean = false;
+  exactCahierdeCharge: boolean = false;
+  exactLiensupport: boolean = false;
+  exactNiveau: boolean = false;
+ public pdfUpload:any; // test
+  // exactTelephone: boolean = false;
+  // exactNinea: boolean = false;
 
   // Méthode pour afficher les détails du brief sélectionné
   afficherDetailsBrief(brief: Brief) {
@@ -158,146 +172,267 @@ export class RessourceComponent implements OnInit {
   }
   viderChamps() {
     this.titre = '';
-    this.description = '';
+    this.pdfUpload = '';
     this.lien_support = '';
+    this.cahierDecharge = '';
     this.lient_support = '';
     this.niveau_de_competence = '';
   }
 
-  // Ajout des immersion
-  AjoutImmersion() {
+  // Verification du titre
+  verifTitreFonction() {
+    this.exactTitre = false;
     if (this.titre == '') {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'Renseigner un titre',
-        'error'
-      );
+      this.verifTitre = 'Veuillez renseigner titre';
     } else if (this.titre.length < 5) {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'Le titre doit être supérieur à 5 caratères',
-        'error'
-      );
-    } else if (this.description == '') {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'Renseigner une description',
-        'error'
-      );
-    } else if (this.description.length < 35) {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'La description doit avoir au minimum 35 caractères',
-        'error'
-      );
-    } else if (this.description.length > 250) {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'Veuillez saisir moins 250 caractères',
-        'error'
-      );
-    } else if (this.lien_support == '') {
-      this.ressourceService.showAlert(
-        'error',
-        'Attention',
-        'Renseigner un lien de support'
-      );
+      this.verifTitre = 'Le titre est trop court';
     } else {
-      // console.log('Avant ajout :', this.titre, this.description, this.lien_support);
-      const newImerssion: Imerssion = {
-        titre: this.titre,
-        description: this.description,
-        lien_support: this.lien_support,
-      };
-      console.log(
-        'Après ajout :',
-        this.titre,
-        this.description,
-        this.lien_support
-      );
-      this.ressourceService
-        .ajoutImmersion(newImerssion)
-        .subscribe((reponse) => {
-          console.log('Réponse du service :', reponse);
-          this.ressourceService.showAlert(
-            'Bravo!',
-            'Imerssion ajouté avec succéBravo!',
-            'success'
-          );
-          this.viderChamps();
-          this.getImerssion1();
-          this.getImerssion();
-          Swal.close();
-        });
+      this.verifTitre = '';
+      this.exactTitre = true;
+    }
+    // Si le champ est vide, efface le message d'erreur
+    if (this.titre == '') {
+      this.verifTitre = '';
     }
   }
+  // Verification du cahier de charge
+  verifCahierdeChargeFonction() {
+    this.exactCahierdeCharge = false;
 
-  // Ajout des briefs
-  AjoutBrief() {
-    if (this.titre == '') {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'Renseigner un titre',
-        'error'
-      );
-    } else if (this.titre.length < 5) {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'Le titre doit être supérieur à 5 caratères',
-        'error'
-      );
-    } else if (this.description == '') {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'Renseigner une description',
-        'error'
-      );
-    } else if (this.description.length < 35) {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'La description doit avoir au minimum 35 caractères',
-        'error'
-      );
-    } else if (this.description.length > 250) {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'Veuillez saisir moins 250 caractères',
-        'error'
-      );
-    } else if (this.lient_support == '') {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'Renseigner un lien de support',
-        'error'
-      );
-    } else if (this.niveau_de_competence == '') {
-      this.ressourceService.showAlert(
-        'Attention !!',
-        'Renseigner le niveau de compétence',
-        'error'
-      );
+    if (this.cahierDecharge == '') {
+      this.verifCahierdeCharge = 'Veuillez renseigner votre cahierDecharge';
     } else {
-      // console.log('Avant ajout :', this.titre, this.description, this.lient_support, this.niveau_de_competence);
-      const newBrief: Brief = {
-        titre: this.titre,
-        description: this.description,
-        niveau_de_competence: this.niveau_de_competence,
-        lient_support: this.lient_support,
-      };
-      // console.log('Après ajout brief:', this.titre, this.description, this.niveau_de_competence, this.lient_support);
-      this.ressourceService.ajoutBrief(newBrief).subscribe((reponse) => {
+      this.verifCahierdeCharge = '';
+      this.exactCahierdeCharge = true;
+    }
+    // Si le champ est vide, efface le message d'erreur
+    if (this.cahierDecharge == '') {
+      this.verifCahierdeCharge = '';
+    }
+  }
+  // Verification du niveau de compétence
+  verifNiveauFonction() {
+    this.exactNiveau = false;
+    if (this.niveau_de_competence == '') {
+      this.verifNiveau = 'Veuillez renseigner un niveau de compétence';
+    } else {
+      this.verifNiveau = '';
+      this.exactNiveau = true;
+    }
+    // Si le champ est vide, efface le message d'erreur
+    if (this.niveau_de_competence == '') {
+      this.verifNiveau = '';
+    }
+  }
+  // Verification du lien de support
+  verifLienFonction() {
+    this.exactLiensupport = false;
+    if (this.lien_support == '') {
+      this.verifLiensupport = 'Veuillez renseigner un lien';
+    } else {
+      this.verifLiensupport = '';
+      this.exactLiensupport = true;
+    }
+    // Si le champ est vide, efface le message d'erreur
+    if (this.lien_support == '') {
+      this.verifLiensupport = '';
+    }
+  }
+  // Ajout des immersion
+  AjoutImmersion() {
+    this.verifTitreFonction();
+    this.verifCahierdeChargeFonction();
+    this.verifLienFonction();
+    this.verifNiveauFonction();
+    if (this.titre == '') {
+      this.showAlert('Erreur!', 'Veuillez remplir les champs', 'error');
+    } else{
+      let formData = new FormData();
+      formData.append('titre', this.titre);
+      formData.append('cahierDeCharge', this.pdfUpload);
+      // if (this.cahierDecharge) {
+      // }
+      formData.append('lien_support', this.lien_support);
+      console.log('le formdata est', formData);
+      // let test={
+      //   titre:this.titre,
+      //   cahierDeCharge:this.pdfUpload,
+      //   lien_support:this.lien_support,
+      // }
+      // alert(formData.get('titre'));
+      // alert(formData.get('cahierDecharge'));
+      console.warn(formData);
+      this.ressourceService.ajoutImmersion(formData).subscribe((reponse) => {
+        console.log('le formdata est', formData);
         console.log('Réponse du service :', reponse);
         this.ressourceService.showAlert(
           'Bravo!',
-          'Brief ajouté avec succés',
+          'Imerssion ajouté avec succéBravo!',
+          'success'
+        );
+        this.viderChamps();
+        this.getImerssion1();
+        this.getImerssion();
+        Swal.close();
+      }
+      ,
+      (error) => {
+        console.error('Erreur lors de l\'ajout du projet :', error);
+        // Gestion des erreurs ici
+        if (error.status === 400) {
+          // Erreur de validation du formulaire
+          const errorMessages = error.error['hydra:description'];
+          if (Array.isArray(errorMessages)) {
+            // Si le message d'erreur est un tableau, vous pouvez le parcourir pour l'afficher
+            errorMessages.forEach(errorMessage => {
+              this.ressourceService.showAlert('Erreur !!', errorMessage, 'error');
+            });
+          } else {
+            // Sinon, affichez le message d'erreur directement
+            this.ressourceService.showAlert('Erreur !!', errorMessages, 'error');
+          }
+        } else {
+          // Gestion des autres types d'erreurs
+          this.ressourceService.showAlert('Erreur !!', 'Une erreur s\'est produite lors de l\'ajout du projet.', 'error');
+        }
+      });
+    }
+    // else {
+    //   console.log(this.titre, this.exactLiensupport, this.exactCahierdeCharge);
+    // }
+  }
+  AjoutBrief() {
+    this.verifTitreFonction();
+    this.verifCahierdeChargeFonction();
+    this.verifLienFonction();
+    this.verifNiveauFonction();
+    if (this.titre == '') {
+      this.showAlert('Erreur!', 'Veuillez remplir les champs', 'error');
+    } else{
+      let formData = new FormData();
+      formData.append('titre', this.titre);
+      formData.append('cahierDeCharge', this.pdfUpload);
+      // if (this.cahierDecharge) {
+      // }
+      formData.append('lient_support', this.lient_support);
+      formData.append('niveau_de_competence', this.niveau_de_competence);
+      console.log('le formdata est', formData);
+      // let test={
+      //   titre:this.titre,
+      //   cahierDeCharge:this.pdfUpload,
+      //   lien_support:this.lien_support,
+      // }
+      // alert(formData.get('titre'));
+      // alert(formData.get('cahierDecharge'));
+      console.warn(formData);
+      this.ressourceService.ajoutBrief(formData).subscribe((reponse) => {
+        console.log('le formdata est', formData);
+        console.log('Réponse du service :', reponse);
+        this.ressourceService.showAlert(
+          'Bravo!',
+          'Brief ajouté avec succéBravo!',
           'success'
         );
         this.viderChamps();
         this.getBrief();
         Swal.close();
+      }
+      ,
+      (error) => {
+        console.error('Erreur lors de l\'ajout du projet :', error);
+        // Gestion des erreurs ici
+        if (error.status === 400) {
+          // Erreur de validation du formulaire
+          const errorMessages = error.error['hydra:description'];
+          if (Array.isArray(errorMessages)) {
+            // Si le message d'erreur est un tableau, vous pouvez le parcourir pour l'afficher
+            errorMessages.forEach(errorMessage => {
+              this.ressourceService.showAlert('Erreur !!', errorMessage, 'error');
+            });
+          } else {
+            // Sinon, affichez le message d'erreur directement
+            this.ressourceService.showAlert('Erreur !!', errorMessages, 'error');
+          }
+        } else {
+          // Gestion des autres types d'erreurs
+          this.ressourceService.showAlert('Erreur !!', 'Une erreur s\'est produite lors de l\'ajout du projet.', 'error');
+        }
       });
     }
+    // else {
+    //   console.log(this.titre, this.exactLiensupport, this.exactCahierdeCharge);
+    // }
   }
+  // ------------------methode pour charger le champ input ---------
+  // getFile(event: any) {
+  //   this.cahierDecharge = event.target.files[0] as File;
+  //   console.warn(this.cahierDecharge);
+  // }
+  getFile(event: any) {
+    const file = event.target.files[0] as File;
+    // this.cahierDecharge = file;
+    this.pdfUpload=file;
+      console.warn("Le cahier de charge :",this.pdfUpload); // Vérifiez l'objet fichier dans la console
+    // if (file) {
+    //   this.cahierDecharge = file;
+    //   console.warn("Le cahier de charge :",this.cahierDecharge); // Vérifiez l'objet fichier dans la console
+    // }
+  }
+
+
+  // Ajout des briefs
+  // AjoutBrief() {
+  //   this.verifTitreFonction();
+  //   this.verifCahierdeChargeFonction();
+  //   this.verifLienFonction();
+  //   this.verifNiveauFonction();
+  //   if (this.titre == '') {
+  //     this.showAlert('Erreur!', 'Veuillez remplir les champs', 'error');
+  //   } else {
+  //     // console.log('Avant ajout :', this.titre, this.description, this.lient_support, this.niveau_de_competence);
+  //     const newBrief: Brief = {
+  //       titre: this.titre,
+  //       description: this.cahierDecharge,
+  //       niveau_de_competence: this.niveau_de_competence,
+  //       lient_support: this.lient_support,
+  //     };
+  //     // console.log('Après ajout brief:', this.titre, this.description, this.niveau_de_competence, this.lient_support);
+  //     this.ressourceService.ajoutBrief(newBrief).subscribe((reponse) => {
+  //       console.log('Réponse du service :', reponse);
+  //       this.ressourceService.showAlert(
+  //         'Bravo!',
+  //         'Brief ajouté avec succés',
+  //         'success'
+  //       );
+  //       this.viderChamps();
+  //       this.getBrief();
+  //       Swal.close();
+  //     },
+  //     (error) => {
+  //       console.error('Erreur lors de l\'ajout du projet :', error);
+  //       // Gestion des erreurs ici
+  //       if (error.status === 400) {
+  //         // Erreur de validation du formulaire
+  //         const errorMessages = error.error['hydra:description'];
+  //         if (Array.isArray(errorMessages)) {
+  //           // Si le message d'erreur est un tableau, vous pouvez le parcourir pour l'afficher
+  //           errorMessages.forEach(errorMessage => {
+  //             this.ressourceService.showAlert('Erreur !!', errorMessage, 'error');
+  //           });
+  //         } else {
+  //           // Sinon, affichez le message d'erreur directement
+  //           this.ressourceService.showAlert('Erreur !!', errorMessages, 'error');
+  //         }
+  //       } else {
+  //         // Gestion des autres types d'erreurs
+  //         this.ressourceService.showAlert('Erreur !!', 'Une erreur s\'est produite lors de l\'ajout du projet.', 'error');
+  //       }
+  //     });
+  //   }
+  //   //  else {
+  //   //   console.log(this.titre, this.exactLiensupport, this.exactCahierdeCharge, this.exactNiveau);
+  //   // }
+  // }
 
   // Sweetalert
   showAlert(title: any, text: any, icon: any) {
@@ -388,7 +523,8 @@ export class RessourceComponent implements OnInit {
     const id = this.getId(this.objToArray[0].valeur);
     this.idImmersion = id;
     this.titre = immersion.titre;
-    this.description = immersion.description;
+    this.cahierDecharge = immersion.cahierDecharge;
+    this.pdfUpload = immersion.pdfUpload;
     this.lien_support = immersion.lien_support;
   }
 
@@ -397,10 +533,11 @@ export class RessourceComponent implements OnInit {
     this.idImmersion = id;
     const data = {
       titre: this.titre,
-      description: this.description,
-      lien_du_livrable: this.lien_du_livrable,
+      cahierDecharge: this.cahierDecharge,
+      // description: this.description,
+      // lien_du_livrable: this.lien_du_livrable,
       lien_support: this.lien_support,
-      niveau_de_competence: this.niveau_de_competence,
+      // niveau_de_competence: this.niveau_de_competence,
     };
     this.ressourceService.updateImmersion(id, data).subscribe((response) => {});
     this.ressourceService.showAlert(
@@ -420,8 +557,10 @@ export class RessourceComponent implements OnInit {
     const id = this.getId(this.objToArray[0].valeur);
     this.idBrief = id;
     this.titre = brief.titre;
-    this.description = brief.description;
+    // this.description = brief.description;
     this.lient_support = brief.lient_support;
+    this.cahierDecharge = brief.cahierDecharge;
+    this.niveau_de_competence = brief.niveau_de_competence;
   }
 
   // fonction pour modifier Brief
@@ -431,8 +570,8 @@ export class RessourceComponent implements OnInit {
     console.error('Le brief à update est :', id);
     const data = {
       titre: this.titre,
-      description: this.description,
-      lien_du_livrable: this.lien_du_livrable,
+      // description: this.description,!
+      cahierDecharge: this.cahierDecharge,
       lient_support: this.lient_support,
       niveau_de_competence: this.niveau_de_competence,
     };

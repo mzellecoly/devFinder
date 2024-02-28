@@ -32,7 +32,7 @@ body{
     width: 768px;
     max-width: 100%;
     min-height: 600px;
-    margin: 150px auto;
+    margin: 20px auto;
   }
 .container p{
     font-size: 14px;
@@ -103,7 +103,10 @@ body{
 .container.active .sign-in{
     transform: translateX(100%);
 }
-
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .sign-up{
     left: 0;
     width: 50%;

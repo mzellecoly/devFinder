@@ -55,9 +55,9 @@ export class GestionProjetComponent implements OnInit {
     this.idUser = localStorage.getItem('userId') ?? '';
     this.apprenantService.getApprenant(this.idUser).subscribe(
       (data: any) => {
-        console.warn(data);
+        // console.warn(data);
         this.listeProjet = data.projet;
-        console.log("Informations de l'utilisateur récupérées :", data.projet);
+        console.log("Informations de l'utilisateur récupérées :", this.listeProjet);
       },
       (error) => {
         console.error(
@@ -94,16 +94,16 @@ export class GestionProjetComponent implements OnInit {
   }
 
     // Méthode pour afficher une partie du texte sur le tableau et tout le texte au niveau des détails
-    getPartieDuTexte(texte: string, longueurMax: number): string {
-      if (texte.length <= longueurMax) {
-        return texte;
-      } else {
-        return texte.substring(0, longueurMax) + '...';
-      }
-    }
-    updatePartieDuTexte(texteComplet: string) {
-      this.partieDuTexte = this.getPartieDuTexte(texteComplet,50);
-    }
+    // getPartieDuTexte(texte: string, longueurMax: number): string {
+    //   if (texte.length <= longueurMax) {
+    //     return texte;
+    //   } else {
+    //     return texte.substring(0, longueurMax) + '...';
+    //   }
+    // }
+    // updatePartieDuTexte(texteComplet: string) {
+    //   this.partieDuTexte = this.getPartieDuTexte(texteComplet,50);
+    // }
 
   // Ajoutez la méthode getLangageName
   getLangageName(langageUrl: string): string {
@@ -145,15 +145,6 @@ export class GestionProjetComponent implements OnInit {
       }
     );
   }
-
-    // Ajoutez la méthode getLangageName
-    // getAssoName(assoUrl: string): string {
-    //   const associa = this.listeAssociation.find(
-    //     (asso) => asso['@id'] === assoUrl
-    //   );
-    //   console.log('le nom de l\'association', assoUrl);
-    //   return associa ? associa.nom : 'Association inconnu';
-    // }
     getAssoName(assoUrl: string): string {
       // Extraire l'ID de l'association de l'URL
       const associationId = assoUrl.split('/').pop();

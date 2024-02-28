@@ -147,7 +147,7 @@ body {
 }
 #sidebar .side-menu li a.logout {
 	color: var(--red);
-  margin-top: 150px;
+  margin-top: 100px;
 }
 #sidebar .side-menu.top li a:hover {
 	color: #FFA439;

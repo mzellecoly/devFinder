@@ -10,75 +10,13 @@
     <div class="recherche d-flex justify-content-end">
       <form action="#" class="formSearch">
         <div class="form-input recherche">
-          <input type="search" placeholder="Rechercher..." name ="search" [(ngModel)]="searchProjet" (input)="getArticlesPage()">
+          <input type="search" placeholder="Rechercher..." name ="search" [(ngModel)]="filterValue" (input)="onSearch()">
           <button type="submit" class="search-btn mt-1"><i class='bx bx-search' ></i></button>
         </div>
       </form>
     </div>
     <div class="listesprojets">
       <div class="row mx-0 projetAsso">
-        <div class="col-3 col-sm-3 vh-100" id="theme">
-          <div class="groupe">
-            <div class="list-group rounded-0 liste" id="list-tab" role="tablist">
-              <a class="list-group-item list-group-item-action fw-medium border active" id="list-description-list" data-bs-toggle="list" href="#list-description" role="tab" aria-controls="list-description">Toutes les catégories</a>
-              <a class="list-group-item list-group-item-action fw-medium border" id="list-html-list" data-bs-toggle="list" href="#list-html" role="tab" aria-controls="list-html">HTML</a>
-              <a
-                class="list-group-item list-group-item-action fw-medium border"
-                id="list-css-list"
-                data-bs-toggle="list"
-                href="#list-css"
-                role="tab"
-                aria-controls="list-css"
-                >CSS</a
-              >
-              <a
-                class="list-group-item list-group-item-action fw-medium border"
-                id="list-javascript-list"
-                data-bs-toggle="list"
-                href="#list-javascript"
-                role="tab"
-                aria-controls="list-javascript"
-                >JavaScript</a
-              >
-              <a
-                class="list-group-item list-group-item-action fw-medium border"
-                id="list-api-list"
-                data-bs-toggle="list"
-                href="#list-api"
-                role="tab"
-                aria-controls="list-api"
-                >API</a
-              >
-              <a
-                class="list-group-item list-group-item-action fw-medium border"
-                id="list-angular-list"
-                data-bs-toggle="list"
-                href="#list-angular"
-                role="tab"
-                aria-controls="list-angular"
-                >Angular</a
-              >
-              <a
-                class="list-group-item list-group-item-action fw-medium border"
-                id="list-react-list"
-                data-bs-toggle="list"
-                href="#list-react"
-                role="tab"
-                aria-controls="list-react"
-                >React</a
-              >
-              <a
-                class="list-group-item list-group-item-action fw-medium border"
-                id="list-php-list"
-                data-bs-toggle="list"
-                href="#list-php"
-                role="tab"
-                aria-controls="list-php"
-                >PHP</a
-              >
-            </div>
-          </div>
-        </div>
         <div class="col-9 col-sm-9" id="formation">
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade active show p-4" id="list-description" role="tabpanel"aria-labelledby="list-description-list">
@@ -89,7 +27,7 @@
               <div class="projets mt-5">
                 <div class="container mt-2 cartes">
                   <div class="dieyna" id="cartes">
-                    <div class="card cardProjet" style="width: 20rem" *ngFor="let projet of getArticlesPage()">
+                    <div class="card cardProjet" style="width: 20rem" *ngFor="let projet of listeprojetFilter | slice:(pageActuelle - 1) * projetParPage:(pageActuelle * projetParPage)">
                       <img src="https://img.freepik.com/photos-gratuite/concept-entreprise-strategie-marketing-document_53876-132231.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=sph" class="card-img-top" alt="..."/>
                       <div class="card-body">
                         <h5 class="card-title">{{ projet.titre }}</h5>
@@ -97,7 +35,7 @@
                           {{ getLangageName(langageUrl) }}
                         </span>
                         <p class="card-text">Nombre requis :{{ projet.nombre_de_participant }}</p>
-                        <p class="card-text limit-description">{{ projet.description }}</p>
+                        <p class="card-text limit-description">{{ projet.imageName}}</p>
                         <p class="card-text">{{ projet.date_limite | date: 'dd/MM/yyyy'}}</p>
                         <a href="#" class="btn bouton" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getDetailProjet(projet)">Détails</a>
                       </div>
@@ -106,154 +44,6 @@
                 </div>
               </div>
                <!-- pour la pagination -->
-    <div class="d-flex justify-content-center my-5">
-      <button class="btn btnColore me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
-        Précédent
-      </button>
-      <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
-        {{ page }}
-      </button>
-      <button class="btn btnColore ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
-        Suivant
-      </button>
-  </div>
-            </div>
-            <div class="tab-pane fade show p-4" id="list-html" role="tabpanel" aria-labelledby="list-html-list">
-              <div class="sectiontitle text-center mt-5">
-                <h3 class="text-black fw-bold">Nos projets</h3>
-                <hr class="border-3 opacity-100" />
-              </div>
-              <div class="projets mt-5">
-                <div class="container mt-2 cartes">
-                  <div class="dieyna" id="cartes">
-                    <div class="card" style="width: 20rem" *ngFor="let projet of getArticlesPage()">
-                      <img src="https://img.freepik.com/vecteurs-libre/temps-impots_24877-49137.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" class="card-img-top" alt="..."/>
-                      <div class="card-body">
-                        <h5 class="card-title">{{ projet.titre }}</h5>
-                        <span *ngFor="let langageUrl of projet.langage_de_programmation">
-                          {{ getLangageName(langageUrl) }}
-                        </span>
-                        <p class="card-text">Nombre requis : {{ projet.nombre_de_participant }}</p>
-                        <p class="card-text">{{ projet.description }}</p>
-                        <p class="card-text">{{ projet.date_limite }}</p>
-                        <a href="#" class="btn bouton" (click)="getDetailProjet(projet)">Détails</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                          <!-- pour la pagination -->
-    <div class="d-flex justify-content-center my-5 pagination">
-      <button class="btn btnColore me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
-        Précédent
-      </button>
-      <button class="btn btnColor ms-2 active" *ngFor="let page of pages" (click)="pageActuelle = page">
-        {{ page }}
-      </button>
-      <button class="btn btnColore ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
-        Suivant
-      </button>
-  </div>
-            </div>
-            <div class="tab-pane fade show p-4" id="list-api" role="tabpanel" aria-labelledby="list-api-list">
-              <div class="sectiontitle text-center mt-5">
-                <h3 class="text-black fw-bold">Nos projets</h3>
-                <hr class="border-3 opacity-100" />
-              </div>
-              <div class="projets mt-5">
-                <div class="container mt-2 cartes">
-                  <div class="dieyna" id="cartes">
-                    <div class="card" style="width: 20rem" *ngFor="let projet of getArticlesPage()">
-                      <img src="https://img.freepik.com/vecteurs-libre/temps-impots_24877-49137.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" class="card-img-top" alt="..."/>
-                      <div class="card-body">
-                        <h5 class="card-title">{{ projet.titre }}</h5>
-                        <span *ngFor="let langageUrl of projet.langage_de_programmation">
-                          {{ getLangageName(langageUrl) }}
-                        </span>
-                        <p class="card-text">{{ projet.nombre_de_participant }}</p>
-                        <p class="card-text">{{ projet.description }}</p>
-                        <p class="card-text">{{ projet.date_limite }}</p>
-                        <a href="#" class="btn bouton" (click)="getDetailProjet(projet)">Détails</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                          <!-- pour la pagination -->
-    <div class="d-flex justify-content-center my-5">
-      <button class="btn btnColore me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
-        Précédent
-      </button>
-      <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
-        {{ page }}
-      </button>
-      <button class="btn btnColore ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
-        Suivant
-      </button>
-  </div>
-            </div>
-            <div class="tab-pane fade show p-4" id="list-css" role="tabpanel" aria-labelledby="list-api-list">
-              <div class="sectiontitle text-center mt-5">
-                <h3 class="text-black fw-bold">Nos projets</h3>
-                <hr class="border-3 opacity-100" />
-              </div>
-              <div class="projets mt-5">
-                <div class="container mt-2 cartes">
-                  <div class="dieyna" id="cartes">
-                    <div class="card" style="width: 20rem" *ngFor="let projet of getArticlesPage()">
-                      <img src="https://img.freepik.com/vecteurs-libre/temps-impots_24877-49137.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" class="card-img-top" alt="..."/>
-                      <div class="card-body">
-                        <h5 class="card-title">{{ projet.titre }}</h5>
-                        <span *ngFor="let langageUrl of projet.langage_de_programmation">
-                          {{ getLangageName(langageUrl) }}
-                        </span>
-                        <p class="card-text">{{ projet.nombre_de_participant }}</p>
-                        <p class="card-text">{{ projet.description }}</p>
-                        <p class="card-text">{{ projet.date_limite }}</p>
-                        <a href="#" class="btn bouton" (click)="getDetailProjet(projet)">Détails</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                          <!-- pour la pagination -->
-    <div class="d-flex justify-content-center my-5">
-      <button class="btn btnColore me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
-        Précédent
-      </button>
-      <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
-        {{ page }}
-      </button>
-      <button class="btn btnColore ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
-        Suivant
-      </button>
-  </div>
-            </div>
-            <div class="tab-pane fade show p-4" id="list-javascript" role="tabpanel" aria-labelledby="list-api-list">
-              <div class="sectiontitle text-center mt-5">
-                <h3 class="text-black fw-bold">Nos projets</h3>
-                <hr class="border-3 opacity-100" />
-              </div>
-              <div class="projets mt-5">
-                <div class="container mt-2 cartes">
-                  <div class="dieyna" id="cartes">
-                    <div class="card" style="width: 20rem" *ngFor="let projet of getArticlesPage()">
-                      <img src="https://img.freepik.com/vecteurs-libre/temps-impots_24877-49137.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" class="card-img-top" alt="..."/>
-                      <div class="card-body">
-                        <h5 class="card-title">{{ projet.titre }}</h5>
-                        <span *ngFor="let langageUrl of projet.langage_de_programmation">
-                          {{ getLangageName(langageUrl) }}
-                        </span>
-                        <p class="card-text">{{ projet.nombre_de_participant }}</p>
-                        <p class="card-text">{{ projet.description }}</p>
-                        <p class="card-text">{{ projet.date_limite }}</p>
-                        <a href="#" class="btn bouton" (click)="getDetailProjet(projet)">Détails</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                          <!-- pour la pagination -->
     <div class="d-flex justify-content-center my-5">
       <button class="btn btnColore me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
         Précédent
@@ -288,9 +78,9 @@
       </div>
       <div class="modal-body">
       <p>titre : {{seletedProjet.titre}}</p>
-      <p>{{seletedProjet.description}}</p>
+      <p>{{seletedProjet.imageName}}</p>
       <p>{{seletedProjet.nombre_de_participant}}</p>
-      <p>{{seletedProjet.date_limite}}</p>
+      <p>{{seletedProjet.date_limite | date: 'dd/MM/yyyy'}}</p>
       <!-- <p>{{seletedProjet.titre}}</p> -->
       </div>
       <div class="modal-footer">

@@ -24,6 +24,7 @@ import { AuthEntrepriseComponent } from './auth-entreprise/auth-entreprise.compo
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { ArticleComponent } from './article/article.component';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +53,8 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
     FormsModule,
     DataTablesModule,
     HttpClientModule,
-    EditorModule
+    EditorModule,
+    RouterModule
   ],
   providers: [
     { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }

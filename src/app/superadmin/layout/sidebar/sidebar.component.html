@@ -1,8 +1,9 @@
 <!-- SIDEBAR -->
 
-<a class="brand mt-4 ms-1">
-  <p class="mt-4 ms-3" [(ngModel)]="nom_complet"></p>
-</a>
+<div class="hello mt-4">
+  <h3>Bienvenue !!!</h3>
+  <h4>{{nom_complet}}</h4>
+</div>
 <ul class="side-menu top">
   <li class="active">
     <a [routerLink]="['accueilsuperadmin']">
@@ -20,6 +21,12 @@
     <a [routerLink]="['profiladmin']">
       <i class='bx bxs-doughnut-chart' ></i>
       <span class="text">Gestion profil</span>
+    </a>
+  </li>
+  <li>
+    <a [routerLink]="['langage']">
+      <i class='bx bxs-shopping-bag-alt' ></i>
+      <span class="text">Gestion compétence</span>
     </a>
   </li>
   <li>

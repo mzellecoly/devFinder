@@ -12,8 +12,10 @@ import Swal from 'sweetalert2';
 })
 export class ProjetComponent implements OnInit {
   listeprojet: any[] = [];
+  listeprojetFilter: any[] = [];
   listeLangage: any[] = [];
   selectedLangage: string = '';
+  filterValue: string = '';
   seletedProjet: any = {};
   projet: Projet | undefined;
   hasParticipated: boolean = false;
@@ -27,7 +29,7 @@ export class ProjetComponent implements OnInit {
   objToArray: { cle: string; valeur: any }[] = [];
 
   // Attribut pour la pagination
-  projetParPage = 3; // Nombre d'projet par page
+  projetParPage = 4; // Nombre d'projet par page
   pageActuelle = 1; // Page actuelle
 
 
@@ -68,7 +70,7 @@ export class ProjetComponent implements OnInit {
       (data: any) => {
         if ([data][0]['hydra:member'].length != 0) {
           this.listeprojet = [data][0]['hydra:member'];
-
+          this.listeprojetFilter=this.listeprojet
           console.log('La liste des projets est :',this.listeprojet);
         }
       },
@@ -82,6 +84,14 @@ export class ProjetComponent implements OnInit {
     this.selectedLangage = langage;
     console.log('Langage sélectionné :', langage);
     this.getProjet();
+  }
+  onSearch() {
+    // Recherche se fait selon le nom et  status
+    this.listeprojetFilter = this.listeprojet.filter(
+      (elt: any) =>
+        elt?.titre.toLowerCase().includes(this.filterValue.toLowerCase()) ||
+        elt?.imageName.toLowerCase().includes(this.filterValue.toLowerCase())
+    );
   }
 
   // Ajoutez la méthode getLangageName
@@ -120,7 +130,6 @@ export class ProjetComponent implements OnInit {
       console.log("Aucun ID trouvé dans l'URI");
     }
   }
-
   getProjetById() {
     if (this.seletedProjet) {
       const idProjet = this.getId(this.seletedProjet['@id']);
@@ -159,15 +168,10 @@ export class ProjetComponent implements OnInit {
   dataProjet : any []=[];
   searchProjet : string='';
 
-  // Méthode pour déterminer lesprojet à afficher sur la page actuelle
   getArticlesPage(): any[] {
     const indexDebut = (this.pageActuelle - 1) * this.projetParPage;
     const indexFin = indexDebut + this.projetParPage;
-    this.dataProjet = this.listeprojet.filter((publica: { description: string; titre: string; }) =>
-    publica.description.toLowerCase().includes(this.searchProjet.toLowerCase())||
-    publica.titre.toLowerCase().includes(this.searchProjet.toLowerCase())
-    );
-    return this.dataProjet.slice(indexDebut, indexFin);
+    return this.listeprojet.slice(indexDebut, indexFin);
   }
   // Méthode pour générer la liste des pages
   get pages(): number[] {

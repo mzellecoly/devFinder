@@ -40,9 +40,9 @@
       <tbody>
         <tr *ngFor="let projet of listeprojet">
           <td>{{projet.titre}}</td>
-          <td>{{projet.nombre_de_participant}}</td>
+          <td>{{projet.imageName}}</td>
           <td><span [ngClass]="{'statut-terminé': projet.statu === 'Terminé', 'statut-en-cours': projet.statu === 'En Attente'}">{{projet.statu}}</span></td>
-          <td>{{projet.date_creation |  date: 'dd/MM/yyyy' }}</td>
+          <td>{{projet.createdAt |  date: 'dd/MM/yyyy' }}</td>
           <td>{{projet.date_limite |  date: 'dd/MM/yyyy' }}</td>
           <td>
             <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosProjet(projet)"></i>
@@ -74,27 +74,29 @@
 <!-- Projet terminé -->
 <div class="lignesUrbaine sectionEspace" *ngIf="isTerminate">
   <!-- Tableau des projets terminés -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table table-responsive">
+  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table table-responsive" *ngIf="projetsTermines.length > 0">
     <thead class="thHead">
       <tr class="thHead">
         <th class="thHead">Titre</th>
-        <th class="thHead">Technologies</th>
+        <th class="thHead">Cahier de charge</th>
         <th class="thHead">Etat</th>
+        <th class="thHead">Date début</th>
         <th class="thHead">Date limite</th>
         <th class="thHead">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td><span class="termin"></span></td>
-        <td></td>
+      <tr *ngFor="let projet of projetsTermines">
+        <td>{{projet.titre}}</td>
+        <td>{{projet.imageName}}</td>
+        <td><span [ngClass]="{'statut-terminé': projet.statu === 'Terminé', 'statut-en-cours': projet.statu === 'En Attente'}">{{projet.statu}}</span></td>
+        <td>{{projet.createAt |  date: 'dd/MM/yyyy' }}</td>
+        <td>{{projet.date_limite |  date: 'dd/MM/yyyy' }}</td>
         <td>
-          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal"></i>
-          <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
-          <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;"></i>
-      </td>
+          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosProjet(projet)"></i>
+          <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="afficherDetailsProjet(projet)"></i>
+          <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;"(click)="supprimerProjet(projet)"></i>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -141,35 +143,25 @@
       <div class="modal-body">
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Titre</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre du projet" name="titre" [(ngModel)]="titre">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre du projet" name="titre" [(ngModel)]="titre" (input)="verifTitreFonction()">
+          <span class="text-danger" *ngIf="!exactNom">{{verifNom}}</span>
+          <span class="text-success" *ngIf="exactNom"><i class="bi bi-check2-all"></i> Exact !</span>
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Participants</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre de Participants" name="nombre_de_participant" [(ngModel)]="nombre_de_participant">
+          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Nombre de Participants" name="nombre_de_participant" [(ngModel)]="nombre_de_participant">
         </div>
-        <div class="mb-3 inputAjout">
-          <label for="">Langage de programmation</label>
-          <select class="form-select" aria-label="Default select example" name="langage_de_programmation" [(ngModel)]="langage_de_programmation">
-            <option selected>Choisir le langage</option>
-            <option *ngFor="let langage of listeLangage" [value]="langage['@id']">{{ langage.nom }}</option>
-          </select>
-        </div>
-
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Date limite</label>
-          <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date" name="date_limite" [(ngModel)]="date_limite">
+          <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date" name="date_limite" [(ngModel)]="date_limite" (input)="verifDateFonction()">
+          <span class="text-danger" *ngIf="!exactDate">{{verifDate}}</span>
+          <span class="text-success" *ngIf="exactDate"><i class="bi bi-check2-all"></i> Exact !</span>
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Description</label>
-          <editor class="editeur" [init]="{
-            base_url: '/tinymce',
-            height: '80vh',
-            toolbar: 'undo redo | formatselect | bold italic backcolor | \
-         alignleft aligncenter alignright alignjustify | \
-         bullist numlist outdent indent | removeformat | help',
-            plugins: 'lists checklist',
-          }" [(ngModel)]="description" style="border-radius: 0 !important; height: 100%;"></editor>
-
+          <input class="form-control" type="file" (change)="getFile($event)">
+          <span class="text-danger" *ngIf="!exactDescription">{{verifDescription}}</span>
+          <span class="text-success" *ngIf="exactDescription"><i class="bi bi-check2-all"></i> Exact !</span>
         </div>
       </div>
       <div class="modal-footer">
@@ -190,26 +182,25 @@
       <div class="modal-body">
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Titre</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre du projet" name="titre" [(ngModel)]="titre">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre du projet" name="titre" [(ngModel)]="titre" (input)="verifTitreFonction()">
+          <span class="text-danger" *ngIf="!exactNom">{{verifNom}}</span>
+          <span class="text-success" *ngIf="exactNom"><i class="bi bi-check2-all"></i> Exact !</span>
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Participants</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre de Participants" name="nombre_de_participant" [(ngModel)]="nombre_de_participant">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="">Langage de programmation</label>
-        <select class="form-select" aria-label="Default select example" name="langage_de_programmation" [(ngModel)]="langage_de_programmation">
-          <option selected>Choisir le langage</option>
-          <option  *ngFor="let langage of listeLangage" [value]="langage_de_programmation">{{ langage.nom }}</option>
-        </select>
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Description</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
+          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Nombre de Participants" name="nombre_de_participant" [(ngModel)]="nombre_de_participant">
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Date limite</label>
-          <input class="form-control" id="exampleFormControlInput1" placeholder="Date" name="date_limite" [(ngModel)]="date_limite">
+          <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date" name="date_limite" [(ngModel)]="date_limite" (input)="verifDateFonction()">
+          <span class="text-danger" *ngIf="!exactDate">{{verifDate}}</span>
+          <span class="text-success" *ngIf="exactDate"><i class="bi bi-check2-all"></i> Exact !</span>
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Description</label>
+          <input class="form-control" type="file" (change)="getFile($event)">
+          <span class="text-danger" *ngIf="!exactDescription">{{verifDescription}}</span>
+          <span class="text-success" *ngIf="exactDescription"><i class="bi bi-check2-all"></i> Exact !</span>
         </div>
       </div>
       <div class="modal-footer">
@@ -229,10 +220,11 @@
       </div>
       <div class="modal-body detail">
         <p class="fw-bold">Titre : <span>{{projetSelectionne.titre}}</span></p>
-        <p>Description : {{projetSelectionne.description}}</p>
-        <p>Langage : {{projetSelectionne.langage_de_programmation}}</p>
-        <p>Participants : {{projetSelectionne.nombre_de_participant}}</p>
-        <p>Date limite : {{projetSelectionne.date_limite |  date: 'dd/MM/yyyy'}}</p>
+        <p class="fw-bold">Description : <span>{{projetSelectionne.description}}</span></p>
+        <!-- <p>Langage : {{projetSelectionne.langage_de_programmation}}</p> -->
+        <p class="fw-bold">Cahier de charge : <span>{{projetSelectionne.imageName}}</span></p>
+        <p class="fw-bold">Date création : <span>{{projetSelectionne.createAt |  date: 'dd/MM/yyyy'}}</span></p>
+        <p class="fw-bold">Date limite : <span>{{projetSelectionne.date_limite |  date: 'dd/MM/yyyy'}}</span></p>
       </div>
     </div>
   </div>

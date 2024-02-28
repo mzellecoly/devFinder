@@ -4,5 +4,7 @@ export interface Apprenant{
   mot_de_passe: string;
   nom_complet: string;
   roles: string;
+  telephone: string;
+  description: string;
   projet: [];
 }

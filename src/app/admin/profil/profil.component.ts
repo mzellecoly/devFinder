@@ -30,7 +30,7 @@ export class ProfilComponent implements OnInit{
     script.src = '../../../assets/js/profil.js';
     document.body.appendChild(script);
 
-    const userString = localStorage.getItem('userOnline');
+    const userString = localStorage.getItem('user');
     const id = localStorage.getItem('userId');
     if (userString) {
       this.seletedUser=userString

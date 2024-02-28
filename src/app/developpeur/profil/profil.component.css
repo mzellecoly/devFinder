@@ -21,6 +21,10 @@
   border: 3.373px solid #8D8D8D;
   box-shadow: 7.102px 7.102px 0px 0px rgba(0, 0, 0, 0.25);
 }
+.btnAjout{
+  background-color: #FFA439;
+  color: white;
+}
 .profil{
   display: flex;
   width: 995px;

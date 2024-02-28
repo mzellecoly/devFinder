@@ -61,7 +61,7 @@ export class AccueilsuperadminComponent implements OnInit{
     this.getBrief();
     this.getBrief1();
     this.getImerssion();
-    this.getImerssion1();
+    // this.getImerssion1();
     this.getUser();
     console.warn(this.listeImerssion);
   }
@@ -105,7 +105,7 @@ export class AccueilsuperadminComponent implements OnInit{
 
       if ([data][0]['hydra:member'].length != 0) {
         this.listeImerssion = [data][0]['hydra:member'];
-        console.log('La liste des immersion est:', this.listeImerssion);
+        console.log('La liste des immersion de la gloire est:', this.listeImerssion);
       }
       },
       (error) => {
@@ -116,7 +116,7 @@ export class AccueilsuperadminComponent implements OnInit{
   getImerssion1(): void {
     this.ressourceService.getImerssion().subscribe((data :any)=>{
       this.listeImerssion = data;
-      console.log("les immersions sont là :", this.listeImerssion);
+      console.log("les immersions de la gloire sont là :", this.listeImerssion);
   });
   }
   viderChamps(){
@@ -144,11 +144,12 @@ export class AccueilsuperadminComponent implements OnInit{
     }
 
      // Méthode pour déterminer lesprojet à afficher sur la page actuelle
-  getArticlesPage(): any[] {
-    const indexDebut = (this.pageActuelle - 1) * this.projetParPage;
-    const indexFin = indexDebut + this.projetParPage;
-    return this.listeImerssion.slice(indexDebut, indexFin);
-  }
+     getArticlesPage(): any[] {
+      const indexDebut = (this.pageActuelle - 1) * this.projetParPage;
+      const indexFin = indexDebut + this.projetParPage;
+      console.log('les immersions', (this.listeImerssion));
+      return this.listeImerssion.slice(indexDebut, indexFin);
+    }
   // Méthode pour générer la liste des pages
   get pages(): number[] {
     const totalPages = Math.ceil(this.listeImerssion.length / this.projetParPage);

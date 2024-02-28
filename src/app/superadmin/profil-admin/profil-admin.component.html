@@ -20,7 +20,7 @@
         <form action="">
           <div class="mb-3 d-flex flex-wrap justify-content-between">
             <label for="exampleFormControlInput5" class="form-label">Ancien mot de passe :</label>
-            <input type="password" class="form-control" id="exampleFormControlInput5" [(ngModel)]="mot_de_passe">
+            <input type="password" class="form-control" id="exampleFormControlInput5" name="mot_de_passe" [(ngModel)]="mot_de_passe">
           </div>
           <div class="mb-3 d-flex flex-wrap justify-content-between">
             <label for="exampleFormControlInput6" class="form-label">Nouveau mot de passe :</label>
@@ -32,4 +32,4 @@
           </div>
         </form>
       </div>
-      <button class="btnSave p-2 mt-5">Enregistrer</button>
+      <button class="btnSave p-2 mt-5" (click)="modifierUser(idUser)">Enregistrer</button>

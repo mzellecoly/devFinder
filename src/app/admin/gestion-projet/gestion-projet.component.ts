@@ -12,25 +12,25 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 })
 export class GestionProjetComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
-
-  editorConfig = {
-    base_url: '/tinymce',
-    suffix: '.min',
-    plugins:'lists link image table wordcount'
-  }
   // Les variables
   listeprojet: any[] = [];
   listeLangage: any[] = [];
   idProjet: number = 0;
   titre: string = '';
   description: string = '';
-  nombre_de_participant: number = 0;
+  nombre_de_participant: any;
   langage_de_programmation: string = '';
   date_limite: string = '';
+  CahierDecharge: string='';
   statu: string = '';
   projetSelectionne: any = {};
+  public pdfUpload:any; // test
 
   objToArray: any[] = [];
+  projetsTermines: any[] = [];
+    // Ajoutez ces deux propriétés
+    partieDuTexte: string | undefined;
+    texteComplet: string | undefined;
 
   constructor(
     private projetService: ProjetService,
@@ -84,21 +84,53 @@ export class GestionProjetComponent implements OnInit {
     this.isCancel = true;
   }
 
+    // Variables pour faire la vérifications
+    verifNom: String = '';
+    verifNinea: String = '';
+    verifEmail: String = '';
+    verifDate: String = '';
+    verifDescription: String = '';
+    verifTelephone: String = '';
+    // Variables si les champs sont exacts
+    exactNom: boolean = false;
+    exactEmail: boolean = false;
+    exactDate: boolean = false;
+    // exactTelephone: boolean = false;
+    // exactNinea: boolean = false;
+    exactDescription: boolean = false;
+
   // Liste des Projets ajoutés
   getProjet(): void {
     this.projetService.getProjet().subscribe(
       (data: any) => {
         if ([data][0]['hydra:member'].length != 0) {
           this.listeprojet = [data][0]['hydra:member'];
-          console.log(this.listeprojet);
+          console.log('la liste de tous les projets',this.listeprojet);
           this.updateStatutProjets();
+                  // Filtrer les projets terminés
+        this.projetsTermines = this.listeprojet.filter(projet => projet.statu === 'Terminé');
         }
       },
       (error) => {
-        console.error('Erreur lors de la récupération des briefs', error);
+        console.error('Erreur lors de la récupération des projets', error);
       }
     );
   }
+  // Méthode pour récupérer les projets en cours uniquement
+getProjetEnCours(): void {
+  this.projetService.getProjet().subscribe(
+    (data: any) => {
+      if ([data][0]['hydra:member'].length != 0) {
+        // Filtrer les projets en cours uniquement
+        this.listeprojet = [data][0]['hydra:member'].filter((projet: any) => projet.statu !== 'Terminé');
+        console.log(this.listeprojet);
+      }
+    },
+    (error) => {
+      console.error('Erreur lors de la récupération des projets', error);
+    }
+  );
+}
 
   // Ajoutez la méthode getLangageName
   getLangageName(langageUrl: string): string {
@@ -130,30 +162,149 @@ export class GestionProjetComponent implements OnInit {
     this.date_limite = '';
     this.langage_de_programmation='';
   }
+    // Verification du nom
+    verifTitreFonction() {
+      this.exactNom = false;
+      if (this.titre == '') {
+        this.verifNom = 'Veuillez renseigner votre nom complet';
+      } else if (this.titre.length < 5) {
+        this.verifNom = 'Le nom est trop court';
+      } else {
+        this.verifNom = '';
+        this.exactNom = true;
+      }
+       // Si le champ est vide, efface le message d'erreur
+       if (this.titre == '') {
+        this.verifNom = '';
+      }
+    }
+    // Verification de la description
+    verifDescriptionFonction() {
+      this.exactDescription = false;
+      if (this.description == '') {
+        this.verifDescription = 'Veuillez renseigner une description';
+      } else if (this.description.length < 30) {
+        this.verifDescription = 'La description est trop courte';
+      } else {
+        this.verifDescription = '';
+        this.exactDescription = true;
+      }
+       // Si le champ est vide, efface le message d'erreur
+       if (this.description == '') {
+        this.verifDescription = '';
+      }
+    }
+    // Verification du cahier de charge
+    verifCahierdeChargeFonction() {
+      this.exactEmail = false;
 
+      if (this.CahierDecharge == '') {
+        this.verifEmail = 'Veuillez renseigner votre CahierDecharge';
+      } else {
+        this.verifEmail = '';
+        this.exactEmail = true;
+      }
+       // Si le champ est vide, efface le message d'erreur
+       if (this.CahierDecharge == '') {
+        this.verifEmail = '';
+      }
+    }
+    verifDateFonction() {
+      this.exactDate = false;
+
+      if (this.date_limite == '') {
+        this.verifDate = 'Veuillez renseigner une date';
+      } else if ( new Date(this.date_limite).toDateString() < new Date().toDateString()) {
+        this.verifDate='Attention !!', 'La date limite ne peut pas être une date passée', 'error';
+      } else {
+        this.verifDate = '';
+        this.exactDate = true;
+      }
+       // Si le champ est vide, efface le message d'erreur
+       if (this.date_limite == '') {
+        this.verifDate = '';
+      }
+    }
+
+  // AjoutProjet() {
+  //   this.verifTitreFonction();
+  //   this.verifCahierdeChargeFonction();
+  //   this.verifDateFonction();
+  //   this.verifDescriptionFonction();
+  //   if(this.exactNom && this.exactDescription && this.exactEmail && this.exactDate && this.exactDescription) {
+  //     const newProjet: Projet = {
+  //       titre: this.titre,
+  //       description: this.description,
+  //       langage_de_programmation: [this.langage_de_programmation], // Utilisez un tableau avec une seule chaîne
+  //       nombre_de_participant: +this.nombre_de_participant,
+  //       date_limite: this.date_limite,
+  //       CahierDecharge: this.CahierDecharge,
+  //       date_creation: new Date().toISOString(),
+  //     };
+  //     this.projetService.addProjet(newProjet).subscribe((reponse) => {
+  //       console.log('Réponse du service :', reponse);
+  //       this.projetService.showAlert('Bravo!!', 'Projet ajouté avec succès', 'success');
+  //       this.viderChamps();
+  //       this.getProjet();
+        // this.updateStatutProjets();
+      // },
+      // (error) => {
+      //   console.error('Erreur lors de l\'ajout du projet :', error);
+        // Gestion des erreurs ici
+        // if (error.status === 400) {
+          // Erreur de validation du formulaire
+          // const errorMessages = error.error['hydra:description'];
+          // if (Array.isArray(errorMessages)) {
+            // Si le message d'erreur est un tableau, vous pouvez le parcourir pour l'afficher
+          //   errorMessages.forEach(errorMessage => {
+          //     this.projetService.showAlert('Erreur !!', errorMessage, 'error');
+          //   });
+          // } else {
+            // Sinon, affichez le message d'erreur directement
+        //     this.projetService.showAlert('Erreur !!', errorMessages, 'error');
+        //   }
+        // } else {
+          // Gestion des autres types d'erreurs
+  //         this.projetService.showAlert('Erreur !!', 'Une erreur s\'est produite lors de l\'ajout du projet.', 'error');
+  //       }
+  //     });
+  //   }
+  // }
+  showAlert(title: any, text: any, icon: any) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+    });
+  }
+    // Méthode pour afficher une partie du texte sur le tableau et tout le texte au niveau des détails
+    getPartieDuTexte(texte: string, longueurMax: number): string {
+      if (texte.length <= longueurMax) {
+        return texte;
+      } else {
+        return texte.substring(0, longueurMax) + '...';
+      }
+    }
+  //
   AjoutProjet() {
+    this.verifTitreFonction();
+    this.verifCahierdeChargeFonction();
+    this.verifDateFonction();
+    this.verifDescriptionFonction();
     if (this.titre == '') {
-      this.projetService.showAlert('Attention !!', 'Renseigner un titre', 'error');
-    } else if (this.description == '') {
-      this.projetService.showAlert('Attention !!', 'Renseigner une description', 'error');
-    } else if (this.nombre_de_participant == 0) {
-      this.projetService.showAlert('Attention !!', 'Renseigner le nombre de participant', 'error');
-    } else if (this.date_limite == '') {
-      this.projetService.showAlert('Attention !!', 'Renseigner une date limite', 'error');
-    } else if (new Date(this.date_limite) < new Date()) {
-      this.projetService.showAlert('Attention !!', 'La date limite ne peut pas être une date passée', 'error');
-    } else if (this.langage_de_programmation == '') {
-      this.projetService.showAlert('Attention !!', 'Sélectionner un langage de programmation', 'error');
-    } else {
-      const newProjet: Projet = {
-        titre: this.titre,
-        description: this.description,
-        langage_de_programmation: [this.langage_de_programmation], // Utilisez un tableau avec une seule chaîne
-        nombre_de_participant: +this.nombre_de_participant,
-        date_limite: this.date_limite,
-        date_creation: new Date().toISOString(),
-      };
-      this.projetService.addProjet(newProjet).subscribe((reponse) => {
+      this.showAlert('Erreur!', 'Veuillez remplir les champs', 'error');
+    }
+    else
+    {
+      let formData = new FormData();
+      this.nombre_de_participant= parseInt(this.nombre_de_participant);
+      formData.append("titre", this.titre);
+      formData.append("description ", this.description);
+      // formData.append("langage_de_programmation", this.langage_de_programmation);
+      formData.append("nombre_de_participant", this.nombre_de_participant);
+      formData.append("date_limite", this.date_limite);
+      formData.append("CahierDecharge", this.pdfUpload);
+      this.projetService.addProjet(formData).subscribe((reponse) => {
         console.log('Réponse du service :', reponse);
         this.projetService.showAlert('Bravo!!', 'Projet ajouté avec succès', 'success');
         this.viderChamps();
@@ -184,6 +335,18 @@ export class GestionProjetComponent implements OnInit {
     }
   }
 
+
+  // ------------------methode pour charger le champ input ---------
+  getFile(event: any) {
+    const file = event.target.files[0] as File;
+    // this.cahierDecharge = file;
+    this.pdfUpload=file;
+      console.warn("Le cahier de charge :",this.pdfUpload); // Vérifiez l'objet fichier dans la console
+    // if (file) {
+    //   this.cahierDecharge = file;
+    //   console.warn("Le cahier de charge :",this.cahierDecharge); // Vérifiez l'objet fichier dans la console
+    // }
+  }
   // Supprimer projet
   getId(uri: any) {
     const idMatch = uri.match(/\/(\d+)$/);
@@ -236,7 +399,7 @@ export class GestionProjetComponent implements OnInit {
     this.idProjet = id;
     this.titre = projet.titre;
     this.description = projet.description;
-    this.langage_de_programmation = projet.langage_de_programmation;
+    this.pdfUpload = projet.pdfUpload;
     this.date_limite = projet.date_limite;
     this.nombre_de_participant = projet.nombre_de_participant;
   }

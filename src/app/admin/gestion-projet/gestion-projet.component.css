@@ -56,14 +56,14 @@ table tbody tr td{
 .pagination{
   background-color: red;
 }
-span {
+/* span {
   background: #F7DFF5;
   margin-top: 32px;
   padding: 8px 15px;
   font-size: 0.75rem;
   border-radius: 50px;
   font-weight: 600;
-}
+} */
 .designer {
   background-color: #ff9d0056;
   color: #FFA439;
@@ -94,7 +94,7 @@ span {
   color: #FFA439;
 }
 .editeur{
-  background-color: red;
+  /* background-color: red; */
   color: black;
 }
 @media screen and (max-width: 900px) and (min-width: 200px){

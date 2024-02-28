@@ -1,6 +1,8 @@
 export interface Imerssion{
   id?: number;
   titre: string;
-  description: string;
+  // description: string;
   lien_support: string;
+  CahierDecharge: string;
+  
 }

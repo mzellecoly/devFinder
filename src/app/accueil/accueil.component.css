@@ -1,6 +1,6 @@
 .headertext{
   position: relative;
-  z-index: 2000;
+  z-index: 7;
 }
 /* Début Section Bannière */
 .banner{
@@ -17,6 +17,7 @@
   line-height: 1em;
 }
 .imgBanner{
+  border: 2px solid red;
   height: 70vh;
   margin-right: 30px;
 }

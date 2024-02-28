@@ -4,7 +4,7 @@
       <i class="fa-solid fa-user-tie" style="color: #FFA439; font-size: 50px; display: flex; justify-content: center;"></i>
     </div>
     <div class="ml-5">
-      <p class="pp text-center" style="font-size: 25px; font-weight: bold;">Nombre Imerssion</p>
+      <p class="pp text-center" style="font-size: 24px; font-weight: bold;">Nombre Imerssion</p>
       <p class="p text-center" style="font-size: 25px;" *ngIf="listeImerssion">{{ listeImerssion.length }}</p>
     </div>
   </div>
@@ -33,7 +33,8 @@
       <div class="card" style="width: 20rem" *ngFor="let immersion of getArticlesPage()">
         <div class="card-body">
           <h5 class="card-title">{{ immersion.titre }}</h5>
-          <p class="card-text">{{ immersion.description }}</p>
+          <p class="card-text">{{ immersion.lien_support }}</p>
+          <p class="card-text">{{ immersion.imageName }}</p>
           <p class="card-text">{{ immersion.date_limite | date: 'dd/MM/yyyy'}}</p>
         </div>
       </div>

@@ -1,18 +1,18 @@
 <div class="profil">
   <div class="left">
     <div class="profilUp">
-      <img src="https://img.freepik.com/photos-gratuite/belle-femme-africaine-se-sentant-reconnaissante_181624-46352.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" alt="">
-      <p>Dev COLY</p>
+      <img src="https://img.freepik.com/vecteurs-libre/cercle-bleu-utilisateur-blanc_78370-4707.jpg?t=st=1709040448~exp=1709044048~hmac=a2b734dbf6516513fd564a8e051242681b7e4f79d84d062f7bde5493558cb954&w=740" alt="">
+      <h3>{{nom_complet}}</h3>
     </div>
     <div class="profilDown mt-3">
       <h3>Informations</h3>
       <div>
         <strong>Email</strong>
-        <p>name@gmail.com</p>
+        <p>{{email}}</p>
       </div>
       <div>
         <strong>Téléphone</strong>
-        <p>77 777 77 77</p>
+        <p>{{telephone}}</p>
       </div>
       <div>
         <strong>Réseaux sociaux</strong>
@@ -26,116 +26,51 @@
   </div>
   <div class="right">
     <div class="rightUp">
-      <h3>Expérience</h3>
-      <div>
-        <strong>Langages et Technologies <i class="fa-solid fa-pencil ms-2" data-bs-toggle="modal" data-bs-target="#firstModal"></i></strong>
-        <p>HTML CSS JS PHP SQL</p>
-      </div>
-      <div>
-        <strong>Entreprises <i class="fa-solid fa-circle-plus ms-2" style="font-size: 17px;" data-bs-toggle="modal" data-bs-target="#secondModal"></i></strong>
-        <div>
-          <p>Agence Nationale de la Statistique et de la Démographie (ANSD)</p>
-          <p class="rightItem">Stage en développement web</p>
-          <p class="rightItem">6 mois</p>
-        </div>
-        <div>
-          <p>Wanekoo</p>
-          <p class="rightItem">Stage en développement web</p>
-          <p class="rightItem">6 mois</p>
-        </div>
-      </div>
-      <div>
-        <strong>Projets <i class="fa-solid fa-circle-plus ms-2" style="font-size: 17px;" data-bs-toggle="modal" data-bs-target="#threeModal"></i></strong>
-        <p>https://daaraytechnologie.netlify.app/</p>
-        <p class="rightItem">https://briefangmarielaure.netlify.app/auth</p>
+      <h3>Compétences <i class="fa-solid fa-circle-plus ms-2" style="font-size: 17px; color: #0F2A3D;" data-bs-toggle="modal" data-bs-target="#secondModal"></i></h3>
+      <div *ngFor="let competence of listeDescripCompetence">
+        <p><span class="fw-bold">Compétence :</span>{{competence.nomCompetence}}</p>
+        <p><span class="fw-bold">Description :</span>{{competence.description}}</p>
+        <p><span class="fw-bold">Lien :</span>{{competence.lien_de_realisation}}</p>
+        <i class="fa-regular fa-pen-to-square" title="Modifier la description" style="color: #0F2A3D; font-size: 15px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosDescription(competence)"></i>
+        <!-- <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 15px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i> -->
+        <i class="fa-solid fa-trash-can ms-3" title="Supprimer la description" style="color: #0F2A3D; font-size: 15px;" (click)=" supprimerDescripCompetence(competence)"></i>
       </div>
     </div>
     <div class="rightDown mt-3">
-      <h3>A propos <i class="fa-solid fa-pencil ms-2" data-bs-toggle="modal" data-bs-target="#fourModal"></i></h3>
-      <strong>À propos de Dev COLY</strong>
-      <p>Noel Robinson NDECKY, est un étudiant de la promotion 7 en Informatique,<br>Développement, d'Applications (IDA) à l'Espace Numérique ouvert (ENO) de<br>Sébikotane qui conjugue avec brio ses études et sa passion pour<br>l’entrepreneuriat.
-        En plus d être un membre actif de la communauté<br>estudiantine , il a développé un projet de fabrication de maquettes avec<br>comme ambition de marquer son empreinte dans la création d'objets<br>ludiques au Sénégal. </p>
+      <h3>A propos</h3>
+      <strong>À propos de {{nom_complet}}</strong>
+      <p>{{description}} </p>
     </div>
   </div>
 </div>
-<!-- Modal pour langage et technologie-->
-<div class="modal fade" id="firstModal" tabindex="-1" aria-labelledby="firstModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="firstModalLabel">Langages et Technologies</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            HTML
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            CSS
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            CSS
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            JS
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            PHP
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            SQL
-          </label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btnEditProfil" style="background-color: #FFA439; color: white;">Enregistrer</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal pour entreprises-->
+<!-- Modal pour compétence-->
 <div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="secondModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="secondModalLabel">Entreprise</h1>
+        <h1 class="modal-title fs-5" id="secondModalLabel">Compétences</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Entreprise</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Entreprise">
+        <div class="mb-3 inputAjout">
+          <label for="">Compétence</label>
+          <select class="form-select" aria-label="Default select example" name="competences" [(ngModel)]="competences">
+            <option selected>Choisir une compétence</option>
+            <option *ngFor="let competence of listeCompetence" [value]="competence.id">{{ competence.nom }}</option>
+          </select>
         </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Poste occupé</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Poste occupé">
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Description</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Desscription" name="description" [(ngModel)]="descriptionCom">
         </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Durée</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Durée">
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Lien de réalisation</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien" name="lien_de_realisation" [(ngModel)]="lien_de_realisation">
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btnEditProfil" style="background-color: #FFA439; color: white;">Enregistrer</button>
+        <button type="button" class="btn btnEditProfil" style="background-color: #FFA439; color: white;" (click)="ajoutCompetence()">Ajouter</button>
       </div>
     </div>
   </div>
@@ -178,6 +113,33 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
         <button type="button" class="btn btnEditProfil" style="background-color: #FFA439; color: white;">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PopUp modifier -->
+<div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modifierModalLabel">Modifier une description</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Description</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="titre du projet" name="description" [(ngModel)]="description">
+        </div>
+        <div class="mb-3 inputAjout">
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="exampleFormControlInput1" class="form-label">Lien</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien" name="lien_de_realisation" [(ngModel)]="lien_de_realisation">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btnAjout" data-bs-dismiss="modal" (click)=" modifierDescripCompetence(idDescr)">Modifier</button>
       </div>
     </div>
   </div>

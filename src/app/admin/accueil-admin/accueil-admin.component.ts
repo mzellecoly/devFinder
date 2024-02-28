@@ -40,7 +40,7 @@ export class AccueilAdminComponent implements OnInit {
         }
       },
       (error) => {
-        console.error('Erreur lors de la récupération des briefs', error);
+        console.error('Erreur lors de la récupération des projets', error);
       }
     );
   }
@@ -70,14 +70,19 @@ export class AccueilAdminComponent implements OnInit {
   dataProjet : any []=[];
   searchProjet : string='';
   // Méthode pour déterminer lesprojet à afficher sur la page actuelle
+  // getArticlesPage(): any[] {
+  //   const indexDebut = (this.pageActuelle - 1) * this.projetParPage;
+  //   const indexFin = indexDebut + this.projetParPage;
+  //   this.dataProjet = this.listeprojet.filter((publica: { description: string; titre: string; }) =>
+  //   publica.description.toLowerCase().includes(this.searchProjet.toLowerCase())||
+  //   publica.titre.toLowerCase().includes(this.searchProjet.toLowerCase())
+  //   );
+  //   return this.dataProjet.slice(indexDebut, indexFin);
+  // }
   getArticlesPage(): any[] {
     const indexDebut = (this.pageActuelle - 1) * this.projetParPage;
     const indexFin = indexDebut + this.projetParPage;
-    this.dataProjet = this.listeprojet.filter((publica: { description: string; titre: string; }) =>
-    publica.description.toLowerCase().includes(this.searchProjet.toLowerCase())||
-    publica.titre.toLowerCase().includes(this.searchProjet.toLowerCase())
-    );
-    return this.dataProjet.slice(indexDebut, indexFin);
+    return this.listeprojet.slice(indexDebut, indexFin);
   }
   // Méthode pour générer la liste des pages
   get pages(): number[] {

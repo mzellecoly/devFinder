@@ -16,6 +16,10 @@ body{
     flex-direction: column;
     height: 100vh;
 }
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .users{
   margin-top: 20vh;
 }
@@ -32,7 +36,7 @@ body{
   width: 768px;
   max-width: 100%;
   min-height: 600px;
-  margin: 150px auto;
+  margin: 20px auto;
 }
 .container p{
     font-size: 14px;

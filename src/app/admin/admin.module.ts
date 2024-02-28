@@ -11,7 +11,7 @@ import { GestionProjetComponent } from './gestion-projet/gestion-projet.componen
 import { DataTablesModule } from 'angular-datatables';
 import { FormsModule } from '@angular/forms';
 import { EditprofilComponent } from './editprofil/editprofil.component';
-import { GestionlangageComponent } from './gestionlangage/gestionlangage.component';
+import { GestionlangageComponent } from '../superadmin/gestionlangage/gestionlangage.component';
 import { SharedModule } from '../shared/shared.module';
 import { LangageProgramPipe } from '../shared/langage-program.pipe';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';

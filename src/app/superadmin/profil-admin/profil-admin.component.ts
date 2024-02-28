@@ -15,6 +15,7 @@ export class ProfilAdminComponent implements OnInit{
   mot_de_passe: string='';
   nom_complet: string='';
   roles: string='';
+  idUser: number = 0;
   // seletedUser: any = {};
 
   constructor(
@@ -25,14 +26,14 @@ export class ProfilAdminComponent implements OnInit{
  seletedUser: any = {};
 
  ngOnInit(): void {
-   const userString = localStorage.getItem('userOnline');
+   const userString = localStorage.getItem('user');
 
  if (userString) {
-  this.seletedUser=userString
+  // this.seletedUser=userString
    const user = JSON.parse(userString);
    this.nom_complet = user.nom_complet;
    this.email = user.email;
-   this.modifierUser(this.seletedUser)
+   this.modifierUser(this.idUser)
 
  }
 // const userString = localStorage.getItem('userOnline');
@@ -40,13 +41,14 @@ export class ProfilAdminComponent implements OnInit{
  }
 
 
- modifierUser(user: any) {
+ modifierUser(id: any) {
+  this.idUser=id
    const data = {
      nom_complet: this.nom_complet,
      email: this.email,
    };
 
-   console.log('Selected user:', this.seletedUser);
+   console.log('Selected user:', id);
 
    // Assurez-vous que votre service updateUser fonctionne correctement
    this.user.updateUser(this.seletedUser, data).subscribe(

@@ -55,14 +55,17 @@ table tbody tr td{
 .pagination{
   background-color: red;
 }
-span {
+.fa-trash-can{
+  cursor: pointer;
+}
+/* span {
   background: #F7DFF5;
   margin-top: 32px;
   padding: 8px 15px;
   font-size: 0.75rem;
   border-radius: 50px;
-  font-weight: 600;
-}
+  font-weight: 600; */
+/* } */
 .designer {
   background-color: #ff9d0056;
   color: #FFA439;

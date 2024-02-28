@@ -16,7 +16,7 @@
       <a class="user ms-3" [routerLink]="['/authAssociation']">Association</a>
     </div>
     <div>
-      <img class="imgBanner" src="../../assets/banierre.png" alt="" />
+      <img class="imgBanner" src="../../assets/banner.png" alt="" />
     </div>
   </div>
   <div class="carte container mt-5">
@@ -85,15 +85,15 @@
             <span *ngFor="let langageUrl of projet.langage_de_programmation">
               {{ getLangageName(langageUrl) }}
             </span>
-            <p class="card-text">{{ projet.nombre_de_participant }}</p>
+            <p class="card-text">{{ projet.imageName }}</p>
             <p class="card-text limit-description">{{ projet.description }}</p>
-            <p class="card-text">{{ projet.date_limite }}</p>
-            <a href="#" class="btn bouton" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getDetailProjet(projet)">Détails</a>
+            <p class="card-text">{{ projet.date_limite |  date: 'dd/MM/yyyy'}}</p>
+            <a href="#" class="btn bouton" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="getDetailProjet(projet)">Détails</a>
           </div>
         </div>
       </div>
     </div>
-    <a href="#" class="btn bouton mt-4 btnProjet">Plus de projets</a>
+    <a href="#" [routerLink]="['/projet']" class="btn bouton mt-4 btnProjet">Plus de projets</a>
   </div>
   <!-- Fin Section Projet-->
 
@@ -289,23 +289,41 @@
 <app-footer></app-footer>
 <!-- footer -->
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Détail projet</h1>
+        <h1 class="modal-title fs-5" id="detailModalLabel">Détail projet</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <p>titre : {{seletedProjet.titre}}</p>
-      <p>{{seletedProjet.description}}</p>
-      <p>{{seletedProjet.nombre_de_participant}}</p>
-      <p>{{seletedProjet.date_limite}}</p>
+      <p><span class="fw-bold">Titre : </span>{{seletedProjet.titre}}</p>
+      <!-- <p><span>Titre :</span>{{seletedProjet.description}}</p> -->
+      <p><span class="fw-bold">Cahier de charge : </span>{{seletedProjet.imageName}}</p>
+      <p><span class="fw-bold">Date limite : </span>{{seletedProjet.date_limite}}</p>
       <!-- <p>{{seletedProjet.titre}}</p> -->
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btnAjout" (click)="getProjetById()">Participer</button> -->
         <!-- <button type="button" class="btn btnAjout" (click)="participerAuProjet(projet)">Participer</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

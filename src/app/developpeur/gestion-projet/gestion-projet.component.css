@@ -9,6 +9,10 @@
 {
   cursor: pointer;
 }
+.fa-trash-can
+{
+  cursor: pointer;
+}
 .btnAjout{
   background-color: #FFA439;
   color: white;

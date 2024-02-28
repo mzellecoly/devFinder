@@ -28,17 +28,22 @@
       <tr>
         <th class="thHead">Titre</th>
         <th class="thHead">Description</th>
+        <th class="thHead">Cahier de charge</th>
         <th class="thHead">Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let ressource of listeImerssion">
         <td>{{ressource.titre}}</td>
-        <td>{{ getPartieDuTexte(ressource.description, 20) }}</td>
+        <td>{{ getPartieDuTexte(ressource.lien_support, 20) }}</td>
+        <td>{{ getPartieDuTexte(ressource.imageName, 20) }}</td>
         <td>
-          <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosImmersion(ressource)"></i>
-          <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="afficherDetailsImerssion(ressource)" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
-          <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="supprimerImmersion(ressource)"></i>
+          <a href="https://mamadoucire99.simplonfabriques.com/public/fichiers/immersions/{{ressource.imageName }}" download>
+            <i class="fa-solid fa-download" title="Télécharger la ressource" style="color: #0F2A3D; font-size: 20px;"></i>
+          </a>
+          <i class="fa-regular fa-pen-to-square ms-1" title="Modifier la ressource" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosImmersion(ressource)"></i>
+          <i class="fa-solid fa-eye ms-1" title="Voir les détails de la ressource" style="color: #0F2A3D; font-size: 20px;" (click)="afficherDetailsImerssion(ressource)" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
+          <i class="fa-solid fa-trash-can ms-1" title="Supprimer la ressource" style="color: #0F2A3D; font-size: 20px;" (click)="supprimerImmersion(ressource)"></i>
         </td>
       </tr>
     </tbody>
@@ -62,26 +67,43 @@
 <!-- Liste des briefs -->
 <div class="lignesUrbaine sectionEspace" *ngIf="isTerminate">
   <!-- Tableau des projets terminés -->
-  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table table-responsive" >
+  <table datatable [dtOptions]="dtOptions" class="row-border hover w-100 table table-responsive" *ngIf="listeBrief.length>0">
     <thead class="thHead">
       <tr class="thHead">
         <th class="thHead">Titre</th>
         <th class="thHead">Description</th>
-        <th class="thHead">Niveau compétence</th>
+        <th class="thHead">Cahier de charge</th>
         <th class="thHead">Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let ressource of listeBrief">
         <td>{{ressource.titre}}</td>
-        <td>{{ getPartieDuTexte(ressource.description, 20) }}</td>
-        <td>{{ressource.niveau_de_competence}}</td>
+        <td>{{ getPartieDuTexte(ressource.niveau_de_competence, 20) }}</td>
+        <td>{{ getPartieDuTexte(ressource.imageName, 20) }}</td>
         <td>
+          <a href="https://mamadoucire99.simplonfabriques.com/public/fichiers/briefs/{{ressource.imageName }}" download>
+            <i class="fa-solid fa-download" title="Télécharger la ressource" style="color: #0F2A3D; font-size: 20px;"></i>
+          </a>
           <!-- <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="afficherDetailsBrief(ressource)" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i> -->
-            <i class="fa-regular fa-pen-to-square" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModalBrief" (click)="chargerInfosBrief(ressource)"></i>
+            <i class="fa-regular fa-pen-to-square ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#modifierModalBrief" (click)="chargerInfosBrief(ressource)"></i>
             <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="afficherDetailsImerssion(ressource)" type="button" data-bs-toggle="modal" data-bs-target="#detailModal"></i>
             <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;" (click)="supprimerBrief(ressource)"></i>
         </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="" *ngIf="listeBrief.length<0">
+    <thead>
+      <tr>
+        <th class="thHead">Titre</th>
+        <th class="thHead">Description</th>
+        <th class="thHead">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Aucune donnée disponnible dans le tableau</td>
       </tr>
     </tbody>
   </table>
@@ -97,22 +119,46 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Titre</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="Titre" [(ngModel)]="titre">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Description</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
-        </div>
-        <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Lien support</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support">
-        </div>
+        <!-- <form action="" enctype="multipart/form-data">
+          <div class="mb-3 inputAjout">
+            <label for="exampleFormControlInput1" class="form-label">Titre</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="Titre" [(ngModel)]="titre" (input)="verifTitreFonction()">
+            <span class="text-danger" *ngIf="!exactTitre">{{verifTitre}}</span>
+            <span class="text-success" *ngIf="exactTitre"><i class="bi bi-check2-all"></i> Exact !</span>
+          </div>
+          <div class="mb-3 inputAjout">
+            <label for="exampleFormControlInput1" class="form-label">Cahier de charge</label>
+            <input class="form-control" type="file" id="formFile" name="CahierDecharge"  (change)="getFile($event)">
+          </div>
+          <div class="mb-3 inputAjout">
+            <label for="exampleFormControlInput1" class="form-label">Lien support</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support" (input)="verifLienFonction()">
+            <span class="text-danger" *ngIf="!exactLiensupport">{{verifLiensupport}}</span>
+            <span class="text-success" *ngIf="exactLiensupport"><i class="bi bi-check2-all"></i> Exact !</span>
+          </div>
+        </form> -->
+        <!-- <form enctype="multipart/form-data"> -->
+          <div class="mb-3 inputAjout">
+            <label for="exampleFormControlInput1" class="form-label">Titre</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="Titre" [(ngModel)]="titre" (input)="verifTitreFonction()">
+            <span class="text-danger" *ngIf="!exactTitre">{{verifTitre}}</span>
+            <span class="text-success" *ngIf="exactTitre"><i class="bi bi-check2-all"></i> Exact !</span>
+          </div>
+          <div class="mb-3 inputAjout">
+            <label for="exampleFormControlInput1" class="form-label">Cahier de charge</label>
+            <input class="form-control" type="file" (change)="getFile($event)">
+          </div>
+          <div class="mb-3 inputAjout">
+            <label for="exampleFormControlInput1" class="form-label">Lien support</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support" (input)="verifLienFonction()">
+            <span class="text-danger" *ngIf="!exactLiensupport">{{verifLiensupport}}</span>
+            <span class="text-success" *ngIf="exactLiensupport"><i class="bi bi-check2-all"></i> Exact !</span>
+          </div>
+        <!-- </form> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btnAjout" (click)="AjoutImmersion()">Ajouter</button>
+        <button type="button" class="btn btnAjout" data-bs-dismiss="modal" (click)="AjoutImmersion()">Ajouter</button>
       </div>
     </div>
   </div>
@@ -128,24 +174,30 @@
       <div class="modal-body">
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Titre</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="Titre" [(ngModel)]="titre">
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="Titre" [(ngModel)]="titre" (input)="verifTitreFonction()">
+          <span class="text-danger" *ngIf="!exactTitre">{{verifTitre}}</span>
+          <span class="text-success" *ngIf="exactTitre"><i class="bi bi-check2-all"></i> Exact !</span>
         </div>
         <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Description</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
+          <label for="exampleFormControlInput1" class="form-label">Cahier de charge</label>
+          <input class="form-control" type="file" (change)="getFile($event)">
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Lien support</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lient_support" [(ngModel)]="lient_support">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lient_support" [(ngModel)]="lient_support" (input)="verifLienFonction()">
+          <span class="text-danger" *ngIf="!exactLiensupport">{{verifLiensupport}}</span>
+          <span class="text-success" *ngIf="exactLiensupport"><i class="bi bi-check2-all"></i> Exact !</span>
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Niveau compétence</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau" name="niveau_de_competence" [(ngModel)]="niveau_de_competence">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Niveau" name="niveau_de_competence" [(ngModel)]="niveau_de_competence" (input)="verifNiveauFonction()">
+          <span class="text-danger" *ngIf="!exactNiveau">{{verifNiveau}}</span>
+          <span class="text-success" *ngIf="exactNiveau"><i class="bi bi-check2-all"></i> Exact !</span>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btnAjout" (click)="AjoutBrief()">Ajouter</button>
+        <button type="button" class="btn btnAjout" (click)="AjoutBrief()" data-bs-dismiss="modal">Ajouter</button>
       </div>
     </div>
   </div>
@@ -164,9 +216,8 @@
           <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="titre" [(ngModel)]="titre">
         </div>
         <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Description</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
-        </div>
+          <label for="exampleFormControlInput1" class="form-label">Cahier de charge</label>
+          <input class="form-control" type="file" (change)="getFile($event)">
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Lien support</label>
           <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Lien support" name="lien_support" [(ngModel)]="lien_support">
@@ -193,8 +244,8 @@
           <input type="text" class="form-control" id="exampleFormControlInput1" name="titre" placeholder="titre" [(ngModel)]="titre">
         </div>
         <div class="mb-3 inputAjout">
-          <label for="exampleFormControlInput1" class="form-label">Description</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Description" name="description" [(ngModel)]="description">
+          <label for="exampleFormControlInput1" class="form-label">CAhier de charge</label>
+          <input class="form-control" type="file" (change)="getFile($event)">
         </div>
         <div class="mb-3 inputAjout">
           <label for="exampleFormControlInput1" class="form-label">Lien support</label>
@@ -225,6 +276,7 @@
         <p>{{briefSelectionne.description}}</p>
         <p>{{briefSelectionne.lien_support}}</p>
         <p>{{briefSelectionne.lient_support}}</p>
+        <p>{{briefSelectionne.imageName}}</p>
       </div>
     </div>
   </div>

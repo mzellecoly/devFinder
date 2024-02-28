@@ -37,6 +37,14 @@ export class AuthAssoComponent {
   exactTelephone: boolean = false;
   exactNinea: boolean = false;
   exactDescription: boolean = false;
+  allFieldsFilled(): boolean {
+    return this.nom_complet !== '' &&
+           this.email !== '' &&
+           this.mot_de_passe !== '' &&
+           this.telephone !== '' &&
+           this.description !== '' &&
+           this.numero_identification_naitonal!=='';
+  }
 
   private isAuthenticatedSubject: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);

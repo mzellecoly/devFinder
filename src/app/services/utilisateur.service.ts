@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
-import { url } from './api-url.service';
+import { url } from './apiUrl';
 import { User } from '../models/user.modele';
 import { Entreprise } from '../models/entreprise.model';
 
@@ -36,7 +36,7 @@ export class UtilisateurService {
     return this.http.get<User[]>(`${url}/brief/liste`);
   }
   getUserInfo(): any {
-    const userString = localStorage.getItem('userOnline');
+    const userString = localStorage.getItem('user');
     return userString ? JSON.parse(userString) : null;
   }
 

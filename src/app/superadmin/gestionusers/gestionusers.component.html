@@ -23,14 +23,16 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of listeUsers">
+
           <td>{{user.nom_complet}}</td>
           <td>{{user.email}}</td>
           <td>{{user.roles}}</td>
           <td>
-            <i class="fa-solid fa-eye ms-3" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="afficherDetailsUser(user)"></i>
+            <i class="fa-solid fa-eye ms-3" title="Voir les détails l'utilisateur" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="afficherDetailsUser(user)"></i>
             <!-- <i  class="bi ms-3" [ngClass]="{ 'bi-ban': !user.est_bloquer, 'bi bi-unlock': user.est_bloquer }"type="button" (click)="user.est_bloquer ? debloquerUtilisateur(user.id) : bloquerUtilisateur(user.id)" style="color: #0F2A3D;font-size: 24px; font-weight: bold;"></i> -->
-            <i class="fa-solid fa-ban ms-3" style="color: #0F2A3D;font-size: 24px; font-weight: bold;" (click)="blockUser(user.id)"></i>
+            <i class="fa-solid fa-ban ms-3" title="Bloqué l'utilisateur" style="color: #0F2A3D;font-size: 24px; font-weight: bold;" (click)="blockUser(user.id)"></i>
           </td>
+
         </tr>
       </tbody>
     </table>

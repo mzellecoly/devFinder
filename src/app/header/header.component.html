@@ -22,22 +22,42 @@
         <a href="#" [routerLink]="['/projet']" routerLinkActive="active">Projet</a>
       </li>
       <li>
+        <a href="#" [routerLink]="['/article']" routerLinkActive="active">Articles</a>
+        <!-- <a href="#" [routerLink]="['/projet']" >Projet</a> -->
+      </li>
+      <li>
         <a href="#" [routerLink]="['/profils']"  *ngIf="isUserLoggedIn()" routerLinkActive="active">Profils</a>
       </li>
       <li>
         <a href="#" [routerLink]="['/contact']" routerLinkActive="active" >Contact</a>
       </li>
+      <li class="login">
+        <a href="#" [routerLink]="['/auth']" routerLinkActive="active" >Connexion</a>
+      </li>
     </ul>
-    <div class="buttons">
-      <a href="" class="paste-button" *ngIf="!isUserLog()">
-        <a href="#" class="signup" [routerLink]="['/auth']">Connexion</a>
+    <div class="buttons" >
+      <a href="" class="paste-button" *ngIf="!isUserLoggedInn()">
+        <a href="#" class="signup" [routerLink]="['/auth']" *ngIf="!isUserLoggedIn()">Connexion</a>
+        <a href="#" class="signup" *ngIf="isUserLoggedIn()">{{nom_complet}}</a>
+        <!-- <p class="" *ngIf="isUserLog()">{{nom_complet}}</p> -->
         <ul class="dropdown-content"  *ngIf="isUserLoggedIn()">
           <a id="top" href="#" [routerLink]="['/mesprofils']">Mes profils</a>
           <a id="middle" href="#" (click)="logout()">Se deconnecter</a>
         </ul>
+        <ul class="dropdown-content"  *ngIf="isUserLogApprenant()">
+          <a id="top" href="#" [routerLink]="['/developpeur']">Dashboard</a>
+          <a id="middle" href="#" (click)="logout()">Se deconnecter</a>
+        </ul>
       </a>
-      <p class="" *ngIf="isUserLog()">{{nom_complet}}</p>
-      <i class="fa-solid fa-table-columns dashboard" style="color: #FFA439; font-size: 30px;" [routerLink]="['/developpeur']" *ngIf="isUserLoggedInn()"></i>
+      <a href="" class="paste-button" *ngIf="isUserLoggedInn()">
+        <!-- <a href="#" class="signup" [routerLink]="['/auth']" *ngIf="!isUserLoggedIn()">Connexion</a> -->
+        <a href="#" class="signup">{{nom_complet}}</a>
+        <ul class="dropdown-content"  *ngIf="isUserLogApprenant()">
+          <a id="top" href="#" [routerLink]="['/developpeur']">Dashboard</a>
+          <a id="middle" href="#" (click)="logout()">Se deconnecter</a>
+        </ul>
+      </a>
+      <!-- <i class="fa-solid fa-table-columns dashboard" style="color: #FFA439; font-size: 30px;" [routerLink]="['/developpeur']" ></i> -->
     </div>
   </nav>
 </header>

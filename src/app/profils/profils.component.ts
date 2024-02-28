@@ -130,6 +130,7 @@ export class ProfilsComponent implements OnInit{
   getProfilById() {
     // Simuler l'idProfil sélectionné (supposons que cela soit récupéré correctement)
     const idProfil = this.seletedProfil.id;
+    const token = localStorage.getItem('token');
 
     // Appeler le service pour recruter un apprenant en lui passant des données vides
     this.apprenantService.geRecruById(idProfil).subscribe(
@@ -146,7 +147,7 @@ export class ProfilsComponent implements OnInit{
         );
       },
       (error) => {
-        console.error('Erreur lors du recrutement de ce profil :', error);
+        console.error('Erreur lors du recrutement de ce profil :', error.error);
 
         // Afficher un message d'erreur
         this.alertMessage(

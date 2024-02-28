@@ -21,7 +21,7 @@ export class SidebarComponent implements OnInit{
     private router: Router
   ){}
     ngOnInit(): void {
-      const userString = localStorage.getItem('userOnline');
+      const userString = localStorage.getItem('user');
 
       if (userString) {
        this.seletedUser=userString

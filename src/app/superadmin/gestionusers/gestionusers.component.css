@@ -22,6 +22,8 @@
 .active{
  color: #FFA439 !important;
  border: none;
+}.fa-ban{
+  cursor: pointer;
 }
 /* CSS Tableau */
 .thHead{

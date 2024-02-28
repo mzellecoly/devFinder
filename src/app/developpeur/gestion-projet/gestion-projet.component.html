@@ -33,10 +33,13 @@
     <tbody>
       <tr *ngFor="let projet of listeProjet">
         <td>{{projet.titre}}</td>
-        <td>{{ getPartieDuTexte(projet.description, 50) }}</td>
-        <td><span class="langage" *ngFor="let assoUrl of projet.association">{{ getAssoName(assoUrl) }}</span></td>
+        <td>{{projet.imageName}}</td>
+        <td>{{projet.association.nom_complet}}</td>
         <td>{{projet.date_limite | date: 'dd/MM/yyyy'}}</td>
         <td>
+          <a href="https://mamadoucire99.simplonfabriques.com/public/fichiers/projets/{{projet.imageName }}" download>
+            <i class="fa-solid fa-download" title="Télécharger la ressource" style="color: #0F2A3D; font-size: 20px;"></i>
+          </a>
           <i class="fa-solid fa-eye ms-1" style="color: #0F2A3D; font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="afficherDetailsProjet(projet)"></i>
           <i class="fa-solid fa-trash-can ms-1" style="color: #0F2A3D; font-size: 20px;"></i>
         </td>
@@ -123,10 +126,11 @@
       </div>
       <div class="modal-body detail">
         <p><strong>Titre :</strong> {{projetSelectionne.titre}}</p>
-        <p><strong>Description :</strong> {{projetSelectionne.description}}</p>
-        <p><strong>Langage :</strong> {{projetSelectionne.langage_de_programmation}}</p>
-        <p><strong>Participants :</strong> {{projetSelectionne.nombre_de_participant}}</p>
-        <p><strong>Date limite :</strong> {{projetSelectionne.date_limite}}</p>
+        <!-- <p><strong>Description :</strong> {{projetSelectionne.description}}</p> -->
+        <p><strong>Langage :</strong> {{projetSelectionne.imageName}}</p>
+        <!-- <p><strong>Association :</strong> {{projetSelectionne.association.nom_complet}}</p> -->
+        <!-- <p><strong>Date début :</strong> {{projetSelectionne.projet.createAt}}</p> -->
+        <p><strong>Date limite :</strong> {{projetSelectionne.date_limite | date: 'dd/MM/yyyy'}}</p>
       </div>
     </div>
   </div>

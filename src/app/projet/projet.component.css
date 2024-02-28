@@ -60,10 +60,13 @@ hr{
 }
 #cartes{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
   justify-content: center;
   margin: 0 auto !important;
+  /* background-color: red; */
+  width: 1250px;
+  /* border: 3px solid green; */
 }
 .dieyna{
   margin: 0 auto !important;

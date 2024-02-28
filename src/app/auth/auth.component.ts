@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../services/auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.modele';
+import { CryptoService } from '../services/crypto.service';
 
 @Component({
   selector: 'app-auth',
@@ -21,7 +22,8 @@ export class AuthComponent implements OnInit {
   // telephone: string ='';
   description: string = '';
   emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
-  emailRegex = /^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+.[A-Za-z]{3,}$/;
+  // emailRegex = /^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+.[A-Za-z]{3,}$/;
+  emailRegex =/^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
   nameRegex=/^[a-zA-Z][a-zA-Z -]{1,100}$/;
   formChoice = true;
   // Variables pour faire la vérifications
@@ -38,11 +40,18 @@ export class AuthComponent implements OnInit {
   exactTelephone: boolean = false;
   exactNinea: boolean = false;
   exactDescription: boolean = false;
+  allFieldsFilled(): boolean {
+    return this.nom_complet !== '' &&
+           this.email !== '' &&
+           this.mot_de_passe !== '' &&
+           this.telephone !== '' &&
+           this.description !== '';
+  }
 
   private isAuthenticatedSubject: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private cryptoservice: CryptoService) {}
   ngOnInit(): void {
     const script = document.createElement('script');
     script.src = '../../../assets/js/script.js';
@@ -62,6 +71,8 @@ export class AuthComponent implements OnInit {
       // Envoyer les informations d'identification au backend via une API
       this.authService.login(this.email, this.mot_de_passe).subscribe(
         (response) => {
+          const userOnline = this.cryptoservice.encryptionAES(JSON.stringify(response.user));
+          localStorage.setItem('userOnline', userOnline);
           localStorage.setItem('userOnline', JSON.stringify(response));
           localStorage.setItem(
             'access_token',
@@ -138,7 +149,7 @@ export class AuthComponent implements OnInit {
       title: title,
       text: text,
       showConfirmButton: false,
-      timer: 900,
+      timer: 2000,
     });
   }
   // Déconnexion de l'utisateur

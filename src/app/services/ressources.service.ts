@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { url } from './api-url.service';
+import { url } from './apiUrl';
 import { Brief } from '../models/brief.model';
 import { Observable, Subject, of, tap } from 'rxjs';
 import { Imerssion } from '../models/immersion.model';
@@ -25,7 +25,7 @@ export class RessourcesService {
     return this.http.get<Imerssion[]>(`${url}/immersion/liste`);
   }
 
-  ajoutImmersion(imerssion: Imerssion) {
+  ajoutImmersion(imerssion: any) {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -36,7 +36,7 @@ export class RessourcesService {
   }
 
   // Ajouter brief
-  ajoutBrief(brief: Brief) {
+  ajoutBrief(brief: any) {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -47,9 +47,11 @@ export class RessourcesService {
   }
   showAlert(title: any, text: any, icon: any) {
     Swal.fire({
-      title:title,
-      text:text,
-      icon:icon,
+      icon: icon,
+      title: title,
+      text: text,
+      showConfirmButton: false,
+      timer: 1500,
     });
   }
     // Suppression immersion

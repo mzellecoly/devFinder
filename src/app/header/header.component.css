@@ -20,6 +20,7 @@ body {
   width: 100%;
   background-color: #0F2A3D;
   z-index: 1000;
+  /* z-index: -1; */
 }
 
 .navbar {
@@ -241,11 +242,19 @@ color: white !important;
 .dashboard{
   cursor: pointer;
 }
+.login{
+  background-color: #FFA439;
+  padding: 7px 10px;
+  border-radius: 5px;
+  display: none;
+}
 @media screen and (max-width: 1023px) {
   .navbar .logo a {
     font-size: 1.5rem;
   }
-
+  .login{
+    display: block;
+  }
   .links {
     position: fixed;
     left: -100%;
